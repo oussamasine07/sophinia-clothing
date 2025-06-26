@@ -35,6 +35,16 @@ public class FabricController {
         return fabricService.createNewFabric( fabric );
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update (@Valid @RequestBody FabricFormDTO fabricFormDTO, @PathVariable Long id ) {
+        Fabric fabric = new Fabric();
+
+        fabric.setName(fabricFormDTO.name());
+        fabric.setDescription( fabricFormDTO.description() );
+
+        return fabricService.updateFabric( fabric, id );
+    }
+
 }
 
 

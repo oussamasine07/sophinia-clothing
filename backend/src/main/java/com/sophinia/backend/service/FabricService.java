@@ -2,6 +2,7 @@ package com.sophinia.backend.service;
 
 import com.sophinia.backend.dto.FabricFormDTO;
 import com.sophinia.backend.dto.MappedFabricDTO;
+import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.mapper.FabricMapper;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.repository.FabricRepository;
@@ -38,6 +39,19 @@ public class FabricService {
     public ResponseEntity<?> createNewFabric (Fabric fabric) {
         Fabric newFabric = fabricRepository.save( fabric );
         return new ResponseEntity<>(newFabric, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> updateFabric (Fabric fabric, Long fabricId) {
+        Fabric updatedFabric = fabricRepository.findById( fabricId )
+                .orElseThrow(() -> new NotFoundException("you can't update an unfound fabric"));
+
+        updatedFabric.setName(fabric.getName());
+        updatedFabric.setDescription(fabric.getDescription());
+
+        updatedFabric = fabricRepository.save( updatedFabric );
+
+        return new ResponseEntity<>( updatedFabric, HttpStatus.OK);
+
     }
 
 
