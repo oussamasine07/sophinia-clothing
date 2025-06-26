@@ -54,6 +54,15 @@ public class FabricService {
 
     }
 
+    public ResponseEntity<?> deleteFabric (Long fabricId) {
+        Fabric deletedFabric = fabricRepository.findById( fabricId )
+                .orElseThrow(() -> new NotFoundException("you can't delete an unfound fabric"));
+
+        fabricRepository.deleteById( fabricId );
+
+        return new ResponseEntity<>(deletedFabric, HttpStatus.OK);
+    }
+
 
 }
 

@@ -45,6 +45,11 @@ public class FabricController {
         return fabricService.updateFabric( fabric, id );
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete (@PathVariable Long id) {
+        return fabricService.deleteFabric( id );
+    }
+
 }
 
 
