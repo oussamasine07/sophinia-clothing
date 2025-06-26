@@ -30,4 +30,21 @@ public class CustomException {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> handleNotFoundException (
+            NotFoundException ex
+    ) {
+
+        Map<String, String> error = new HashMap<>();
+
+        error.put("error", ex.getMessage());
+
+        return new ResponseEntity<>( error, HttpStatus.OK );
+
+    }
+
 }
+
+
+
+
