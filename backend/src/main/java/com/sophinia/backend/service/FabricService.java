@@ -1,5 +1,6 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.dto.FabricFormDTO;
 import com.sophinia.backend.dto.MappedFabricDTO;
 import com.sophinia.backend.mapper.FabricMapper;
 import com.sophinia.backend.model.Fabric;
@@ -32,6 +33,11 @@ public class FabricService {
                 .toList();
 
         return new ResponseEntity<>(fabrics, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> createNewFabric (Fabric fabric) {
+        Fabric newFabric = fabricRepository.save( fabric );
+        return new ResponseEntity<>(newFabric, HttpStatus.OK);
     }
 
 

@@ -1,12 +1,12 @@
 package com.sophinia.backend.controller;
 
 
+import com.sophinia.backend.dto.FabricFormDTO;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.service.FabricService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/fabric")
@@ -25,4 +25,23 @@ public class FabricController {
         return fabricService.getFabrics();
     }
 
+    @PostMapping
+    public ResponseEntity<?> create (@Valid @RequestBody FabricFormDTO fabricFormDTO) {
+        Fabric fabric = new Fabric();
+
+        fabric.setName(fabricFormDTO.name());
+        fabric.setDescription( fabricFormDTO.description() );
+
+        return fabricService.createNewFabric( fabric );
+    }
+
 }
+
+
+
+
+
+
+
+
+
