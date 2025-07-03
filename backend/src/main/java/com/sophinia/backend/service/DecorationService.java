@@ -29,8 +29,8 @@ public class DecorationService {
 
     }
 
-    public void create () {
-
+    public ResponseEntity<?> createNewDecoration (Decoration decoration) {
+        return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
 
     public void update () {
