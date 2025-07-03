@@ -1,7 +1,12 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.repository.DecorationRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DecorationService {
@@ -14,8 +19,10 @@ public class DecorationService {
         this.decorationRepository = decorationRepository;
     }
 
-    public void index () {
+    public ResponseEntity<?> getAllDecorations () {
+        List<Decoration> decorations = decorationRepository.findAll();
 
+        return new ResponseEntity<>(decorations, HttpStatus.OK);
     }
 
     public void show () {
