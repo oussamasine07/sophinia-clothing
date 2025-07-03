@@ -32,5 +32,31 @@ public class DecorationController {
         return decorationService.createNewDecoration( decoration );
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO, @PathVariable Long id) {
+        Decoration decoration = new Decoration();
+        decoration.setName(validateDecorationDTO.name());
+
+        return decorationService.updateDecoration( decoration, id );
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

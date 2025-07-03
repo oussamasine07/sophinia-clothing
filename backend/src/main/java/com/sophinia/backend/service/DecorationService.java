@@ -1,5 +1,6 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.repository.DecorationRepository;
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,13 @@ public class DecorationService {
         return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
 
-    public void update () {
+    public ResponseEntity<?> updateDecoration (Decoration updatedDecoration, Long decorationId) {
+        Decoration decoration = decorationRepository.findById( decorationId )
+                .orElseThrow(() -> new NotFoundException("you cant update an unfound decoration"));
 
+        decoration.setName( updatedDecoration.getName());
+
+        return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
 
     public void delete () {
