@@ -24,6 +24,11 @@ public class DecorationController {
         return decorationService.getAllDecorations();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> show (@PathVariable Long id) {
+        return decorationService.getDecorationById(id);
+    }
+
     @PostMapping
     public ResponseEntity<?> create (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO) {
         Decoration decoration = new Decoration();

@@ -28,8 +28,11 @@ public class DecorationService {
         return new ResponseEntity<>(decorations, HttpStatus.OK);
     }
 
-    public void show () {
+    public ResponseEntity<?> getDecorationById (Long decorationId) {
+        Decoration decoration = decorationRepository.findById( decorationId )
+                .orElseThrow(() -> new NotFoundException("unfound decoration"));
 
+        return new ResponseEntity<>(decoration, HttpStatus.OK);
     }
 
     public ResponseEntity<?> createNewDecoration (Decoration decoration) {
