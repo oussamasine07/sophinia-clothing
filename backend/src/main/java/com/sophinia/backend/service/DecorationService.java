@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DecorationService {
@@ -43,7 +45,16 @@ public class DecorationService {
         return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
 
-    public void delete () {
+    public ResponseEntity<?> deleteDecoration ( Long decorationId ) {
+        Decoration decoration = decorationRepository.findById( decorationId )
+                .orElseThrow(() -> new NotFoundException("you cant delete an unfound decoration"));
+
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "decoration " + decoration.getName() + " removed");
+        decorationRepository.deleteById( decorationId );
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 

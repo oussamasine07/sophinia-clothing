@@ -40,6 +40,11 @@ public class DecorationController {
         return decorationService.updateDecoration( decoration, id );
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete (@PathVariable Long id) {
+        return decorationService.deleteDecoration(id);
+    }
+
 
 }
 
