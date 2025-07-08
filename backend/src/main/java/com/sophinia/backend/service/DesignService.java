@@ -25,4 +25,10 @@ public class DesignService {
         return new ResponseEntity<>( designs, HttpStatus.OK );
     }
 
+    public ResponseEntity<?> createDesign ( Design design ) {
+        Design newDesign = designRepository.save(design);
+
+        return new ResponseEntity<>(newDesign, HttpStatus.OK);
+    }
+
 }

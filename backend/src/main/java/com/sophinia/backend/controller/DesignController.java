@@ -1,10 +1,10 @@
 package com.sophinia.backend.controller;
 
+import com.sophinia.backend.dto.validation.DesignValidateDTO;
+import com.sophinia.backend.model.Design;
 import com.sophinia.backend.service.DesignService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/design")
@@ -20,6 +20,17 @@ public class DesignController {
     @GetMapping
     public ResponseEntity<?> index () {
         return designService.getAllDesigns();
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create (@RequestBody DesignValidateDTO designValidateDTO) {
+        Design design = new Design();
+
+        design.setName(designValidateDTO.name());
+        design.setImage(designValidateDTO.image());
+
+        return designService.createDesign( design );
+
     }
 
 }
