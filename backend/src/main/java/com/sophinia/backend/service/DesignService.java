@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DesignService {
@@ -47,6 +49,19 @@ public class DesignService {
 
         return new ResponseEntity<>( designRepository.save(updatedDesign), HttpStatus.OK);
 
+    }
+
+    public ResponseEntity<?> deleteDesignById (Long id) {
+        Design design = designRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("you can't delete a not found design"));
+
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", design.getName() + " hqs been Deleted");
+
+        designRepository.deleteById(id);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

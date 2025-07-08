@@ -51,6 +51,11 @@ public class DesignController {
         return designService.updateDesignById( id, design );
     }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete (@PathVariable Long id) {
+        return designService.deleteDesignById( id );
+    }
 }
 
 
