@@ -38,4 +38,35 @@ public class DesignController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update (
+            @PathVariable Long id,
+            @RequestBody DesignValidateDTO designValidateDTO
+    ) {
+        Design design = new Design();
+
+        design.setName(designValidateDTO.name());
+        design.setImage(designValidateDTO.image());
+
+        return designService.updateDesignById( id, design );
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

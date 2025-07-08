@@ -39,4 +39,14 @@ public class DesignService {
         return new ResponseEntity<>(newDesign, HttpStatus.OK);
     }
 
+    public ResponseEntity<?> updateDesignById (Long id, Design design) {
+        Design updatedDesign = designRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("you can't update a not found design"));
+        updatedDesign.setName(design.getName());
+        updatedDesign.setImage(design.getImage());
+
+        return new ResponseEntity<>( designRepository.save(updatedDesign), HttpStatus.OK);
+
+    }
+
 }

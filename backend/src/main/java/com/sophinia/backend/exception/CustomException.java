@@ -39,7 +39,7 @@ public class CustomException {
 
         error.put("error", ex.getMessage());
 
-        return new ResponseEntity<>( error, HttpStatus.OK );
+        return new ResponseEntity<>( error, HttpStatus.NOT_FOUND );
 
     }
 
