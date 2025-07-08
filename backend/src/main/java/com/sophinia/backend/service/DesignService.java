@@ -1,5 +1,6 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Design;
 import com.sophinia.backend.repository.DesignRepository;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,13 @@ public class DesignService {
         List<Design> designs = designRepository.findAll();
 
         return new ResponseEntity<>( designs, HttpStatus.OK );
+    }
+
+    public ResponseEntity<?> getDesignById (Long id) {
+        Design design = designRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Design not found"));
+
+        return new ResponseEntity<>( design, HttpStatus.OK );
     }
 
     public ResponseEntity<?> createDesign ( Design design ) {

@@ -22,6 +22,11 @@ public class DesignController {
         return designService.getAllDesigns();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getDesign (@PathVariable Long id) {
+        return designService.getDesignById(id);
+    }
+
     @PostMapping
     public ResponseEntity<?> create (@RequestBody DesignValidateDTO designValidateDTO) {
         Design design = new Design();
