@@ -54,7 +54,10 @@ public class ClothingTypeController {
         return clothingTypeService.updateClothingType( clothingType, id );
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete ( @PathVariable Long id ) {
+        return clothingTypeService.deleteClothingType( id );
+    }
 
 
 }

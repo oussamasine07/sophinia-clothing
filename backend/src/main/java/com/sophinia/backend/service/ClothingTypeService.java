@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ClothingTypeService {
@@ -48,6 +50,20 @@ public class ClothingTypeService {
         updatedClothingType.setImage( clothingType.getImage());
 
         return new ResponseEntity<>( clothingTypeRepository.save( updatedClothingType ), HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<?> deleteClothingType ( Long id ) {
+        ClothingType clothingType = clothingTypeRepository.findById( id )
+                .orElseThrow(() -> new NotFoundException("you can't update an not found clothing type"));
+
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", clothingType.getName() + " has been Deleted");
+
+        clothingTypeRepository.deleteById( id );
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
