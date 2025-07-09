@@ -39,6 +39,18 @@ public class ClothingTypeService {
         return new ResponseEntity<>( clothingTypeRepository.save(clothingType), HttpStatus.OK );
     }
 
+    public ResponseEntity<?> updateClothingType ( ClothingType clothingType, Long id ) {
+
+        ClothingType updatedClothingType = clothingTypeRepository.findById( id )
+                .orElseThrow(() -> new NotFoundException("you can't update an not found clothing type"));
+
+        updatedClothingType.setName(clothingType.getName());
+        updatedClothingType.setImage( clothingType.getImage());
+
+        return new ResponseEntity<>( clothingTypeRepository.save( updatedClothingType ), HttpStatus.OK);
+
+    }
+
 }
 
 

@@ -41,6 +41,21 @@ public class ClothingTypeController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update (
+            @Valid @RequestBody ClothingTypeValidationDTO clothingTypeValidationDTO,
+            @PathVariable Long id
+    ) {
+        ClothingType clothingType = new ClothingType();
+
+        clothingType.setName(clothingTypeValidationDTO.name());
+        clothingType.setImage(clothingTypeValidationDTO.image());
+
+        return clothingTypeService.updateClothingType( clothingType, id );
+    }
+
+
+
 
 }
 
