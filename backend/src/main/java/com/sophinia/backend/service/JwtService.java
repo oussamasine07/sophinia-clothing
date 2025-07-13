@@ -2,6 +2,7 @@ package com.sophinia.backend.service;
 
 
 
+import com.sophinia.backend.dto.mappingDTO.AuthUserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

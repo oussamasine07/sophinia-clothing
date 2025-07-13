@@ -8,5 +8,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface EmployeeMapper {
     Employee toEntity(AuthUserDTO authUserDTO);
-    AuthUserDTO toDto(Employee employee);
+    AuthUserDTO toDTO(Employee employee);
 }

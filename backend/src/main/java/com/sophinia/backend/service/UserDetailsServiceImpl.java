@@ -1,6 +1,8 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.model.User;
 import com.sophinia.backend.repository.UserRepository;
+import com.sun.security.auth.UserPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
