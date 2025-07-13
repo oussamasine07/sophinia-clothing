@@ -2,6 +2,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import javax.security.auth.Subject;
+
 @Entity
 @Table(name = "clients")
 public class Client extends User {
@@ -22,5 +24,13 @@ public class Client extends User {
     private String cnssCode;
 
 
+    @Override
+    public String getName() {
+        return "";
+    }
 
+    @Override
+    public boolean implies(Subject subject) {
+        return super.implies(subject);
+    }
 }

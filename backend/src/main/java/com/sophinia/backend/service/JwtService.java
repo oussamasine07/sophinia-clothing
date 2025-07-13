@@ -2,6 +2,7 @@ package com.sophinia.backend.service;
 
 
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -14,11 +15,32 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private Long jwtExpiration;
-    private String secretKey;
+    private Long jwtExpiration = 8640000L;
+    private String secretKey = "StEXS1xRcETwjvEjAjZDuJ2cd95g4LK3";
+
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return
+                Jwts
+                        .parser()
+                        .setSigningKey(signInKey())
+                        .build()
+                        .parseSignedClaims(token)
+                        .getPayload();
+    }
 
     public String generateJwtToken(UserDetails userDetails) {
         return generateJwtToken(new HashMap<>(), userDetails);
@@ -45,6 +67,20 @@ public class JwtService {
                 .compact();
 
     }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractExperation(token).before(new Date());
+    }
+
+    private Date extractExperation(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
 
     private Key signInKey() {
 
