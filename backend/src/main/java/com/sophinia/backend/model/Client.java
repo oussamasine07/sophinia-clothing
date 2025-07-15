@@ -23,14 +23,4 @@ public class Client extends User {
     @Column(name = "cnss_code")
     private String cnssCode;
 
-
-    @Override
-    public String getName() {
-        return "";
-    }
-
-    @Override
-    public boolean implies(Subject subject) {
-        return super.implies(subject);
-    }
 }

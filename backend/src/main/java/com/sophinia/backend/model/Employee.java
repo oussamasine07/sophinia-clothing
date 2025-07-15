@@ -21,14 +21,5 @@ public class Employee extends User {
 
     @Column(name = "postal_code")
     private String postalCode;
-
-    @Override
-    public String getName() {
-        return "";
-    }
-
-    @Override
-    public boolean implies(Subject subject) {
-        return super.implies(subject);
-    }
+    
 }

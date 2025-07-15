@@ -59,32 +59,18 @@ public class AuthService {
                                     user.getPassword()
                             )
                     );
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String token = jwtService.generateJwtToken(userDetails); // Must accept UserDetails
 
-            Map<String, String> response = new HashMap<>();
-            response.put("token", token);
-            return ResponseEntity.ok(response);
+            if (authentication.isAuthenticated()){
+                AuthUserDTO authUser = this.getAuthenticatedUser(user.getEmail());
 
-//            if (authentication.isAuthenticated()){
-//                AuthUserDTO authUser = this.getAuthenticatedUser(user.getEmail());
-//
-//                String token = jwtService.generateJwtToken(authUser);
-//
-//                Map<String, String> responseSuccess = new HashMap<>();
-//                responseSuccess.put("token", token);
-//
-//                return new ResponseEntity<>(responseSuccess, HttpStatus.OK);
-//
-//                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//                String token = jwtService.generateJwtToken(userDetails); // Must accept UserDetails
-//
-//                Map<String, String> response = new HashMap<>();
-//                response.put("token", token);
-//                return ResponseEntity.ok(response);
-//            }
-//
-//            throw  new PasswordIncorrectException("Invalid credentials");
+                String token = jwtService.generateJwtToken(authUser); 
+
+                Map<String, String> response = new HashMap<>();
+                response.put("token", token);
+                return ResponseEntity.ok(response);
+            }
+
+            throw  new PasswordIncorrectException("Invalid credentials");
         }
         catch (AuthenticationException e ) {
             throw  new PasswordIncorrectException("Invalid credentials");

@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User implements UserDetails, Principal {
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -74,33 +74,6 @@ public abstract class User implements UserDetails, Principal {
 
     public String getFullName() {
         return firstName + " " + lastName;
-    }
-
-    // user detials implimentation
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    public boolean isAccountNonLocked() {
-        return !accountLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
     }
 
 

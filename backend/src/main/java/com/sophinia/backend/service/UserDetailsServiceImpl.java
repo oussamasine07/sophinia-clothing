@@ -1,8 +1,9 @@
 package com.sophinia.backend.service;
 
+
 import com.sophinia.backend.model.User;
+import com.sophinia.backend.model.UserPrincipal;
 import com.sophinia.backend.repository.UserRepository;
-import com.sun.security.auth.UserPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +18,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("this user does not exist"));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow();
+
+        if ( user == null ) {
+            System.out.println("user not found");
+            throw new UsernameNotFoundException("this user is not found");
+        }
+
+        return new UserPrincipal(user);
     }
 }
