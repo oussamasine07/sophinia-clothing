@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import javax.security.auth.Subject;
+
 @Entity
 @Table(name = "employees")
 public class Employee extends User {
@@ -19,5 +21,5 @@ public class Employee extends User {
 
     @Column(name = "postal_code")
     private String postalCode;
-
+    
 }

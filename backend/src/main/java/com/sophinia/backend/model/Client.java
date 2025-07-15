@@ -2,6 +2,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import javax.security.auth.Subject;
+
 @Entity
 @Table(name = "clients")
 public class Client extends User {
@@ -20,7 +22,5 @@ public class Client extends User {
 
     @Column(name = "cnss_code")
     private String cnssCode;
-
-
 
 }

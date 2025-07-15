@@ -1,6 +1,11 @@
 package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.security.Principal;
+import java.util.Collection;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -21,6 +26,11 @@ public abstract class User {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "account_locked")
+    private boolean accountLocked;
+
+    private boolean enabled;
 
     public Long getId() {
         return id;
@@ -61,4 +71,35 @@ public abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
