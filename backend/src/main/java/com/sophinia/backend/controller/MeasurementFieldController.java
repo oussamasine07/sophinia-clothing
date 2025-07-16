@@ -6,10 +6,7 @@ import com.sophinia.backend.model.MeasurementField;
 import com.sophinia.backend.service.MeasurementFieldService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/measurement-field")
@@ -29,6 +26,17 @@ public class MeasurementFieldController {
         measurementField.setName( measurementFieldValidationDTO.name());
 
         return measurementFieldService.createMeasurementField( measurementField );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update (
+            @Valid @RequestBody MeasurementFieldValidationDTO measurementFieldValidationDTO,
+            @PathVariable Long id
+    ) {
+        MeasurementField measurementField = new MeasurementField();
+        measurementField.setName( measurementFieldValidationDTO.name());
+
+        return measurementFieldService.updateMeasurementField( id, measurementField );
     }
 
 }

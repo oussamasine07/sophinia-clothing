@@ -1,5 +1,6 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.MeasurementField;
 import com.sophinia.backend.repository.MeasurementFieldRepository;
 import org.springframework.http.HttpStatus;
@@ -23,4 +24,37 @@ public class MeasurementFieldService {
 
     }
 
+    public ResponseEntity<?> updateMeasurementField ( Long id, MeasurementField measurementField ) {
+        MeasurementField updatedMeasurementField = measurementFieldRepository.findById( id )
+                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+
+        updatedMeasurementField.setName( measurementField.getName() );
+
+        return new ResponseEntity<>(measurementFieldRepository.save( updatedMeasurementField ), HttpStatus.OK);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
