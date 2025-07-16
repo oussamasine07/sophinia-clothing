@@ -18,6 +18,13 @@ public class MeasurementFieldService {
         this.measurementFieldRepository = measurementFieldRepository;
     }
 
+    public ResponseEntity<?> getMeasurementFieldById ( Long id ) {
+        MeasurementField measurementField = measurementFieldRepository.findById( id )
+                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+
+        return new ResponseEntity<>(measurementField, HttpStatus.OK);
+    }
+
     public ResponseEntity<?> createMeasurementField (MeasurementField measurementField) {
         MeasurementField savedMeasurmentField = measurementFieldRepository.save( measurementField );
         return new ResponseEntity<>(savedMeasurmentField, HttpStatus.OK);

@@ -20,6 +20,11 @@ public class MeasurementFieldController {
         this.measurementFieldService = measurementFieldService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> show (@PathVariable Long id) {
+        return measurementFieldService.getMeasurementFieldById(id);
+    }
+
     @PostMapping
     public ResponseEntity<?> create (@Valid @RequestBody MeasurementFieldValidationDTO measurementFieldValidationDTO) {
         MeasurementField measurementField = new MeasurementField();
