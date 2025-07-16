@@ -44,4 +44,33 @@ public class MeasurementFieldController {
         return measurementFieldService.updateMeasurementField( id, measurementField );
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete ( @PathVariable Long id ) {
+
+        return measurementFieldService.deleteMeasurementField( id );
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

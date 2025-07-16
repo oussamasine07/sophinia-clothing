@@ -40,6 +40,15 @@ public class MeasurementFieldService {
         return new ResponseEntity<>(measurementFieldRepository.save( updatedMeasurementField ), HttpStatus.OK);
     }
 
+    public ResponseEntity<?> deleteMeasurementField ( Long id ) {
+        MeasurementField measurementField = measurementFieldRepository.findById( id )
+                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+
+        measurementFieldRepository.deleteById( id );
+
+        return new ResponseEntity<>( measurementField.getName(), HttpStatus.OK);
+    }
+
 }
 
 
