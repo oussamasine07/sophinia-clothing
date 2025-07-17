@@ -2,6 +2,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "clothing_types")
 public class ClothingType {
@@ -15,6 +17,9 @@ public class ClothingType {
 
     @Column(name = "image", nullable = true)
     private String image;
+
+    @OneToMany(mappedBy = "clothingType")
+    private List<Product> products;
 
     public ClothingType () {}
 
