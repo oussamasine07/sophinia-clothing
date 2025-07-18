@@ -25,15 +25,50 @@ public class Product {
     @ManyToMany
     @JoinTable(
             name = "product_measurement_fields",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "measurement_field_id")
     )
     private List<MeasurementField> productMeasurementFields;
 
+    public Long getId() {
+        return id;
+    }
 
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ClothingType getClothingType() {
+        return clothingType;
+    }
+
+    public void setClothingType(ClothingType clothingType) {
+        this.clothingType = clothingType;
+    }
+
+    public List<MeasurementField> getProductMeasurementFields() {
+        return productMeasurementFields;
+    }
+
+    public void setProductMeasurementFields(List<MeasurementField> productMeasurementFields) {
+        this.productMeasurementFields = productMeasurementFields;
+    }
 }
 
 
