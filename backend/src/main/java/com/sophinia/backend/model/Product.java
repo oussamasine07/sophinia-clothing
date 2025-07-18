@@ -20,6 +20,14 @@ public class Product {
     @ManyToOne
     private ClothingType clothingType;
 
+
+
+    @ManyToOne
+    private Fabric fabric;
+
+    @ManyToOne
+    private Decoration decoration;
+
     // todo: add model relationship
 
 
