@@ -2,6 +2,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "measurement_fields")
 public class MeasurementField {
@@ -12,6 +14,9 @@ public class MeasurementField {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(mappedBy = "productMeasurementFields")
+    private List<Product> products;
 
     public MeasurementField () {}
 

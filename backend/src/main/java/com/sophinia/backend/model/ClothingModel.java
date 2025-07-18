@@ -3,6 +3,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "clothing_models")
 public class ClothingModel {
@@ -16,7 +18,6 @@ public class ClothingModel {
 
     @Column(name = "image")
     private String image;
-
 
     public Long getId() {
         return id;

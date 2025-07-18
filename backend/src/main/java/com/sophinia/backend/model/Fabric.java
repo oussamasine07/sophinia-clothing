@@ -18,9 +18,6 @@ public class Fabric {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "fabric")
-    private List<Product> products;
-
 
     public Long getId() {
         return id;

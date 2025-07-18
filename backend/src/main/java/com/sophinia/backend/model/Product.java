@@ -3,6 +3,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -20,18 +22,42 @@ public class Product {
     @ManyToOne
     private ClothingType clothingType;
 
-
-
-    @ManyToOne
-    private Fabric fabric;
-
-    @ManyToOne
-    private Decoration decoration;
-
-    // todo: add model relationship
+    @ManyToMany
+    @JoinTable(
+            name = "product_measurement_fields",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<MeasurementField> productMeasurementFields;
 
 
     
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

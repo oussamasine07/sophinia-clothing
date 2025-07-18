@@ -18,9 +18,6 @@ public class Decoration {
     @Column(name = "image")
     private String image;
 
-    @OneToMany
-    private List<Product> products;
-
     public Decoration () {}
 
     public Long getId() {
