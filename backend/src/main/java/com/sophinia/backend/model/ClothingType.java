@@ -1,5 +1,6 @@
 package com.sophinia.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class ClothingType {
     @Column(name = "image", nullable = true)
     private String image;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "clothingType")
     private List<Product> products;
 
