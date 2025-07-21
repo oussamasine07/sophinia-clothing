@@ -2,6 +2,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "decorations")
 public class Decoration {

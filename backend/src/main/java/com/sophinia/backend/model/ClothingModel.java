@@ -1,13 +1,13 @@
 package com.sophinia.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = "clothing_types")
-public class ClothingType {
+@Table(name = "clothing_models")
+public class ClothingModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,14 +16,8 @@ public class ClothingType {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "image", nullable = true)
+    @Column(name = "image")
     private String image;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "clothingType")
-    private List<Product> products;
-
-    public ClothingType () {}
 
     public Long getId() {
         return id;
@@ -49,25 +43,3 @@ public class ClothingType {
         this.image = image;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

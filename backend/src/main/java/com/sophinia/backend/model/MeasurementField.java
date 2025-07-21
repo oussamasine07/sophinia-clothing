@@ -1,6 +1,9 @@
 package com.sophinia.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "measurement_fields")
@@ -12,6 +15,10 @@ public class MeasurementField {
 
     @Column(name = "name")
     private String name;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "productMeasurementFields")
+    private List<Product> products;
 
     public MeasurementField () {}
 
