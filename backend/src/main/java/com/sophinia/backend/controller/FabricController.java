@@ -6,6 +6,7 @@ import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.service.FabricService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,6 +26,7 @@ public class FabricController {
         return fabricService.getFabrics();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create (@Valid @RequestBody FabricFormDTO fabricFormDTO) {
         Fabric fabric = new Fabric();
@@ -35,6 +37,7 @@ public class FabricController {
         return fabricService.createNewFabric( fabric );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update (@Valid @RequestBody FabricFormDTO fabricFormDTO, @PathVariable Long id ) {
         Fabric fabric = new Fabric();
@@ -45,6 +48,7 @@ public class FabricController {
         return fabricService.updateFabric( fabric, id );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete (@PathVariable Long id) {
         return fabricService.deleteFabric( id );

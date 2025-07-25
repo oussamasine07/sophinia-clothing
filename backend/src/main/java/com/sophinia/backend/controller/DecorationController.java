@@ -5,6 +5,7 @@ import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.service.DecorationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,6 +30,7 @@ public class DecorationController {
         return decorationService.getDecorationById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO) {
         Decoration decoration = new Decoration();
@@ -37,6 +39,7 @@ public class DecorationController {
         return decorationService.createNewDecoration( decoration );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO, @PathVariable Long id) {
         Decoration decoration = new Decoration();
@@ -45,6 +48,7 @@ public class DecorationController {
         return decorationService.updateDecoration( decoration, id );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete (@PathVariable Long id) {
         return decorationService.deleteDecoration(id);

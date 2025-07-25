@@ -4,6 +4,7 @@ import com.sophinia.backend.dto.validation.DesignValidateDTO;
 import com.sophinia.backend.model.Design;
 import com.sophinia.backend.service.DesignService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,6 +28,7 @@ public class DesignController {
         return designService.getDesignById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create (@RequestBody DesignValidateDTO designValidateDTO) {
         Design design = new Design();
@@ -38,6 +40,7 @@ public class DesignController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
             @PathVariable Long id,
@@ -51,7 +54,7 @@ public class DesignController {
         return designService.updateDesignById( id, design );
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete (@PathVariable Long id) {
         return designService.deleteDesignById( id );

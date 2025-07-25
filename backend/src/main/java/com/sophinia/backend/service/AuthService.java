@@ -82,6 +82,8 @@ public class AuthService {
         User authenticatedUser = userRepository.findByEmail( email )
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
+        System.out.println(authenticatedUser.getClass().getSimpleName());
+
         AuthUserDTO authUserDTO = null;
         switch (authenticatedUser.getClass().getSimpleName()) {
             case "Admin":
@@ -90,7 +92,7 @@ public class AuthService {
             case "Client":
                 authUserDTO = clientMapper.toDTO((Client) authenticatedUser);
                 break;
-            case "Emloyee":
+            case "Employee":
                 authUserDTO = employeeMapper.toDTO((Employee) authenticatedUser);
                 break;
         }
