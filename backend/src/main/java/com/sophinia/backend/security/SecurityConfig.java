@@ -1,5 +1,6 @@
 package com.sophinia.backend.security;
 
+import com.sophinia.backend.exception.CustomAccessDeniedHandler;
 import com.sophinia.backend.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,13 +17,16 @@ public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
     private final JwtFilter jwtFilter;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     public SecurityConfig(
             final AuthenticationProvider authenticationProvider,
-            final JwtFilter jwtFilter
+            final JwtFilter jwtFilter,
+            final CustomAccessDeniedHandler customAccessDeniedHandler
     ) {
         this.authenticationProvider = authenticationProvider;
         this.jwtFilter = jwtFilter;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
 
     @Bean
@@ -48,6 +52,9 @@ public class SecurityConfig {
                     .permitAll()
                     .anyRequest()
                     .authenticated()
+                )
+                .exceptionHandling(
+                        ex -> ex.accessDeniedHandler(customAccessDeniedHandler)
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
