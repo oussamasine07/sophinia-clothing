@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails {
+
     private final User user;
 
     public UserPrincipal (User user) {
@@ -16,7 +17,8 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        String role = "ROLE_" + user.getClass().getSimpleName().toUpperCase();
+        return List.of(() -> role);
     }
 
     @Override

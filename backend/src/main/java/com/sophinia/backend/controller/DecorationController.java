@@ -5,6 +5,7 @@ import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.service.DecorationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,6 +30,7 @@ public class DecorationController {
         return decorationService.getDecorationById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO) {
         Decoration decoration = new Decoration();

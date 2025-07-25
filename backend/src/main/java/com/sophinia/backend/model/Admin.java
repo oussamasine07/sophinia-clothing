@@ -7,4 +7,6 @@ import javax.security.auth.Subject;
 
 @Entity
 @Table(name = "admins")
-public class Admin extends User {}
+public class Admin extends User {
+
+}
