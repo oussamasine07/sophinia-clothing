@@ -6,6 +6,7 @@ import com.sophinia.backend.model.MeasurementField;
 import com.sophinia.backend.service.MeasurementFieldService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,6 +26,7 @@ public class MeasurementFieldController {
         return measurementFieldService.getMeasurementFieldById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create (@Valid @RequestBody MeasurementFieldValidationDTO measurementFieldValidationDTO) {
         MeasurementField measurementField = new MeasurementField();
@@ -33,6 +35,7 @@ public class MeasurementFieldController {
         return measurementFieldService.createMeasurementField( measurementField );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
             @Valid @RequestBody MeasurementFieldValidationDTO measurementFieldValidationDTO,
@@ -44,6 +47,7 @@ public class MeasurementFieldController {
         return measurementFieldService.updateMeasurementField( id, measurementField );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete ( @PathVariable Long id ) {
 

@@ -10,6 +10,7 @@ import com.sophinia.backend.service.MeasurementFieldService;
 import com.sophinia.backend.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create ( @Valid @RequestBody ProductValidationDTO productValidationDTO) {
 
@@ -85,6 +87,7 @@ public class ProductController {
         return productService.createProduct( product );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
             @Valid @RequestBody ProductValidationDTO productValidationDTO,
@@ -133,6 +136,7 @@ public class ProductController {
         return productService.updateProduct( product, id );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete ( @PathVariable Long id ) {
         return productService.deleteProduct( id );

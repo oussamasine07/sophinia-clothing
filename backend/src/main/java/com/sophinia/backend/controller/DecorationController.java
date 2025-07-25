@@ -39,6 +39,7 @@ public class DecorationController {
         return decorationService.createNewDecoration( decoration );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO, @PathVariable Long id) {
         Decoration decoration = new Decoration();
@@ -47,6 +48,7 @@ public class DecorationController {
         return decorationService.updateDecoration( decoration, id );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete (@PathVariable Long id) {
         return decorationService.deleteDecoration(id);

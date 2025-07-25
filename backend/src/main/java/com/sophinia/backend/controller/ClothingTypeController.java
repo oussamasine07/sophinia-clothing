@@ -6,6 +6,7 @@ import com.sophinia.backend.model.ClothingType;
 import com.sophinia.backend.service.ClothingTypeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,6 +31,7 @@ public class ClothingTypeController {
         return clothingTypeService.getClothingTypeById( id );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> create (@Valid @RequestBody ClothingTypeValidationDTO clothingTypeValidationDTO) {
         ClothingType clothingType = new ClothingType();
@@ -41,6 +43,7 @@ public class ClothingTypeController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
             @Valid @RequestBody ClothingTypeValidationDTO clothingTypeValidationDTO,
@@ -54,6 +57,7 @@ public class ClothingTypeController {
         return clothingTypeService.updateClothingType( clothingType, id );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete ( @PathVariable Long id ) {
         return clothingTypeService.deleteClothingType( id );
