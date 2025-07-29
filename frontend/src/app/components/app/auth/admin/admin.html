@@ -1,8 +1,36 @@
-<div class="page-wrapper p-12 flex w-screen h-screen rounded rounded-2xl">
-  <div class="side-image-login w-1/2 bg-gray-700 h-full">
+<div class="page-wrapper p-12 flex w-screen h-screen">
+  <div class="side-image-login w-1/2 bg-gray-700 h-full rounded-xl">
     <!-- todo add image here-->
   </div>
-  <div class="login-wrapper flex justify-center items-center">
 
+  <div class="login-wrapper flex justify-center items-center w-1/2 h-full">
+    <div class="form-wrapper  text-center w-2/3">
+      <h1 class="text-3xl mb-9">Login as Admin</h1>
+
+      <form class="login-form w-full">
+        <div class="mb-3 w-full">
+          <input type="text" class="border border-[#E3DFDF] w-full bg-white py-3 px-6 text-md rounded-xl placeholder-[#B5B5B5] outline-0" placeholder="Your email">
+          <p class="mt-2 text-sm text-red-600 dark:text-red-500 ">
+<!--            <span class="font-medium">Oh, snapp!</span> Some error message.-->
+          </p>
+        </div>
+
+        <div class="mb-3 w-full">
+          <input type="text" class="border border-[#E3DFDF] w-full bg-white py-3 px-6 text-md rounded-xl placeholder-[#B5B5B5] outline-0" placeholder="Your password">
+          <p class="mt-2 text-sm text-red-600 dark:text-red-500 ">
+            <!--            <span class="font-medium">Oh, snapp!</span> Some error message.-->
+          </p>
+        </div>
+
+        <div class="flex items-start mb-5">
+          <div class="flex items-center h-5">
+            <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+          </div>
+          <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+        </div>
+
+        <button type="submit" class="text-white text-xl bg-[#374353] hover:bg-[#031224] font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer">Sign in</button>
+      </form>
+    </div>
   </div>
 </div>
