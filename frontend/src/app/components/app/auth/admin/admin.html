@@ -7,16 +7,16 @@
     <div class="form-wrapper  text-center w-2/3">
       <h1 class="text-3xl mb-9">Login as Admin</h1>
 
-      <form class="login-form w-full">
+      <form class="login-form w-full" #loginForm (ngSubmit)="onLoginSubmit(loginForm)" >
         <div class="mb-3 w-full">
-          <input type="text" class="border border-[#E3DFDF] w-full bg-white py-3 px-6 text-md rounded-xl placeholder-[#B5B5B5] outline-0" placeholder="Your email">
+          <input type="text" class="border border-[#E3DFDF] w-full bg-white py-3 px-6 text-md rounded-xl placeholder-[#B5B5B5] outline-0" placeholder="Your email" name="email" [(ngModel)]="loginObj.email" >
           <p class="mt-2 text-sm text-red-600 dark:text-red-500 ">
 <!--            <span class="font-medium">Oh, snapp!</span> Some error message.-->
           </p>
         </div>
 
         <div class="mb-3 w-full">
-          <input type="text" class="border border-[#E3DFDF] w-full bg-white py-3 px-6 text-md rounded-xl placeholder-[#B5B5B5] outline-0" placeholder="Your password">
+          <input type="text" class="border border-[#E3DFDF] w-full bg-white py-3 px-6 text-md rounded-xl placeholder-[#B5B5B5] outline-0" placeholder="Your password" name="password" [(ngModel)]="loginObj.password" >
           <p class="mt-2 text-sm text-red-600 dark:text-red-500 ">
             <!--            <span class="font-medium">Oh, snapp!</span> Some error message.-->
           </p>

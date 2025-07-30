@@ -44,6 +44,17 @@ public class CustomException {
 
     }
 
+    @ExceptionHandler(PasswordIncorrectException.class)
+    public ResponseEntity<?> handlePasswordIncorrectException (
+            PasswordIncorrectException ex
+    ) {
+        Map<String, String> error = new HashMap<>();
+
+        error.put("error", ex.getMessage());
+
+        return new ResponseEntity<>( error, HttpStatus.BAD_REQUEST );
+    }
+
 
 }
 
