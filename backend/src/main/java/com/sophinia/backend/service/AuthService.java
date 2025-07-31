@@ -1,15 +1,14 @@
 package com.sophinia.backend.service;
 
 import com.sophinia.backend.dto.mappingDTO.AuthUserDTO;
+import com.sophinia.backend.dto.validation.LoginValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.exception.PasswordIncorrectException;
 import com.sophinia.backend.mapper.AdminMapper;
 import com.sophinia.backend.mapper.ClientMapper;
 import com.sophinia.backend.mapper.EmployeeMapper;
-import com.sophinia.backend.model.Admin;
-import com.sophinia.backend.model.Client;
-import com.sophinia.backend.model.Employee;
-import com.sophinia.backend.model.User;
+import com.sophinia.backend.mapper.UserMapper;
+import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +29,7 @@ public class AuthService {
     private final AdminMapper adminMapper;
     private final ClientMapper clientMapper;
     private final EmployeeMapper employeeMapper;
+    private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
@@ -39,6 +39,7 @@ public class AuthService {
             AdminMapper adminMapper,
             ClientMapper clientMapper,
             EmployeeMapper employeeMapper,
+            UserMapper userMapper,
             JwtService jwtService,
             AuthenticationManager authenticationManager
     ) {
@@ -46,22 +47,23 @@ public class AuthService {
         this.adminMapper = adminMapper;
         this.clientMapper = clientMapper;
         this.employeeMapper = employeeMapper;
+        this.userMapper = userMapper;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
     }
 
-    public ResponseEntity<?> loginUser (User user) {
+    public ResponseEntity<?> loginUser (LoginValidationDTO loginValidationDTO) {
         try {
             Authentication authentication = authenticationManager
                     .authenticate(
                             new UsernamePasswordAuthenticationToken(
-                                    user.getEmail(),
-                                    user.getPassword()
+                                    loginValidationDTO.email(),
+                                    loginValidationDTO.password()
                             )
                     );
 
             if (authentication.isAuthenticated()){
-                AuthUserDTO authUser = this.getAuthenticatedUser(user.getEmail());
+                AuthUserDTO authUser = this.getAuthenticatedUser(loginValidationDTO.email());
 
                 String token = jwtService.generateJwtToken(authUser); 
 
@@ -82,21 +84,17 @@ public class AuthService {
         User authenticatedUser = userRepository.findByEmail( email )
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
-        System.out.println(authenticatedUser.getClass().getSimpleName());
-
-        AuthUserDTO authUserDTO = null;
-        switch (authenticatedUser.getClass().getSimpleName()) {
-            case "Admin":
-                authUserDTO = adminMapper.toDTO((Admin) authenticatedUser);
-                break;
-            case "Client":
-                authUserDTO = clientMapper.toDTO((Client) authenticatedUser);
-                break;
-            case "Employee":
-                authUserDTO = employeeMapper.toDTO((Employee) authenticatedUser);
-                break;
-        }
+        UserPrincipal principal = new UserPrincipal(authenticatedUser);
+        AuthUserDTO authUserDTO = new AuthUserDTO(
+                authenticatedUser.getId(),
+                authenticatedUser.getFirstName(),
+                authenticatedUser.getLastName(),
+                authenticatedUser.getEmail(),
+                principal.getAuthorities()  // correct authorities set here
+        );
         return authUserDTO;
     }
+
+
 
 }

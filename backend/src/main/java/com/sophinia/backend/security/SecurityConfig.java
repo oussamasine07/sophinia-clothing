@@ -43,11 +43,7 @@ public class SecurityConfig {
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests( req ->
                     req.requestMatchers(
-                            "/app/admin/login"
-                    )
-                    .permitAll()
-                    .requestMatchers(
-                            "/app/employee/login"
+                            "/app/login"
                     )
                     .permitAll()
                     .anyRequest()
