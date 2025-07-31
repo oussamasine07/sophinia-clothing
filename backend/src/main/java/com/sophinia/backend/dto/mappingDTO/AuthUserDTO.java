@@ -9,6 +9,6 @@ public record AuthUserDTO(
         String firstName,
         String lastName,
         String email,
-        Collection<? extends GrantedAuthority> getAuthorities
+        Collection<? extends GrantedAuthority> authorities
 ) {
 }

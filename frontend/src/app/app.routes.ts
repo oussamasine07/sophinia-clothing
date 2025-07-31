@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: Layout
   },
   {
-    path: "login/admin",
+    path: "login",
     component: Admin
   }
 ];

@@ -16,10 +16,7 @@ import javax.crypto.SecretKey;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -80,6 +77,14 @@ public class JwtService {
         claims.put("firstName", authUserDTO.firstName());
         claims.put("lastName", authUserDTO.lastName());
         claims.put("email", authUserDTO.email());
+
+        String role = authUserDTO.authorities()
+                .stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("NO_ROLE");
+
+        claims.put("role", role.substring(5).toLowerCase());
 
         return Jwts.builder()
                 .claims()
