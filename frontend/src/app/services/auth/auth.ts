@@ -12,7 +12,7 @@ export class Auth {
   httpClient: HttpClient = inject( HttpClient );
 
   authenticateUser (body: loginFromType): Observable<Token> {
-    return this.httpClient.post<Token>("http://localhost:8090/app/admin/login", body).pipe(
+    return this.httpClient.post<Token>("http://localhost:8090/app/login", body).pipe(
       catchError((err: HttpErrorResponse) => {
         return throwError(() => err);
       })
