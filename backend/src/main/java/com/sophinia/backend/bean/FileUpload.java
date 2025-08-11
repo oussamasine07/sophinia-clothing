@@ -14,6 +14,7 @@ public class FileUpload {
 
         // 1️⃣ Ensure the directory path is correct
         String uploadDir = System.getProperty("user.dir")
+                + File.separator + "backend"
                 + File.separator + "uploads"
                 + File.separator + dir;
 
