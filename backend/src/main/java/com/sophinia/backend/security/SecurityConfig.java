@@ -39,13 +39,17 @@ public class SecurityConfig {
 //                .httpBasic(basic -> basic.disable());
 //        return http.build();
         return http
-                //.cors(c -> c.disable())
+                .cors(c -> c.disable())
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests( req ->
                     req.requestMatchers(
                             "/app/login"
                     )
                     .permitAll()
+                            .requestMatchers(
+                                    "/uploads/**"
+                            )
+                            .permitAll()
                     .anyRequest()
                     .authenticated()
                 )
