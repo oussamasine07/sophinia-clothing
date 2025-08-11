@@ -44,6 +44,16 @@ public class FileUpload {
         return "uploads" + File.separator + dir + File.separator + uniqueFileName;
     }
 
+    public void deleteFile (String filePath) {
+        String path = System.getProperty("user.dir")
+                + File.separator + "backend"
+                + File.separator + filePath;
+
+        File file = new File( path );
+        if (file.exists()) {
+            file.delete();
+        }
+    }
 
 }
 

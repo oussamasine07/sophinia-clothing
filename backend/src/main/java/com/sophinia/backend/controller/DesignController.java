@@ -44,8 +44,10 @@ public class DesignController {
         Design design = new Design();
         design.setName(designValidateDTO.name());
 
-        String image = fileUpload.upload( designValidateDTO.image(), "decorations");
-        design.setImage(image);
+        if (designValidateDTO.image() != null) {
+            String image = fileUpload.upload( designValidateDTO.image(), "decorations");
+            design.setImage(image);
+        }
 
         return designService.createDesign( design );
 
@@ -55,14 +57,9 @@ public class DesignController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
             @PathVariable Long id,
-            @RequestBody DesignValidateDTO designValidateDTO
+            @Valid DesignValidateDTO designValidateDTO
     ) {
-        Design design = new Design();
-
-        design.setName(designValidateDTO.name());
-//        design.setImage(designValidateDTO.image());
-
-        return designService.updateDesignById( id, design );
+        return designService.updateDesignById( id, designValidateDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
