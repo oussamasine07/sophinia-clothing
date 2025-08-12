@@ -82,6 +82,8 @@ public class DesignService {
 
         designRepository.deleteById(id);
 
+        fileUpload.deleteFile(design.getImage());
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
