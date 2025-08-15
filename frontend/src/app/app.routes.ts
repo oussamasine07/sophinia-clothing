@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {Index} from './components/pages/index';
 import {Layout} from './components/app/layout/layout';
 import {Admin} from './components/app/auth/admin/admin';
+import {DesignCreate} from './components/app/content/design/design-create/design-create';
 
 export const routes: Routes = [
   {
@@ -10,7 +11,13 @@ export const routes: Routes = [
   },
   {
     path: "app",
-    component: Layout
+    component: Layout,
+    children: [
+      {
+        path: "design/create",
+        component: DesignCreate
+      }
+    ]
   },
   {
     path: "login",
