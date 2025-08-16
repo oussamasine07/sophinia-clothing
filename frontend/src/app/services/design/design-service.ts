@@ -9,12 +9,14 @@ import {DesignInterface} from '../../models/interfaces/design-interface';
 export class DesignService {
 
   httpClient:HttpClient = inject(HttpClient);
+  url: string = "http://localhost:8090/api/v1/design";
+
+  getDesigns (): Observable<DesignInterface[]> {
+    return this.httpClient.get<DesignInterface[]>(this.url);
+  }
 
   createDesign (formData: FormData): Observable<DesignInterface> {
-
-    const url = "http://localhost:8090/api/v1/design";
-
-    return this.httpClient.post<DesignInterface>(url, formData).pipe(
+    return this.httpClient.post<DesignInterface>(this.url, formData).pipe(
       catchError((err: HttpErrorResponse) => {
         return throwError(() => err);
       })

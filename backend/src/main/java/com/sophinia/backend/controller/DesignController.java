@@ -46,7 +46,7 @@ public class DesignController {
         design.setName(designValidateDTO.name());
 
         if (designValidateDTO.image() != null) {
-            String image = fileUpload.upload( designValidateDTO.image(), "decorations");
+            String image = fileUpload.upload( designValidateDTO.image(), "design");
             design.setImage(image);
         }
 
