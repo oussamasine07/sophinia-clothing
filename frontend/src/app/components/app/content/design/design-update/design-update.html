@@ -1,0 +1,44 @@
+
+<h2 class="text-2xl font-semibold text-gray-800 text-center mt-6">Update design</h2>
+
+<form enctype="multipart/form-data" class="mt-6" [formGroup]="formGroup" #formDesign (ngSubmit)="onUpdateDesignSubmit(formDesign)">
+  <div class="grid grid-cols-12 gap-6">
+
+    <!-- Text Input -->
+    <div class="col-span-12 md:col-span-6">
+      <input
+        type="text"
+        class="border border-[#E3DFDF] w-full bg-white py-3 px-6 text-md rounded-xl placeholder-[#B5B5B5] outline-0"
+        placeholder="Design name"
+        name="name"
+        [(ngModel)]="formObj.name"
+        [ngModelOptions]="{standalone: true}"
+      >
+    </div>
+
+    <!-- File Input -->
+    <div class="col-span-12 md:col-span-6">
+      <input
+        class="block w-full px-4 py-3 text-sm text-gray-900 border border-[#E3DFDF] rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        id="file"
+        name="image"
+        type="file"
+        fileControlName="file"
+        (change)="onFileChange($event)"
+      >
+
+    </div>
+
+  </div>
+
+  <!-- Submit Button -->
+  <div class="mt-6">
+    <button type="submit"
+            class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 cursor-pointer">
+      Update design
+    </button>
+  </div>
+</form>
+
+
+
