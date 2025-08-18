@@ -15,6 +15,10 @@ export class DesignService {
     return this.httpClient.get<DesignInterface[]>(this.url);
   }
 
+  getDesignById ( id: number ) {
+    return this.httpClient.get<DesignInterface>(`${this.url}/${id}`);
+  }
+
   createDesign (formData: FormData): Observable<DesignInterface> {
     return this.httpClient.post<DesignInterface>(this.url, formData).pipe(
       catchError((err: HttpErrorResponse) => {
@@ -24,4 +28,31 @@ export class DesignService {
 
   }
 
+  updateDesign (formData: FormData, id: number): Observable<DesignInterface> {
+    return this.httpClient.put<DesignInterface>(`${this.url}/${id}`, formData).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err);
+      })
+    );
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
