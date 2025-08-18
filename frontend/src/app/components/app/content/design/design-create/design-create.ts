@@ -76,7 +76,8 @@ export class DesignCreate implements OnInit {
         this.selectedFile = null;
       },
       error: (err) => {
-        console.log(err)
+        console.log( err )
+        this.fieldErrors = err.error;
       }
     })
 
