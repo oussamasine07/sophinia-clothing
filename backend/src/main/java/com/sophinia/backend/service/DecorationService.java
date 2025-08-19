@@ -1,5 +1,7 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.bean.FileUpload;
+import com.sophinia.backend.dto.validation.ValidateDecorationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.repository.DecorationRepository;
@@ -15,11 +17,14 @@ import java.util.Map;
 public class DecorationService {
 
     private final DecorationRepository decorationRepository;
+    private final FileUpload fileUpload;
 
     public DecorationService (
-            final DecorationRepository decorationRepository
+            final DecorationRepository decorationRepository,
+            final FileUpload fileUpload
     ) {
         this.decorationRepository = decorationRepository;
+        this.fileUpload = fileUpload;
     }
 
     public ResponseEntity<?> getAllDecorations () {
@@ -35,15 +40,28 @@ public class DecorationService {
         return new ResponseEntity<>(decoration, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createNewDecoration (Decoration decoration) {
+    public ResponseEntity<?> createNewDecoration (ValidateDecorationDTO validateDecorationDTO) {
+        Decoration decoration = new Decoration();
+        decoration.setName(validateDecorationDTO.name());
+
+        if (validateDecorationDTO.image() != null) {
+            String image = fileUpload.upload( validateDecorationDTO.image(), "design");
+            decoration.setImage(image);
+        }
+
         return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> updateDecoration (Decoration updatedDecoration, Long decorationId) {
+    public ResponseEntity<?> updateDecoration (ValidateDecorationDTO validateDecorationDTO, Long decorationId) {
         Decoration decoration = decorationRepository.findById( decorationId )
                 .orElseThrow(() -> new NotFoundException("you cant update an unfound decoration"));
 
-        decoration.setName( updatedDecoration.getName());
+        decoration.setName( validateDecorationDTO.name());
+
+        if (validateDecorationDTO.image() != null) {
+            String image = fileUpload.upload( validateDecorationDTO.image(), "design");
+            decoration.setImage(image);
+        }
 
         return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
@@ -52,9 +70,11 @@ public class DecorationService {
         Decoration decoration = decorationRepository.findById( decorationId )
                 .orElseThrow(() -> new NotFoundException("you cant delete an unfound decoration"));
 
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
         response.put("message", "decoration " + decoration.getName() + " removed");
+        response.put("id", decoration.getId());
+
         decorationRepository.deleteById( decorationId );
 
         return new ResponseEntity<>(response, HttpStatus.OK);
