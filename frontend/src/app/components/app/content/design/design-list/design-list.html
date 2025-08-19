@@ -23,7 +23,7 @@
       <button (click)="openUpdateModal( d )" class="bg-yellow-100 text-yellow-600 p-2 rounded-full hover:bg-yellow-200">
         <i class="fa-solid fa-pencil"></i>
       </button>
-      <button routerLink="#" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200">
+      <button (click)="openDeleteModal( d )" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200">
         <i class="fa-solid fa-trash-can"></i>
       </button>
     </div>
@@ -43,5 +43,12 @@
     (emitUpdateDesign)="updateDesign($event)"
     [currentDesign]="currentUpdateDesign"
 ></app-design-update>
+
+<app-popup
+  *ngIf="showDeleteModal"
+  (cancelDelete)="closeDeleteModal()"
+  (confiremDelete)="deleteModal($event)"
+  [current]="currentUpdateDesign"
+></app-popup>
 
 

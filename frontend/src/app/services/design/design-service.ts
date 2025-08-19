@@ -36,6 +36,10 @@ export class DesignService {
     );
   }
 
+  deleteDesign ( id: number | null | undefined ): Observable<any> {
+    return this.httpClient.delete<any>(`${this.url}/${id}`);
+  }
+
 }
 
 

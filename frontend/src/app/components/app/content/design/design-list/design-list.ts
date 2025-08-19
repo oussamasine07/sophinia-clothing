@@ -5,15 +5,14 @@ import {DesignInterface} from '../../../../../models/interfaces/design-interface
 import {NgFor, NgIf} from '@angular/common';
 import {DesignCreate} from '../design-create/design-create';
 import {DesignUpdate} from '../design-update/design-update';
+import {Popup} from '../../../partials/popup/popup';
 
 @Component({
   selector: 'app-design-list',
   imports: [
-    RouterLink,
     NgFor,
     NgIf,
-    DesignCreate,
-    DesignUpdate
+    DesignCreate, DesignUpdate, Popup
   ],
   templateUrl: './design-list.html',
   styleUrl: './design-list.css'
@@ -55,6 +54,23 @@ export class DesignList implements OnInit{
   }
   updateDesign (design: DesignInterface) {
     this.designs = this.designs.map((d: DesignInterface) => d.id == design.id ? design : d);
+  }
+
+
+  showDeleteModal = false;
+  openDeleteModal ( d: DesignInterface ) {
+    this.showDeleteModal = true;
+    this.currentUpdateDesign = d;
+  }
+  closeDeleteModal () {
+    this.showDeleteModal = false;
+    this.currentUpdateDesign = null;
+  }
+  deleteModal ( d: DesignInterface ) {
+    this.designs = this.designs.filter( des => des.id != d.id)
+    console.log( d )
+    console.log( this.designs )
+    this.closeDeleteModal()
   }
 
 
