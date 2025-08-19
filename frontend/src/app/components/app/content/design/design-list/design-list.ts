@@ -1,9 +1,10 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, Input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {DesignService} from '../../../../../services/design/design-service';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
 import {NgFor, NgIf} from '@angular/common';
 import {DesignCreate} from '../design-create/design-create';
+import {DesignUpdate} from '../design-update/design-update';
 
 @Component({
   selector: 'app-design-list',
@@ -11,7 +12,8 @@ import {DesignCreate} from '../design-create/design-create';
     RouterLink,
     NgFor,
     NgIf,
-    DesignCreate
+    DesignCreate,
+    DesignUpdate
   ],
   templateUrl: './design-list.html',
   styleUrl: './design-list.css'
@@ -42,5 +44,32 @@ export class DesignList implements OnInit{
     this.designs.push( design );
   }
 
+  @Input() currentUpdateDesign: DesignInterface | null = null
+  showUpdateModal = false;
+  openUpdateModal (design: DesignInterface) {
+    this.showUpdateModal = true;
+    this.currentUpdateDesign = design;
+  }
+  closeUpdateModal () {
+    this.showUpdateModal = false;
+  }
+  updateDesign (design: DesignInterface) {
+    this.designs = this.designs.map((d: DesignInterface) => d.id == design.id ? design : d);
+  }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

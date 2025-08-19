@@ -20,7 +20,7 @@
 
     <!-- Action icons -->
     <div class="flex items-center gap-2">
-      <button routerLink="#" class="bg-yellow-100 text-yellow-600 p-2 rounded-full hover:bg-yellow-200">
+      <button (click)="openUpdateModal( d )" class="bg-yellow-100 text-yellow-600 p-2 rounded-full hover:bg-yellow-200">
         <i class="fa-solid fa-pencil"></i>
       </button>
       <button routerLink="#" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200">
@@ -36,5 +36,12 @@
   (close)="closeCreateModal()"
   (emitCreatedDesign)="addNewDesign($event)"
 ></app-design-create>
+
+<app-design-update
+    *ngIf="showUpdateModal"
+    (close)="closeUpdateModal()"
+    (emitUpdateDesign)="updateDesign($event)"
+    [currentDesign]="currentUpdateDesign"
+></app-design-update>
 
 

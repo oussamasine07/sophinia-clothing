@@ -66,7 +66,6 @@ public class DesignService {
         }
 
         updatedDesign.setName(design.getName());
-        updatedDesign.setImage(design.getImage());
 
         return new ResponseEntity<>( designRepository.save(updatedDesign), HttpStatus.OK);
 

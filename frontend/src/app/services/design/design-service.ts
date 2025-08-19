@@ -28,7 +28,7 @@ export class DesignService {
 
   }
 
-  updateDesign (formData: FormData, id: number): Observable<DesignInterface> {
+  updateDesign (formData: FormData, id: number | null | undefined): Observable<DesignInterface> {
     return this.httpClient.put<DesignInterface>(`${this.url}/${id}`, formData).pipe(
       catchError((err: HttpErrorResponse) => {
         return throwError(() => err);
