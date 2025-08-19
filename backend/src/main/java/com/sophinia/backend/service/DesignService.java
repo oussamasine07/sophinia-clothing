@@ -66,7 +66,6 @@ public class DesignService {
         }
 
         updatedDesign.setName(design.getName());
-        updatedDesign.setImage(design.getImage());
 
         return new ResponseEntity<>( designRepository.save(updatedDesign), HttpStatus.OK);
 
@@ -76,9 +75,10 @@ public class DesignService {
         Design design = designRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("you can't delete a not found design"));
 
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
         response.put("message", design.getName() + " hqs been Deleted");
+        response.put("id", design.getId());
 
         designRepository.deleteById(id);
 

@@ -1,17 +1,18 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, Input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {DesignService} from '../../../../../services/design/design-service';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
 import {NgFor, NgIf} from '@angular/common';
 import {DesignCreate} from '../design-create/design-create';
+import {DesignUpdate} from '../design-update/design-update';
+import {Popup} from '../../../partials/popup/popup';
 
 @Component({
   selector: 'app-design-list',
   imports: [
-    RouterLink,
     NgFor,
     NgIf,
-    DesignCreate
+    DesignCreate, DesignUpdate, Popup
   ],
   templateUrl: './design-list.html',
   styleUrl: './design-list.css'
@@ -42,5 +43,49 @@ export class DesignList implements OnInit{
     this.designs.push( design );
   }
 
+  @Input() currentUpdateDesign: DesignInterface | null = null
+  showUpdateModal = false;
+  openUpdateModal (design: DesignInterface) {
+    this.showUpdateModal = true;
+    this.currentUpdateDesign = design;
+  }
+  closeUpdateModal () {
+    this.showUpdateModal = false;
+  }
+  updateDesign (design: DesignInterface) {
+    this.designs = this.designs.map((d: DesignInterface) => d.id == design.id ? design : d);
+  }
+
+
+  showDeleteModal = false;
+  openDeleteModal ( d: DesignInterface ) {
+    this.showDeleteModal = true;
+    this.currentUpdateDesign = d;
+  }
+  closeDeleteModal () {
+    this.showDeleteModal = false;
+    this.currentUpdateDesign = null;
+  }
+  deleteModal ( d: DesignInterface ) {
+    this.designs = this.designs.filter( des => des.id != d.id)
+    console.log( d )
+    console.log( this.designs )
+    this.closeDeleteModal()
+  }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
