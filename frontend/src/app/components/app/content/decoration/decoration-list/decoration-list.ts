@@ -2,12 +2,14 @@ import {Component, inject, Input, OnInit} from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
 import {DecorationInterface} from '../../../../../models/interfaces/decoration-interface';
 import {DecorationService} from '../../../../../services/decoration/decoration-service';
+import {DecorationCreate} from '../decoration-create/decoration-create';
+import {DesignCreate} from '../../design/design-create/design-create';
 
 @Component({
   selector: 'app-decoration-list',
   imports: [
-    NgFor,
-    NgIf,
+    NgFor, NgIf,
+    DecorationCreate, DesignCreate
   ],
   templateUrl: './decoration-list.html',
   styleUrl: './decoration-list.css'
@@ -34,20 +36,20 @@ export class DecorationList implements OnInit {
     this.showCreateModal = false
   }
 
-  addNewDesign (decoration: DecorationInterface) {
+  addNewDecoration (decoration: DecorationInterface) {
     this.decorations.push( decoration );
   }
 
-  @Input() currentUpdateDesign: DecorationInterface | null = null
+  @Input() currentDecoration: DecorationInterface | null = null
   showUpdateModal = false;
   openUpdateModal (decoration: DecorationInterface) {
     this.showUpdateModal = true;
-    this.currentUpdateDesign = decoration;
+    this.currentDecoration = decoration;
   }
   closeUpdateModal () {
     this.showUpdateModal = false;
   }
-  updateDesign (decoration: DecorationInterface) {
+  updateDecoration (decoration: DecorationInterface) {
     this.decorations = this.decorations.map((d: DecorationInterface) => d.id == decoration.id ? decoration : d);
   }
 
@@ -55,16 +57,14 @@ export class DecorationList implements OnInit {
   showDeleteModal = false;
   openDeleteModal ( d: DecorationInterface ) {
     this.showDeleteModal = true;
-    this.currentUpdateDesign = d;
+    this.currentDecoration = d;
   }
   closeDeleteModal () {
     this.showDeleteModal = false;
-    this.currentUpdateDesign = null;
+    this.currentDecoration = null;
   }
   deleteModal ( d: DecorationInterface ) {
     this.decorations = this.decorations.filter( des => des.id != d.id)
-    console.log( d )
-    console.log( this.decorations )
     this.closeDeleteModal()
   }
 

@@ -27,3 +27,31 @@
     </div>
   </div>
 </div>
+
+<app-decoration-create
+  *ngIf="showCreateModal"
+  (close)="closeCreateModal()"
+  (emitCreatedDecoration)="addNewDecoration($event)"
+></app-decoration-create>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
