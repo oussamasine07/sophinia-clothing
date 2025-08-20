@@ -34,6 +34,13 @@
   (emitCreatedDecoration)="addNewDecoration($event)"
 ></app-decoration-create>
 
+<app-decoration-update
+  *ngIf="showUpdateModal"
+  (close)="closeUpdateModal()"
+  (emitUpdatedDecoration)="updateDecoration($event)"
+  [currentDecoration]="currentDecoration"
+></app-decoration-update>
+
 
 
 

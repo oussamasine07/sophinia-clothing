@@ -3,13 +3,13 @@ import {NgFor, NgIf} from '@angular/common';
 import {DecorationInterface} from '../../../../../models/interfaces/decoration-interface';
 import {DecorationService} from '../../../../../services/decoration/decoration-service';
 import {DecorationCreate} from '../decoration-create/decoration-create';
-import {DesignCreate} from '../../design/design-create/design-create';
+import {DecorationUpdate} from '../decoration-update/decoration-update';
 
 @Component({
   selector: 'app-decoration-list',
   imports: [
     NgFor, NgIf,
-    DecorationCreate, DesignCreate
+    DecorationCreate, DecorationUpdate
   ],
   templateUrl: './decoration-list.html',
   styleUrl: './decoration-list.css'
@@ -23,7 +23,6 @@ export class DecorationList implements OnInit {
     this.decorationService.getDecorations().subscribe({
       next: (decos: DecorationInterface[]) => {
         this.decorations = decos
-        console.log( this.decorations )
       }
     })
   }
