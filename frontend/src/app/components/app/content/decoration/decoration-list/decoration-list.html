@@ -1,0 +1,29 @@
+<div class="flex items-center justify-between my-4">
+  <h2 class="text-xl font-semibold">All decorations</h2>
+  <button (click)="openCreateModal()" class="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-200">
+    New Decoration
+  </button>
+</div>
+
+
+<div class="w-full rounded-lg">
+  <div class="grid grid-cols-[auto_1fr_auto] items-center p-3 border-b border-gray-200" *ngFor="let d of decorations">
+    <!-- Image -->
+    <div class="w-12 h-12 bg-gray-700 rounded-md overflow-hidden">
+      <img [src]="d.image">
+    </div>
+
+    <!-- Design name -->
+    <span class="ml-4 text-blue-600">{{ d.name }}</span>
+
+    <!-- Action icons -->
+    <div class="flex items-center gap-2">
+      <button (click)="openUpdateModal( d )" class="bg-yellow-100 text-yellow-600 p-2 rounded-full hover:bg-yellow-200">
+        <i class="fa-solid fa-pencil"></i>
+      </button>
+      <button (click)="openDeleteModal( d )" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+    </div>
+  </div>
+</div>
