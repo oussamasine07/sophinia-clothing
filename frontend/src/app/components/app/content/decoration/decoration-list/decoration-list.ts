@@ -4,12 +4,13 @@ import {DecorationInterface} from '../../../../../models/interfaces/decoration-i
 import {DecorationService} from '../../../../../services/decoration/decoration-service';
 import {DecorationCreate} from '../decoration-create/decoration-create';
 import {DecorationUpdate} from '../decoration-update/decoration-update';
+import {Popup} from '../../../partials/popup/popup';
 
 @Component({
   selector: 'app-decoration-list',
   imports: [
     NgFor, NgIf,
-    DecorationCreate, DecorationUpdate
+    DecorationCreate, DecorationUpdate, Popup
   ],
   templateUrl: './decoration-list.html',
   styleUrl: './decoration-list.css'
@@ -52,11 +53,12 @@ export class DecorationList implements OnInit {
     this.decorations = this.decorations.map((d: DecorationInterface) => d.id == decoration.id ? decoration : d);
   }
 
-
+  @Input() currentDeleteType: string = "";
   showDeleteModal = false;
   openDeleteModal ( d: DecorationInterface ) {
     this.showDeleteModal = true;
     this.currentDecoration = d;
+    this.currentDeleteType = "decoration"
   }
   closeDeleteModal () {
     this.showDeleteModal = false;

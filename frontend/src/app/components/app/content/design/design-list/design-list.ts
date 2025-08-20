@@ -56,11 +56,12 @@ export class DesignList implements OnInit{
     this.designs = this.designs.map((d: DesignInterface) => d.id == design.id ? design : d);
   }
 
-
+  @Input() currentDeleteType: string = "";
   showDeleteModal = false;
   openDeleteModal ( d: DesignInterface ) {
     this.showDeleteModal = true;
     this.currentUpdateDesign = d;
+    this.currentDeleteType = "design";
   }
   closeDeleteModal () {
     this.showDeleteModal = false;

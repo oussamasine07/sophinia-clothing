@@ -1,6 +1,7 @@
 import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {DesignService} from '../../../../services/design/design-service';
+import {DecorationService} from '../../../../services/decoration/decoration-service';
 
 @Component({
   selector: 'app-popup',
@@ -13,6 +14,7 @@ import {DesignService} from '../../../../services/design/design-service';
 export class Popup implements OnInit{
 
   designService: DesignService = inject( DesignService );
+  decortionService: DecorationService = inject( DecorationService );
 
   ngOnInit () {
     setTimeout(() => {
@@ -23,6 +25,7 @@ export class Popup implements OnInit{
   animate = false
 
   @Input() current: any | null = null;
+  @Input() deleteType: string = "";
   @Output() confiremDelete = new EventEmitter();
   @Output() cancelDelete = new EventEmitter();
 
@@ -34,11 +37,24 @@ export class Popup implements OnInit{
   }
 
   onConfirmDeleteClick () {
-    this.designService.deleteDesign( this.current?.id ).subscribe({
-      next: (res: any) => {
-        this.confiremDelete.emit(res);
-      }
-    })
+
+    switch ( this.deleteType ) {
+      case "design":
+        this.designService.deleteDesign( this.current?.id ).subscribe({
+          next: (res: any) => {
+            this.confiremDelete.emit(res);
+          }
+        })
+        break;
+      case "decoration":
+        this.decortionService.deleteDecoration( this.current?.id ).subscribe({
+          next: (res: any) => {
+            console.log("decoration deleted")
+            this.confiremDelete.emit(res);
+          }
+        })
+        break;
+    }
   }
 }
 

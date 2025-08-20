@@ -41,6 +41,14 @@
   [currentDecoration]="currentDecoration"
 ></app-decoration-update>
 
+<app-popup
+  *ngIf="showDeleteModal"
+  (cancelDelete)="closeDeleteModal()"
+  (confiremDelete)="deleteModal($event)"
+  [current]="currentDecoration"
+  [deleteType]="currentDeleteType"
+></app-popup>
+
 
 
 
