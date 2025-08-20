@@ -27,3 +27,9 @@
     </div>
   </div>
 </div>
+
+<app-clothing-type-create
+  *ngIf="showCreateModal"
+  (close)="closeCreateModal()"
+  (emitCreatedClothingType)="addNewClothingType($event)"
+></app-clothing-type-create>
