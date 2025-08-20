@@ -6,6 +6,7 @@ import {DesignCreate} from './components/app/content/design/design-create/design
 import {DesignList} from './components/app/content/design/design-list/design-list';
 import {DesignUpdate} from './components/app/content/design/design-update/design-update';
 import {DecorationList} from './components/app/content/decoration/decoration-list/decoration-list';
+import {ClothingTypeList} from './components/app/content/clothing-type/clothing-type-list/clothing-type-list';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
       {
         path: "decoration",
         component: DecorationList
+      },
+      {
+        path: "clothing-type",
+        component: ClothingTypeList
       }
     ]
   },
