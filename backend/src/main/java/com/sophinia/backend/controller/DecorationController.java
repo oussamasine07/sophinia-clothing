@@ -32,20 +32,17 @@ public class DecorationController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO) {
-        Decoration decoration = new Decoration();
-        decoration.setName(validateDecorationDTO.name());
+    public ResponseEntity<?> create (@Valid ValidateDecorationDTO validateDecorationDTO) {
 
-        return decorationService.createNewDecoration( decoration );
+        return decorationService.createNewDecoration( validateDecorationDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> update (@Valid @RequestBody ValidateDecorationDTO validateDecorationDTO, @PathVariable Long id) {
-        Decoration decoration = new Decoration();
-        decoration.setName(validateDecorationDTO.name());
+    public ResponseEntity<?> update (@Valid ValidateDecorationDTO validateDecorationDTO, @PathVariable Long id) {
 
-        return decorationService.updateDecoration( decoration, id );
+
+        return decorationService.updateDecoration( validateDecorationDTO, id );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
