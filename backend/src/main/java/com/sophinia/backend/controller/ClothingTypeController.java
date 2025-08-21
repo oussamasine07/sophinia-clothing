@@ -33,28 +33,18 @@ public class ClothingTypeController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create (@Valid @RequestBody ClothingTypeValidationDTO clothingTypeValidationDTO) {
-        ClothingType clothingType = new ClothingType();
-
-        clothingType.setName(clothingTypeValidationDTO.name());
-        clothingType.setImage(clothingTypeValidationDTO.image());
-
-        return clothingTypeService.createClothingType( clothingType );
-
+    public ResponseEntity<?> create (@Valid ClothingTypeValidationDTO clothingTypeValidationDTO) {
+        return clothingTypeService.createClothingType( clothingTypeValidationDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
-            @Valid @RequestBody ClothingTypeValidationDTO clothingTypeValidationDTO,
+            @Valid ClothingTypeValidationDTO clothingTypeValidationDTO,
             @PathVariable Long id
     ) {
-        ClothingType clothingType = new ClothingType();
 
-        clothingType.setName(clothingTypeValidationDTO.name());
-        clothingType.setImage(clothingTypeValidationDTO.image());
-
-        return clothingTypeService.updateClothingType( clothingType, id );
+        return clothingTypeService.updateClothingType( clothingTypeValidationDTO, id );
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -1,5 +1,7 @@
 package com.sophinia.backend.service;
 
+import com.sophinia.backend.bean.FileUpload;
+import com.sophinia.backend.dto.validation.ClothingTypeValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.ClothingType;
 import com.sophinia.backend.repository.ClothingTypeRepository;
@@ -15,11 +17,14 @@ import java.util.Map;
 public class ClothingTypeService {
 
     private final ClothingTypeRepository clothingTypeRepository;
+    private final FileUpload fileUpload;
 
     public ClothingTypeService (
-            final ClothingTypeRepository clothingTypeRepository
+            final ClothingTypeRepository clothingTypeRepository,
+            final FileUpload fileUpload
     ) {
         this.clothingTypeRepository = clothingTypeRepository;
+        this.fileUpload = fileUpload;
     }
 
     public ResponseEntity<?> getAllClothingTypes () {
@@ -37,17 +42,32 @@ public class ClothingTypeService {
         return new ResponseEntity<>(clothingType, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createClothingType ( ClothingType clothingType ) {
+    public ResponseEntity<?> createClothingType ( ClothingTypeValidationDTO clothingTypeValidationDTO ) {
+        ClothingType clothingType = new ClothingType();
+
+        clothingType.setName(clothingTypeValidationDTO.name());
+
+        if (clothingTypeValidationDTO.image() != null) {
+            String image = fileUpload.upload( clothingTypeValidationDTO.image(), "clothing-type");
+            clothingType.setImage(image);
+        }
+
         return new ResponseEntity<>( clothingTypeRepository.save(clothingType), HttpStatus.OK );
     }
 
-    public ResponseEntity<?> updateClothingType ( ClothingType clothingType, Long id ) {
+    public ResponseEntity<?> updateClothingType (
+            ClothingTypeValidationDTO clothingTypeValidationDTO,
+            Long id
+    ) {
 
         ClothingType updatedClothingType = clothingTypeRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("you can't update an not found clothing type"));
 
-        updatedClothingType.setName(clothingType.getName());
-        updatedClothingType.setImage( clothingType.getImage());
+        updatedClothingType.setName(clothingTypeValidationDTO.name());
+        if (clothingTypeValidationDTO.image() != null) {
+            String image = fileUpload.upload( clothingTypeValidationDTO.image(), "clothing-type");
+            updatedClothingType.setImage(image);
+        }
 
         return new ResponseEntity<>( clothingTypeRepository.save( updatedClothingType ), HttpStatus.OK);
 
@@ -57,9 +77,10 @@ public class ClothingTypeService {
         ClothingType clothingType = clothingTypeRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("you can't update an not found clothing type"));
 
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
         response.put("message", clothingType.getName() + " has been Deleted");
+        response.put("id", clothingType.getId());
 
         clothingTypeRepository.deleteById( id );
 
