@@ -1,11 +1,19 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {ClothingModelService} from '../../../../../services/clothing-model/clothing-model-service';
 import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-type-interface';
 import {ClothingModelInterface} from '../../../../../models/interfaces/clothing-model-interface';
+import {ClothingTypeCreate} from '../../clothing-type/clothing-type-create/clothing-type-create';
+import {ClothingTypeUpdate} from '../../clothing-type/clothing-type-update/clothing-type-update';
+import {NgForOf, NgIf} from '@angular/common';
+import {Popup} from '../../../partials/popup/popup';
 
 @Component({
   selector: 'app-clothing-model-list',
-  imports: [],
+  imports: [
+    NgForOf,
+    NgIf,
+    Popup
+  ],
   templateUrl: './clothing-model-list.html',
   styleUrl: './clothing-model-list.css'
 })
@@ -21,5 +29,48 @@ export class ClothingModelList implements OnInit {
         console.log( this.clothingModels )
       }
     })
+  }
+
+
+  showCreateModal = false;
+  openCreateModal () {
+    this.showCreateModal = true;
+  }
+  closeCreateModal () {
+    this.showCreateModal = false
+  }
+
+  addNewClothingType (cm: ClothingModelInterface) {
+    this.clothingModels.push( cm );
+  }
+
+  @Input() currentClothingModel: ClothingModelInterface | null = null
+  showUpdateModal = false;
+  openUpdateModal (cm: ClothingModelInterface) {
+    this.showUpdateModal = true;
+    this.currentClothingModel = cm;
+  }
+  closeUpdateModal () {
+    this.showUpdateModal = false;
+  }
+  updateClothingModel (cm: ClothingModelInterface) {
+    this.clothingModels = this.clothingModels
+                              .map((clothingModel: ClothingModelInterface) => clothingModel.id == cm.id ? cm : clothingModel);
+  }
+
+  @Input() currentDeleteModel: string = "";
+  showDeleteModal = false;
+  openDeleteModal ( cm: ClothingModelInterface ) {
+    this.showDeleteModal = true;
+    this.currentClothingModel = cm;
+    this.currentDeleteModel = "clothing-model";
+  }
+  closeDeleteModal () {
+    this.showDeleteModal = false;
+    this.currentClothingModel = null;
+  }
+  deleteModal ( cm: ClothingModelInterface ) {
+    this.clothingModels = this.clothingModels.filter( clothingModel => clothingModel.id != cm.id)
+    this.closeDeleteModal()
   }
 }
