@@ -1,13 +1,15 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {FabricService} from '../../../../../services/fabric/fabric-service';
 import {FabricInterface} from '../../../../../models/interfaces/fabric-interface';
-import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-type-interface';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
+import {Popup} from '../../../partials/popup/popup';
+import {FabricCreate} from '../fabric-create/fabric-create';
 
 @Component({
   selector: 'app-fabric-list',
   imports: [
-    NgForOf
+    NgForOf, NgIf,
+    FabricCreate
   ],
   templateUrl: './fabric-list.html',
   styleUrl: './fabric-list.css'

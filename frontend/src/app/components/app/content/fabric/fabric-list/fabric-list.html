@@ -27,3 +27,25 @@
     </div>
   </div>
 </div>
+
+
+<app-fabric-create
+  *ngIf="showCreateModal"
+  (close)="closeCreateModal()"
+  (emitCreatedFabric)="addNewFabric($event)"
+></app-fabric-create>
+
+<!--<app-clothing-type-update-->
+<!--  *ngIf="showUpdateModal"-->
+<!--  (close)="closeUpdateModal()"-->
+<!--  (emitUpdatedClothingType)="updateClothingType($event)"-->
+<!--  [current]="currentClothingType"-->
+<!--&gt;</app-clothing-type-update>-->
+
+<!--<app-popup-->
+<!--  *ngIf="showDeleteModal"-->
+<!--  (cancelDelete)="closeDeleteModal()"-->
+<!--  (confiremDelete)="deleteModal($event)"-->
+<!--  [current]="currentClothingType"-->
+<!--  [deleteType]="currentDeleteType"-->
+<!--&gt;</app-popup>-->
