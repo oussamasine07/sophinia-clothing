@@ -28,11 +28,11 @@
   </div>
 </div>
 
-<!--<app-clothing-type-create-->
-<!--  *ngIf="showCreateModal"-->
-<!--  (close)="closeCreateModal()"-->
-<!--  (emitCreatedClothingType)="addNewClothingType($event)"-->
-<!--&gt;</app-clothing-type-create>-->
+<app-clothing-model-create
+  *ngIf="showCreateModal"
+  (close)="closeCreateModal()"
+  (emitCreatedClothingModel)="addNewClothingModel($event)"
+></app-clothing-model-create>
 
 <!--<app-clothing-type-update-->
 <!--  *ngIf="showUpdateModal"-->

@@ -6,13 +6,13 @@ import {ClothingTypeCreate} from '../../clothing-type/clothing-type-create/cloth
 import {ClothingTypeUpdate} from '../../clothing-type/clothing-type-update/clothing-type-update';
 import {NgForOf, NgIf} from '@angular/common';
 import {Popup} from '../../../partials/popup/popup';
+import {ClothingModelCreate} from '../clothing-model-create/clothing-model-create';
 
 @Component({
   selector: 'app-clothing-model-list',
   imports: [
-    NgForOf,
-    NgIf,
-    Popup
+    NgForOf, NgIf,
+    ClothingModelCreate, Popup
   ],
   templateUrl: './clothing-model-list.html',
   styleUrl: './clothing-model-list.css'
@@ -40,7 +40,7 @@ export class ClothingModelList implements OnInit {
     this.showCreateModal = false
   }
 
-  addNewClothingType (cm: ClothingModelInterface) {
+  addNewClothingModel (cm: ClothingModelInterface) {
     this.clothingModels.push( cm );
   }
 
