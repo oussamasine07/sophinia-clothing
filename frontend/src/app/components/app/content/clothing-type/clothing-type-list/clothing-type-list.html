@@ -33,3 +33,10 @@
   (close)="closeCreateModal()"
   (emitCreatedClothingType)="addNewClothingType($event)"
 ></app-clothing-type-create>
+
+<app-clothing-type-update
+  *ngIf="showUpdateModal"
+  (close)="closeUpdateModal()"
+  (emitUpdatedClothingType)="updateClothingType($event)"
+  [current]="currentClothingType"
+></app-clothing-type-update>

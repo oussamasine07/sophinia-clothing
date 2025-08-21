@@ -2,14 +2,14 @@ import {Component, inject, Input, OnInit} from '@angular/core';
 import {ClothingTypeService} from '../../../../../services/clothing-type/clothing-type-service';
 import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-type-interface';
 import {NgForOf, NgIf} from '@angular/common';
-import {ClothingTypeCreate} from '../../clothing-type-create/clothing-type-create';
+import {ClothingTypeCreate} from '../clothing-type-create/clothing-type-create';
+import {ClothingTypeUpdate} from '../clothing-type-update/clothing-type-update';
 
 @Component({
   selector: 'app-clothing-type-list',
   imports: [
-    NgForOf,
-    ClothingTypeCreate,
-    NgIf
+    NgForOf, NgIf,
+    ClothingTypeCreate, ClothingTypeUpdate
   ],
   templateUrl: './clothing-type-list.html',
   styleUrl: './clothing-type-list.css'
@@ -67,8 +67,6 @@ export class ClothingTypeList implements OnInit {
   }
   deleteModal ( d: ClothingTypeInterface ) {
     this.clothingTypes = this.clothingTypes.filter( ct => ct.id != d.id)
-    console.log( d )
-    console.log( this.clothingTypes )
     this.closeDeleteModal()
   }
 
