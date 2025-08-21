@@ -1,6 +1,8 @@
 package com.sophinia.backend.service;
 
 
+import com.sophinia.backend.bean.FileUpload;
+import com.sophinia.backend.dto.validation.ClothingModelValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.ClothingModel;
 import com.sophinia.backend.repository.ClothingModelRepository;
@@ -16,11 +18,14 @@ import java.util.Map;
 public class ClothingModelService {
 
     private final ClothingModelRepository clothingModelRepository;
+    private final FileUpload fileUpload;
 
     public ClothingModelService (
-            final ClothingModelRepository clothingModelRepository
+            final ClothingModelRepository clothingModelRepository,
+            final FileUpload fileUpload
     ) {
         this.clothingModelRepository = clothingModelRepository;
+        this.fileUpload = fileUpload;
     }
 
     public ResponseEntity<?> getAllClothingModels () {
@@ -36,7 +41,14 @@ public class ClothingModelService {
         return new ResponseEntity<>(clothingModel, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createClothingModel (ClothingModel clothingModel) {
+    public ResponseEntity<?> createClothingModel ( ClothingModelValidationDTO clothingModelValidationDTO ) {
+        ClothingModel clothingModel = new ClothingModel();
+
+        clothingModel.setName( clothingModelValidationDTO.name() );
+        if ( clothingModelValidationDTO.image() != null) {
+            String image = fileUpload.upload( clothingModelValidationDTO.image(), "clothing-model");
+            clothingModel.setImage(image);
+        }
 
         ClothingModel savedClothingModel = clothingModelRepository.save( clothingModel );
 
@@ -44,12 +56,15 @@ public class ClothingModelService {
 
     }
 
-    public ResponseEntity<?> updateClothingModel ( ClothingModel clothingModel, Long id) {
+    public ResponseEntity<?> updateClothingModel ( ClothingModelValidationDTO clothingModelValidationDTO, Long id) {
         ClothingModel foundClothingModel = clothingModelRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
 
-        foundClothingModel.setName( clothingModel.getName() );
-        foundClothingModel.setImage( clothingModel.getImage() );
+        foundClothingModel.setName( clothingModelValidationDTO.name() );
+        if ( clothingModelValidationDTO.image() != null) {
+            String image = fileUpload.upload( clothingModelValidationDTO.image(), "clothing-model");
+            foundClothingModel.setImage(image);
+        }
 
         return new ResponseEntity<>( clothingModelRepository.save( foundClothingModel ), HttpStatus.OK );
     }
@@ -58,9 +73,10 @@ public class ClothingModelService {
         ClothingModel foundClothingModel = clothingModelRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
 
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
         response.put("message", foundClothingModel.getName() + " has been Deleted");
+        response.put("id", foundClothingModel.getId());
 
         clothingModelRepository.deleteById( id );
 

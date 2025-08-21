@@ -4,6 +4,7 @@ package com.sophinia.backend.controller;
 import com.sophinia.backend.dto.validation.ClothingModelValidationDTO;
 import com.sophinia.backend.model.ClothingModel;
 import com.sophinia.backend.service.ClothingModelService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -35,27 +36,19 @@ public class ClothingModelController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create (@RequestBody ClothingModelValidationDTO clothingModelValidationDTO) {
-        ClothingModel clothingModel = new ClothingModel();
+    public ResponseEntity<?> create (@Valid ClothingModelValidationDTO clothingModelValidationDTO) {
 
-        clothingModel.setName( clothingModelValidationDTO.name() );
-        clothingModel.setImage( clothingModelValidationDTO.image() );
-
-        return clothingModelService.createClothingModel( clothingModel );
+        return clothingModelService.createClothingModel( clothingModelValidationDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
-            @RequestBody ClothingModelValidationDTO clothingModelValidationDTO,
+            @Valid ClothingModelValidationDTO clothingModelValidationDTO,
             @PathVariable Long id
     ) {
-        ClothingModel clothingModel = new ClothingModel();
 
-        clothingModel.setName( clothingModelValidationDTO.name() );
-        clothingModel.setImage( clothingModelValidationDTO.image() );
-
-        return clothingModelService.updateClothingModel( clothingModel, id);
+        return clothingModelService.updateClothingModel( clothingModelValidationDTO, id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
