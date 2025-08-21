@@ -7,12 +7,13 @@ import {ClothingTypeUpdate} from '../../clothing-type/clothing-type-update/cloth
 import {NgForOf, NgIf} from '@angular/common';
 import {Popup} from '../../../partials/popup/popup';
 import {ClothingModelCreate} from '../clothing-model-create/clothing-model-create';
+import {ClothingModelUpdate} from '../clothing-model-update/clothing-model-update';
 
 @Component({
   selector: 'app-clothing-model-list',
   imports: [
     NgForOf, NgIf,
-    ClothingModelCreate, Popup
+    ClothingModelCreate, ClothingModelUpdate, Popup
   ],
   templateUrl: './clothing-model-list.html',
   styleUrl: './clothing-model-list.css'

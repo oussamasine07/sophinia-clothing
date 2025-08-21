@@ -1,27 +1,31 @@
-import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
-import { FormsModule} from '@angular/forms'
-import {ClothingModelService} from '../../../../../services/clothing-model/clothing-model-service';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {clothingModelFormType} from '../../../../../models/types/clothingModelFormType';
 import {ClothingModelInterface} from '../../../../../models/interfaces/clothing-model-interface';
+import {ClothingModelService} from '../../../../../services/clothing-model/clothing-model-service';
 import {NgClass, NgIf} from '@angular/common';
 
 @Component({
-  selector: 'app-clothing-model-create',
+  selector: 'app-clothing-model-update',
   imports: [
-    FormsModule, NgClass, NgIf
+    FormsModule, NgIf, NgClass
   ],
-  templateUrl: './clothing-model-create.html',
-  styleUrl: './clothing-model-create.css'
+  templateUrl: './clothing-model-update.html',
+  styleUrl: './clothing-model-update.css'
 })
-export class ClothingModelCreate implements OnInit {
+export class ClothingModelUpdate implements OnInit {
 
-  clothingModelService: ClothingModelService = inject( ClothingModelService )
+  clothingModelService: ClothingModelService = inject( ClothingModelService );
 
   animate: boolean = false;
   ngOnInit (){
     setTimeout(() => {
       this.animate = true
     }, 10)
+
+    this.clothingModelFormObj = {
+      name: this.current?.name || ""
+    }
   }
 
   fieldErrors: Record<string, string | string[]> = {}
@@ -34,7 +38,7 @@ export class ClothingModelCreate implements OnInit {
     }, 300)
   }
 
-  @Output() emitCreatedClothingModel = new EventEmitter();
+  @Output() emitUpdatedClothingModel = new EventEmitter();
 
 
   selectedFile: File | null = null;
@@ -45,11 +49,13 @@ export class ClothingModelCreate implements OnInit {
     }
   }
 
+  @Input() current: ClothingModelInterface | null = null;
+
   // form submit
   clothingModelFormObj: clothingModelFormType = {
     name : ""
   }
-  onCreateClothingModelSubmit (form: FormsModule) {
+  onUpdateClothingModelSubmit (form: FormsModule) {
 
     const formData = new FormData();
     formData.append("name", this.clothingModelFormObj.name);
@@ -58,9 +64,9 @@ export class ClothingModelCreate implements OnInit {
       formData.append("image", this.selectedFile)
     }
 
-    this.clothingModelService.createClothingModel(formData).subscribe({
+    this.clothingModelService.updateClothingModel(formData, this.current?.id).subscribe({
       next: (cm: ClothingModelInterface) => {
-        this.emitCreatedClothingModel.emit( cm )
+        this.emitUpdatedClothingModel.emit( cm )
         this.onCloseClick()
         this.clothingModelFormObj = {
           name: ""
