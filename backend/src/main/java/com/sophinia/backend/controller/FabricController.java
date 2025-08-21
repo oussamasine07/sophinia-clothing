@@ -1,7 +1,7 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.FabricFormDTO;
+import com.sophinia.backend.dto.validation.FabricFormDTO;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.service.FabricService;
 import jakarta.validation.Valid;
@@ -28,24 +28,17 @@ public class FabricController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create (@Valid @RequestBody FabricFormDTO fabricFormDTO) {
-        Fabric fabric = new Fabric();
+    public ResponseEntity<?> create (@Valid FabricFormDTO fabricFormDTO) {
 
-        fabric.setName(fabricFormDTO.name());
-        fabric.setDescription( fabricFormDTO.description() );
 
-        return fabricService.createNewFabric( fabric );
+        return fabricService.createNewFabric( fabricFormDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update (@Valid @RequestBody FabricFormDTO fabricFormDTO, @PathVariable Long id ) {
-        Fabric fabric = new Fabric();
+    public ResponseEntity<?> update (@Valid FabricFormDTO fabricFormDTO, @PathVariable Long id ) {
 
-        fabric.setName(fabricFormDTO.name());
-        fabric.setDescription( fabricFormDTO.description() );
-
-        return fabricService.updateFabric( fabric, id );
+        return fabricService.updateFabric( fabricFormDTO, id );
     }
 
     @PreAuthorize("hasRole('ADMIN')")

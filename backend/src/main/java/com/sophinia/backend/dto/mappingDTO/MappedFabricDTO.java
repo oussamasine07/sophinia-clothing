@@ -1,4 +1,4 @@
-package com.sophinia.backend.dto;
+package com.sophinia.backend.dto.mappingDTO;
 
 public record MappedFabricDTO(
         Long id,
