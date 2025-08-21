@@ -8,6 +8,7 @@ import {DesignUpdate} from './components/app/content/design/design-update/design
 import {DecorationList} from './components/app/content/decoration/decoration-list/decoration-list';
 import {ClothingTypeList} from './components/app/content/clothing-type/clothing-type-list/clothing-type-list';
 import {ClothingModelList} from './components/app/content/clothing-model/clothing-model-list/clothing-model-list';
+import {FabricList} from './components/app/content/fabric/fabric-list/fabric-list';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,10 @@ export const routes: Routes = [
       {
         path: "clothing-model",
         component: ClothingModelList
+      },
+      {
+        path: "fabric",
+        component: FabricList
       }
     ]
   },
