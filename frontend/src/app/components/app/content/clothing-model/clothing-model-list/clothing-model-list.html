@@ -43,8 +43,8 @@
 
 <app-popup
   *ngIf="showDeleteModal"
-  (close)="closeDeleteModal()"
+  (cancelDelete)="closeDeleteModal()"
   (confiremDelete)="deleteModal($event)"
   [current]="currentClothingModel"
-  [deleteType]="currentDeleteModel"
+  [deleteType]="currentDeleteType"
 ></app-popup>

@@ -59,12 +59,12 @@ export class ClothingModelList implements OnInit {
                               .map((clothingModel: ClothingModelInterface) => clothingModel.id == cm.id ? cm : clothingModel);
   }
 
-  @Input() currentDeleteModel: string = "";
+  @Input() currentDeleteType: string = "";
   showDeleteModal = false;
   openDeleteModal ( cm: ClothingModelInterface ) {
     this.showDeleteModal = true;
     this.currentClothingModel = cm;
-    this.currentDeleteModel = "clothing-model";
+    this.currentDeleteType = "clothing-model";
   }
   closeDeleteModal () {
     this.showDeleteModal = false;
