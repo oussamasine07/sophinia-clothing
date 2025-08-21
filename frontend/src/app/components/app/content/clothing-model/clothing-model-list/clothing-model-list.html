@@ -7,44 +7,44 @@
 
 
 <div class="w-full rounded-lg">
-  <div class="grid grid-cols-[auto_1fr_auto] items-center p-3 border-b border-gray-200" *ngFor="let ct of clothingTypes">
+  <div class="grid grid-cols-[auto_1fr_auto] items-center p-3 border-b border-gray-200" *ngFor="let cm of clothingModels">
     <!-- Image -->
     <div class="w-12 h-12 bg-gray-700 rounded-md overflow-hidden">
-      <img [src]="ct.image">
+      <img [src]="cm.image">
     </div>
 
     <!-- Design name -->
-    <span class="ml-4 text-blue-600">{{ ct.name }}</span>
+    <span class="ml-4 text-blue-600">{{ cm.name }}</span>
 
     <!-- Action icons -->
     <div class="flex items-center gap-2">
-      <button (click)="openUpdateModal( ct )" class="bg-yellow-100 text-yellow-600 p-2 rounded-full hover:bg-yellow-200">
+      <button (click)="openUpdateModal( cm )" class="bg-yellow-100 text-yellow-600 p-2 rounded-full hover:bg-yellow-200">
         <i class="fa-solid fa-pencil"></i>
       </button>
-      <button (click)="openDeleteModal( ct )" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200">
+      <button (click)="openDeleteModal( cm )" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200">
         <i class="fa-solid fa-trash-can"></i>
       </button>
     </div>
   </div>
 </div>
 
-<app-clothing-type-create
+<app-clothing-model-create
   *ngIf="showCreateModal"
   (close)="closeCreateModal()"
-  (emitCreatedClothingType)="addNewClothingType($event)"
-></app-clothing-type-create>
+  (emitCreatedClothingModel)="addNewClothingModel($event)"
+></app-clothing-model-create>
 
-<app-clothing-type-update
+<app-clothing-model-update
   *ngIf="showUpdateModal"
   (close)="closeUpdateModal()"
-  (emitUpdatedClothingType)="updateClothingType($event)"
-  [current]="currentClothingType"
-></app-clothing-type-update>
+  (emitUpdatedClothingModel)="updateClothingModel($event)"
+  [current]="currentClothingModel"
+></app-clothing-model-update>
 
 <app-popup
   *ngIf="showDeleteModal"
   (cancelDelete)="closeDeleteModal()"
   (confiremDelete)="deleteModal($event)"
-  [current]="currentClothingType"
+  [current]="currentClothingModel"
   [deleteType]="currentDeleteType"
 ></app-popup>

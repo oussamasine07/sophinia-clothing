@@ -3,6 +3,7 @@ import {NgClass} from '@angular/common';
 import {DesignService} from '../../../../services/design/design-service';
 import {DecorationService} from '../../../../services/decoration/decoration-service';
 import {ClothingTypeService} from '../../../../services/clothing-type/clothing-type-service';
+import {ClothingModelService} from '../../../../services/clothing-model/clothing-model-service';
 
 @Component({
   selector: 'app-popup',
@@ -17,6 +18,7 @@ export class Popup implements OnInit{
   designService: DesignService = inject( DesignService );
   decortionService: DecorationService = inject( DecorationService );
   clothingTypeService: ClothingTypeService = inject( ClothingTypeService );
+  clothingModelService: ClothingModelService = inject( ClothingModelService )
 
   ngOnInit () {
     setTimeout(() => {
@@ -56,6 +58,13 @@ export class Popup implements OnInit{
         break;
       case "clothing-type":
         this.clothingTypeService.deleteClothingType( this.current?.id ).subscribe({
+          next: (res: any) => {
+            this.confiremDelete.emit(res);
+          }
+        })
+        break;
+      case "clothing-model":
+        this.clothingModelService.deleteClothingModel( this.current?.id ).subscribe({
           next: (res: any) => {
             this.confiremDelete.emit(res);
           }
