@@ -2,6 +2,7 @@ import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/c
 import {NgClass} from '@angular/common';
 import {DesignService} from '../../../../services/design/design-service';
 import {DecorationService} from '../../../../services/decoration/decoration-service';
+import {ClothingTypeService} from '../../../../services/clothing-type/clothing-type-service';
 
 @Component({
   selector: 'app-popup',
@@ -15,6 +16,7 @@ export class Popup implements OnInit{
 
   designService: DesignService = inject( DesignService );
   decortionService: DecorationService = inject( DecorationService );
+  clothingTypeService: ClothingTypeService = inject( ClothingTypeService );
 
   ngOnInit () {
     setTimeout(() => {
@@ -37,7 +39,6 @@ export class Popup implements OnInit{
   }
 
   onConfirmDeleteClick () {
-
     switch ( this.deleteType ) {
       case "design":
         this.designService.deleteDesign( this.current?.id ).subscribe({
@@ -49,7 +50,13 @@ export class Popup implements OnInit{
       case "decoration":
         this.decortionService.deleteDecoration( this.current?.id ).subscribe({
           next: (res: any) => {
-            console.log("decoration deleted")
+            this.confiremDelete.emit(res);
+          }
+        })
+        break;
+      case "clothing-type":
+        this.clothingTypeService.deleteClothingType( this.current?.id ).subscribe({
+          next: (res: any) => {
             this.confiremDelete.emit(res);
           }
         })

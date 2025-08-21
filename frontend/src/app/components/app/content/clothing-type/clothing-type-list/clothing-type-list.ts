@@ -4,12 +4,13 @@ import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-t
 import {NgForOf, NgIf} from '@angular/common';
 import {ClothingTypeCreate} from '../clothing-type-create/clothing-type-create';
 import {ClothingTypeUpdate} from '../clothing-type-update/clothing-type-update';
+import {Popup} from '../../../partials/popup/popup';
 
 @Component({
   selector: 'app-clothing-type-list',
   imports: [
     NgForOf, NgIf,
-    ClothingTypeCreate, ClothingTypeUpdate
+    ClothingTypeCreate, ClothingTypeUpdate, Popup
   ],
   templateUrl: './clothing-type-list.html',
   styleUrl: './clothing-type-list.css'
