@@ -35,14 +35,14 @@ public class FabricController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> update (@Valid FabricFormDTO fabricFormDTO, @PathVariable Long id ) {
 
         return fabricService.updateFabric( fabricFormDTO, id );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete (@PathVariable Long id) {
         return fabricService.deleteFabric( id );
     }

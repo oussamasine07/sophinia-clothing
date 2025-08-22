@@ -29,6 +29,7 @@ export class FabricService {
 
   }
 
+  // take a look here in the update
   updateFabric (formData: FormData, id: number | null | undefined): Observable<FabricInterface> {
     return this.httpClient.put<FabricInterface>(`${this.url}/${id}`, formData).pipe(
       catchError((err: HttpErrorResponse) => {

@@ -4,12 +4,13 @@ import {FabricInterface} from '../../../../../models/interfaces/fabric-interface
 import {NgForOf, NgIf} from '@angular/common';
 import {Popup} from '../../../partials/popup/popup';
 import {FabricCreate} from '../fabric-create/fabric-create';
+import {FabricUpdate} from '../fabric-update/fabric-update';
 
 @Component({
   selector: 'app-fabric-list',
   imports: [
     NgForOf, NgIf,
-    FabricCreate
+    FabricCreate, FabricUpdate
   ],
   templateUrl: './fabric-list.html',
   styleUrl: './fabric-list.css'

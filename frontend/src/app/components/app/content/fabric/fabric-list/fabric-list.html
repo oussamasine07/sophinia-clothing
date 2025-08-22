@@ -35,12 +35,12 @@
   (emitCreatedFabric)="addNewFabric($event)"
 ></app-fabric-create>
 
-<!--<app-clothing-type-update-->
-<!--  *ngIf="showUpdateModal"-->
-<!--  (close)="closeUpdateModal()"-->
-<!--  (emitUpdatedClothingType)="updateClothingType($event)"-->
-<!--  [current]="currentClothingType"-->
-<!--&gt;</app-clothing-type-update>-->
+<app-fabric-update
+  *ngIf="showUpdateModal"
+  (close)="closeUpdateModal()"
+  (emitUpdateFabric)="updateFabric($event)"
+  [current]="currentFabric"
+></app-fabric-update>
 
 <!--<app-popup-->
 <!--  *ngIf="showDeleteModal"-->
