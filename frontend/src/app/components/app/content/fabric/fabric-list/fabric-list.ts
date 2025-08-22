@@ -10,7 +10,7 @@ import {FabricUpdate} from '../fabric-update/fabric-update';
   selector: 'app-fabric-list',
   imports: [
     NgForOf, NgIf,
-    FabricCreate, FabricUpdate
+    FabricCreate, FabricUpdate, Popup
   ],
   templateUrl: './fabric-list.html',
   styleUrl: './fabric-list.css'

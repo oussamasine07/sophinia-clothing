@@ -42,10 +42,10 @@
   [current]="currentFabric"
 ></app-fabric-update>
 
-<!--<app-popup-->
-<!--  *ngIf="showDeleteModal"-->
-<!--  (cancelDelete)="closeDeleteModal()"-->
-<!--  (confiremDelete)="deleteModal($event)"-->
-<!--  [current]="currentClothingType"-->
-<!--  [deleteType]="currentDeleteType"-->
-<!--&gt;</app-popup>-->
+<app-popup
+  *ngIf="showDeleteModal"
+  (cancelDelete)="closeDeleteModal()"
+  (confiremDelete)="deleteModal($event)"
+  [current]="currentFabric"
+  [deleteType]="currentDeleteType"
+></app-popup>
