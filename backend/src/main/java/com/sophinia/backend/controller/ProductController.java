@@ -42,98 +42,19 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create ( @Valid @RequestBody ProductValidationDTO productValidationDTO) {
-
-        Product product = new Product();
-
-        product.setName(productValidationDTO.name());
-        product.setDescription(productValidationDTO.description());
-
-        // get clothing type
-        ClothingType clothingType = (ClothingType) clothingTypeService
-                .getClothingTypeById( productValidationDTO.clothing_type() )
-                .getBody();
-        product.setClothingType( clothingType );
-
-        // setup measurements
-        List<MeasurementField> measurementFields = productValidationDTO.measurements_fields_ids() == null
-                ? new ArrayList<>()
-                :  productValidationDTO
-                .measurements_fields_ids()
-                .stream()
-                .map(id -> {
-                    return (MeasurementField) measurementFieldService
-                            .getMeasurementFieldById( id )
-                            .getBody();
-                })
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        if (productValidationDTO.measurement_fields() != null) {
-            productValidationDTO.measurement_fields()
-                    .forEach(measure -> {
-                        MeasurementField newMeasure = new MeasurementField();
-                        newMeasure.setName( measure.name() );
-
-                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
-                                .createMeasurementField( newMeasure )
-                                .getBody();
-
-                        measurementFields.add( savedMeasure );
-                    });
-        }
-
-        product.setProductMeasurementFields( measurementFields );
-
-        return productService.createProduct( product );
+    public ResponseEntity<?> create ( @Valid ProductValidationDTO productValidationDTO ) {
+        
+        return productService.createProduct( productValidationDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> update (
-            @Valid @RequestBody ProductValidationDTO productValidationDTO,
+            @Valid @ModelAttribute ProductValidationDTO productValidationDTO,
             @PathVariable Long id
     ) {
-        Product product = new Product();
 
-        product.setName(productValidationDTO.name());
-        product.setDescription(productValidationDTO.description());
-
-        // get clothing type
-        ClothingType clothingType = (ClothingType) clothingTypeService
-                .getClothingTypeById( productValidationDTO.clothing_type() )
-                .getBody();
-        product.setClothingType( clothingType );
-
-        // setup measurements
-        List<MeasurementField> measurementFields = productValidationDTO.measurements_fields_ids() == null
-                ? new ArrayList<>()
-                :  productValidationDTO
-                .measurements_fields_ids()
-                .stream()
-                .map(mId -> {
-                    return (MeasurementField) measurementFieldService
-                            .getMeasurementFieldById( mId )
-                            .getBody();
-                })
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        if (productValidationDTO.measurement_fields() != null) {
-            productValidationDTO.measurement_fields()
-                    .forEach(measure -> {
-                        MeasurementField newMeasure = new MeasurementField();
-                        newMeasure.setName( measure.name() );
-
-                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
-                                .createMeasurementField( newMeasure )
-                                .getBody();
-
-                        measurementFields.add( savedMeasure );
-                    });
-        }
-
-        product.setProductMeasurementFields( measurementFields );
-
-        return productService.updateProduct( product, id );
+        return productService.updateProduct( productValidationDTO, id );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
