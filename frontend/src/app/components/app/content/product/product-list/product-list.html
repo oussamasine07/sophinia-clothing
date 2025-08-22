@@ -1,1 +1,31 @@
-<p>product-list works!</p>
+<div class="flex items-center justify-between my-4">
+  <h2 class="text-xl font-semibold">All Products</h2>
+  <button (click)="openCreateModal()" class="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-200">
+    New product
+  </button>
+</div>
+
+
+<div class="w-full rounded-lg">
+  <div class="grid grid-cols-12 items-center p-3 border-b border-gray-200" *ngFor="let p of products">
+    <!-- Image -->
+    <div class="col-span-1 w-12 h-12 bg-gray-700 rounded-md overflow-hidden">
+      <img [src]="p.image">
+    </div>
+
+    <!-- Design name -->
+    <span class="col-span-4 ml-4 text-blue-600 ">{{ p.name }}</span>
+
+    <span class="col-span-5 ml-4 text-gray-700 text-sm italic">{{ p.clothingType?.name }}</span>
+
+    <!-- Action icons -->
+    <div class="col-span-2 flex items-center justify-end gap-2">
+      <button (click)="openUpdateModal( p )" class="bg-yellow-100 text-yellow-600 p-2 rounded-full hover:bg-yellow-200">
+        <i class="fa-solid fa-pencil"></i>
+      </button>
+      <button (click)="openDeleteModal( p )" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+    </div>
+  </div>
+</div>
