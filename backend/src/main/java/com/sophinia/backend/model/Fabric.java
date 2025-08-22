@@ -18,6 +18,9 @@ public class Fabric {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "image", nullable = false)
+    private String image;
+
 
     public Long getId() {
         return id;
@@ -43,4 +46,11 @@ public class Fabric {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

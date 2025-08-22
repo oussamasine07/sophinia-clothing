@@ -1,7 +1,8 @@
 package com.sophinia.backend.service;
 
-import com.sophinia.backend.dto.FabricFormDTO;
-import com.sophinia.backend.dto.MappedFabricDTO;
+import com.sophinia.backend.bean.FileUpload;
+import com.sophinia.backend.dto.mappingDTO.MappedFabricDTO;
+import com.sophinia.backend.dto.validation.FabricFormDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.mapper.FabricMapper;
 import com.sophinia.backend.model.Fabric;
@@ -10,21 +11,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Service
 public class FabricService {
 
     private final FabricRepository fabricRepository;
     private final FabricMapper fabricMapper;
+    private final FileUpload fileUpload;
 
     public FabricService (
             final FabricRepository fabricRepository,
-            final FabricMapper fabricMapper
+            final FabricMapper fabricMapper,
+            final FileUpload fileUpload
     ) {
         this.fabricRepository = fabricRepository;
         this.fabricMapper = fabricMapper;
+        this.fileUpload = fileUpload;
     }
 
     public ResponseEntity<?> getFabrics () {
@@ -36,17 +41,32 @@ public class FabricService {
         return new ResponseEntity<>(fabrics, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createNewFabric (Fabric fabric) {
+    public ResponseEntity<?> createNewFabric (FabricFormDTO fabricFormDTO) {
+        Fabric fabric = new Fabric();
+
+        fabric.setName(fabricFormDTO.name());
+        fabric.setDescription( fabricFormDTO.description() );
+
+        if (fabricFormDTO.image() != null) {
+            String image = fileUpload.upload( fabricFormDTO.image(), "fabrics");
+            fabric.setImage(image);
+        }
+
         Fabric newFabric = fabricRepository.save( fabric );
         return new ResponseEntity<>(newFabric, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> updateFabric (Fabric fabric, Long fabricId) {
+    public ResponseEntity<?> updateFabric (FabricFormDTO fabricFormDTO, Long fabricId) {
         Fabric updatedFabric = fabricRepository.findById( fabricId )
                 .orElseThrow(() -> new NotFoundException("you can't update an unfound fabric"));
 
-        updatedFabric.setName(fabric.getName());
-        updatedFabric.setDescription(fabric.getDescription());
+        updatedFabric.setName(fabricFormDTO.name());
+        updatedFabric.setDescription(fabricFormDTO.description());
+
+        if (fabricFormDTO.image() != null) {
+            String image = fileUpload.upload( fabricFormDTO.image(), "fabrics");
+            updatedFabric.setImage(image);
+        }
 
         updatedFabric = fabricRepository.save( updatedFabric );
 
@@ -58,9 +78,14 @@ public class FabricService {
         Fabric deletedFabric = fabricRepository.findById( fabricId )
                 .orElseThrow(() -> new NotFoundException("you can't delete an unfound fabric"));
 
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", deletedFabric.getName() + " has been Deleted");
+        response.put("id", deletedFabric.getId());
+
         fabricRepository.deleteById( fabricId );
 
-        return new ResponseEntity<>(deletedFabric, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
