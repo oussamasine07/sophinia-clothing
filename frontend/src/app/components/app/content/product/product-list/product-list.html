@@ -35,3 +35,12 @@
   (close)="closeCreateModal()"
   (emitCreatedProduct)="addNewProduct($event)"
 ></app-product-create>
+
+
+<app-popup
+  *ngIf="showDeleteModal"
+  (cancelDelete)="closeDeleteModal()"
+  (confiremDelete)="deleteModal($event)"
+  [current]="currentProduct"
+  [deleteType]="currentDeleteType"
+></app-popup>

@@ -5,6 +5,7 @@ import {DecorationService} from '../../../../services/decoration/decoration-serv
 import {ClothingTypeService} from '../../../../services/clothing-type/clothing-type-service';
 import {ClothingModelService} from '../../../../services/clothing-model/clothing-model-service';
 import {FabricService} from '../../../../services/fabric/fabric-service';
+import {ProductService} from '../../../../services/product/product-service';
 
 @Component({
   selector: 'app-popup',
@@ -21,6 +22,7 @@ export class Popup implements OnInit{
   clothingTypeService: ClothingTypeService = inject( ClothingTypeService );
   clothingModelService: ClothingModelService = inject( ClothingModelService );
   fabricService: FabricService = inject( FabricService );
+  productService: ProductService = inject( ProductService );
 
   ngOnInit () {
     setTimeout(() => {
@@ -74,6 +76,13 @@ export class Popup implements OnInit{
         break;
       case "fabric":
         this.fabricService.deleteFabric( this.current?.id ).subscribe({
+          next: (res: any) => {
+            this.confiremDelete.emit(res);
+          }
+        })
+        break;
+      case "product":
+        this.productService.deleteProduct( this.current?.id ).subscribe({
           next: (res: any) => {
             this.confiremDelete.emit(res);
           }
