@@ -47,15 +47,15 @@ public class ProductController {
         return productService.createProduct( productValidationDTO );
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update (
-            @Valid @ModelAttribute ProductValidationDTO productValidationDTO,
-            @PathVariable Long id
-    ) {
-
-        return productService.updateProduct( productValidationDTO, id );
-    }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PutMapping("/{id}")
+//    public ResponseEntity<?> update (
+//            @Valid @ModelAttribute ProductValidationDTO productValidationDTO,
+//            @PathVariable Long id
+//    ) {
+//
+//        return productService.updateProduct( productValidationDTO, id );
+//    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")

@@ -29,3 +29,9 @@
     </div>
   </div>
 </div>
+
+<app-product-create
+  *ngIf="showCreateModal"
+  (close)="closeCreateModal()"
+  (emitCreatedProduct)="addNewProduct($event)"
+></app-product-create>

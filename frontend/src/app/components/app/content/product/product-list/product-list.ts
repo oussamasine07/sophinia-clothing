@@ -1,12 +1,15 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {ProductService} from '../../../../../services/product/product-service';
 import {ProductInterface} from '../../../../../models/interfaces/product-interface';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
+import {ProductCreate} from '../product-create/product-create';
 
 @Component({
   selector: 'app-product-list',
   imports: [
-    NgForOf
+    NgForOf,
+    ProductCreate,
+    NgIf
   ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'
@@ -20,7 +23,6 @@ export class ProductList implements OnInit {
     this.productService.getProducts().subscribe({
       next: (products: ProductInterface[]) => {
         this.products = products;
-        console.log( this.products )
       }
     })
   }

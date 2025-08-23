@@ -1,7 +1,9 @@
 package com.sophinia.backend.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sophinia.backend.bean.FileUpload;
+import com.sophinia.backend.dto.mappingDTO.MeasurementFieldDTO;
 import com.sophinia.backend.dto.validation.ProductValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.ClothingType;
@@ -63,6 +65,7 @@ public class ProductService {
                 .getBody();
         product.setClothingType( clothingType );
 
+
         // setup measurements
         List<MeasurementField> measurementFields = productValidationDTO.measurements_fields_ids() == null
                 ? new ArrayList<>()
@@ -95,61 +98,62 @@ public class ProductService {
             product.setImage(image);
         }
 
+
         product.setProductMeasurementFields( measurementFields );
 
         return new ResponseEntity<>( productRepository.save(product), HttpStatus.OK );
     }
 
 
-    public ResponseEntity<?> updateProduct (ProductValidationDTO productValidationDTO, Long id) {
-        Product updatedProduct = productRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this product not found"));
-
-        updatedProduct.setName(productValidationDTO.name());
-        updatedProduct.setDescription(productValidationDTO.description());
-
-        // get clothing type
-        ClothingType clothingType = (ClothingType) clothingTypeService
-                .getClothingTypeById( productValidationDTO.clothing_type() )
-                .getBody();
-        updatedProduct.setClothingType( clothingType );
-
-        // setup measurements
-        List<MeasurementField> measurementFields = productValidationDTO.measurements_fields_ids() == null
-                ? new ArrayList<>()
-                :  productValidationDTO
-                .measurements_fields_ids()
-                .stream()
-                .map(mId -> {
-                    return (MeasurementField) measurementFieldService
-                            .getMeasurementFieldById( mId )
-                            .getBody();
-                })
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        if (productValidationDTO.measurement_fields() != null) {
-            productValidationDTO.measurement_fields()
-                    .forEach(measure -> {
-                        MeasurementField newMeasure = new MeasurementField();
-                        newMeasure.setName( measure.name() );
-
-                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
-                                .createMeasurementField( newMeasure )
-                                .getBody();
-
-                        measurementFields.add( savedMeasure );
-                    });
-        }
-
-        if (productValidationDTO.image() != null) {
-            String image = fileUpload.upload( productValidationDTO.image(), "products");
-            updatedProduct.setImage(image);
-        }
-
-        updatedProduct.setProductMeasurementFields( measurementFields );
-
-        return new ResponseEntity<>( productRepository.save( updatedProduct ), HttpStatus.OK);
-    }
+//    public ResponseEntity<?> updateProduct (ProductValidationDTO productValidationDTO, Long id) {
+//        Product updatedProduct = productRepository.findById( id )
+//                .orElseThrow(() -> new NotFoundException("this product not found"));
+//
+//        updatedProduct.setName(productValidationDTO.name());
+//        updatedProduct.setDescription(productValidationDTO.description());
+//
+//        // get clothing type
+//        ClothingType clothingType = (ClothingType) clothingTypeService
+//                .getClothingTypeById( productValidationDTO.clothing_type() )
+//                .getBody();
+//        updatedProduct.setClothingType( clothingType );
+//
+//        // setup measurements
+//        List<MeasurementField> measurementFields = productValidationDTO.measurements_fields_ids() == null
+//                ? new ArrayList<>()
+//                :  productValidationDTO
+//                .measurements_fields_ids()
+//                .stream()
+//                .map(mId -> {
+//                    return (MeasurementField) measurementFieldService
+//                            .getMeasurementFieldById( mId )
+//                            .getBody();
+//                })
+//                .collect(Collectors.toCollection(ArrayList::new));
+//
+//        if (productValidationDTO.measurement_fields() != null) {
+//            productValidationDTO.measurement_fields()
+//                    .forEach(measure -> {
+//                        MeasurementField newMeasure = new MeasurementField();
+//                        newMeasure.setName( measure.name() );
+//
+//                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
+//                                .createMeasurementField( newMeasure )
+//                                .getBody();
+//
+//                        measurementFields.add( savedMeasure );
+//                    });
+//        }
+//
+//        if (productValidationDTO.image() != null) {
+//            String image = fileUpload.upload( productValidationDTO.image(), "products");
+//            updatedProduct.setImage(image);
+//        }
+//
+//        updatedProduct.setProductMeasurementFields( measurementFields );
+//
+//        return new ResponseEntity<>( productRepository.save( updatedProduct ), HttpStatus.OK);
+//    }
 
     public ResponseEntity<?> deleteProduct ( Long id ) {
 
