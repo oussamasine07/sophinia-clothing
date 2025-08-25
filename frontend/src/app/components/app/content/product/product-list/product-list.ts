@@ -4,14 +4,13 @@ import {ProductInterface} from '../../../../../models/interfaces/product-interfa
 import {NgForOf, NgIf} from '@angular/common';
 import {ProductCreate} from '../product-create/product-create';
 import {Popup} from '../../../partials/popup/popup';
+import {ProductUpdate} from '../product-update/product-update';
 
 @Component({
   selector: 'app-product-list',
   imports: [
-    NgForOf,
-    ProductCreate,
-    NgIf,
-    Popup
+    NgForOf, NgIf,
+    ProductCreate, ProductUpdate, Popup
   ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'

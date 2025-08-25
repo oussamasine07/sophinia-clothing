@@ -36,6 +36,12 @@
   (emitCreatedProduct)="addNewProduct($event)"
 ></app-product-create>
 
+<app-product-update
+  *ngIf="showUpdateModal"
+  (close)="closeUpdateModal()"
+  (emitUpdateProduct)="updateProduct($event)"
+  [current]="currentProduct"
+></app-product-update>
 
 <app-popup
   *ngIf="showDeleteModal"
