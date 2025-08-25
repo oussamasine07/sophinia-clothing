@@ -1,0 +1,201 @@
+
+<!-- Backdrop -->
+<div class="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center z-50">
+  <!-- Modal Card -->
+  <div
+    class="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-xl transform transition-all duration-300 ease-out"
+    [ngClass]="{
+      'opacity-100 translate-y-0': animate,
+      'opacity-0 -translate-y-5': !animate
+    }"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold text-gray-800">Add Product</h2>
+
+      <button (click)="onCloseClick()" class="text-gray-500 hover:text-red-500 text-lg">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Modal Content (Form or Inputs) -->
+    <form #createProductForm (ngSubmit)="onCreateProductSubmit( createProductForm )" >
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <!-- Name (with validation style example) -->
+        <div class="col-span-1 mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input
+            type="text"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            [ngClass]="{
+              'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['name'],
+              'border-gray-300 focus:ring-indigo-400': !fieldErrors['name']
+            }"
+            placeholder="Product name"
+            name="name"
+            [(ngModel)]="productFormObj.name"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <p *ngIf="fieldErrors['name']" class="mt-1 text-sm text-red-500">{{ fieldErrors['name'] }}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <!-- Name (with validation style example) -->
+        <div class="col-span-1 mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Clothing type</label>
+          <select
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            name="clothing_type"
+            [(ngModel)]="productFormObj.clothing_type"
+          >
+            <option value="">choose clothing type</option>
+            <option *ngFor="let ct of clothingTypes" [value]="ct.id">{{ ct.name }}</option>
+          </select>
+          <p *ngIf="fieldErrors['name']" class="mt-1 text-sm text-red-500">{{ fieldErrors['name'] }}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <!-- Name (with validation style example) -->
+        <div class="col-span-1 mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <textarea
+            type="text"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            [ngClass]="{
+              'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['description'],
+              'border-gray-300 focus:ring-indigo-400': !fieldErrors['description']
+            }"
+            placeholder="Product description"
+            name="description"
+            [(ngModel)]="productFormObj.description"
+            [ngModelOptions]="{standalone: true}"
+          ></textarea>
+          <p *ngIf="fieldErrors['description']" class="mt-1 text-sm text-red-500">{{ fieldErrors['description'] }}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-3">
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Upload Product image</label>
+          <input
+            class="block w-full px-4 py-3 text-sm text-gray-900 border border-[#E3DFDF] rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            id="file"
+            name="image"
+            type="file"
+            fileControlName="file"
+            (change)="onFileChange($event)"
+          >
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-3">
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Measurement fields</label>
+          <select
+            *ngIf="measurementFields.length > 0"
+            #measurementFieldsSelect
+            multiple
+            class="w-full"
+            name="passed_by_cities"
+            [(ngModel)]="productFormObj.measurements_fields_ids"
+          >
+            <option *ngFor="let mf of measurementFields" [value]="mf.id">
+              {{ mf.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-3">
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Custom measurements</label>
+          <div class="flex justify-between items-center">
+            <input
+              type="text"
+              class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+              placeholder="Add custom measures"
+              name="customMeasure"
+              [(ngModel)]="customMeasure"
+            />
+            <button
+              (click)="addCustomMeaserement()"
+              type="button"
+              class="ml-4 w-10 h-10 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-3">
+        <div class="col-span-1">
+<!--          <div *ngFor="let measue of productFormObj.measurement_fields; let i = index">-->
+<!--            <span> {{ measue.name }} </span>-->
+<!--            <button (click)="removeCustomMeaserement( i )" type="button"> remove </button>-->
+<!--          </div>-->
+          <div *ngFor="let measue of productFormObj.measurement_fields; let i = index"
+               class="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full px-4 py-1.5 m-1 text-sm font-medium shadow-md hover:shadow-lg hover:scale-105 transform transition">
+            <span class="mr-2">{{ measue.name }}</span>
+            <button (click)="removeCustomMeaserement(i)"
+                    type="button"
+                    class="ml-1 bg-white/20 hover:bg-white/30 text-white rounded-full w-5 h-5 flex items-center justify-center transition">
+              <i class="fas fa-times text-xs"></i>
+            </button>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <!-- Submit and Cancel -->
+      <div class="flex justify-end space-x-2 mt-4">
+        <!-- TODO MAKE A CLICK EVEN HERE -->
+        <button type="button"
+                class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-700">Cancel</button>
+        <button type="submit"
+                class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

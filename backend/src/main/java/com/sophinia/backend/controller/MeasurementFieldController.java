@@ -21,6 +21,13 @@ public class MeasurementFieldController {
         this.measurementFieldService = measurementFieldService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public ResponseEntity<?> index () {
+        return measurementFieldService.getMEasurementFields();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> show (@PathVariable Long id) {
         return measurementFieldService.getMeasurementFieldById(id);

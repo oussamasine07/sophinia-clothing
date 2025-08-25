@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MeasurementFieldService {
 
@@ -16,6 +18,12 @@ public class MeasurementFieldService {
             final MeasurementFieldRepository measurementFieldRepository
     ) {
         this.measurementFieldRepository = measurementFieldRepository;
+    }
+
+    public ResponseEntity<?> getMEasurementFields () {
+        List<MeasurementField> measurementFields = measurementFieldRepository.findAll();
+
+        return new ResponseEntity<>(measurementFields, HttpStatus.OK);
     }
 
     public ResponseEntity<?> getMeasurementFieldById ( Long id ) {
