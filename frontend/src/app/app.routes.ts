@@ -1,15 +1,13 @@
 import { Routes } from '@angular/router';
-import {Index} from './components/pages/index';
 import {Layout} from './components/app/layout/layout';
 import {Admin} from './components/app/auth/admin/admin';
-import {DesignCreate} from './components/app/content/design/design-create/design-create';
 import {DesignList} from './components/app/content/design/design-list/design-list';
-import {DesignUpdate} from './components/app/content/design/design-update/design-update';
 import {DecorationList} from './components/app/content/decoration/decoration-list/decoration-list';
 import {ClothingTypeList} from './components/app/content/clothing-type/clothing-type-list/clothing-type-list';
 import {ClothingModelList} from './components/app/content/clothing-model/clothing-model-list/clothing-model-list';
 import {FabricList} from './components/app/content/fabric/fabric-list/fabric-list';
 import {ProductList} from './components/app/content/product/product-list/product-list';
+import {Index} from './components/client/pages/index';
 
 export const routes: Routes = [
   {
