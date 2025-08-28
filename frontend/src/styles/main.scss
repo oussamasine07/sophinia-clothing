@@ -1,1 +1,7 @@
-@use 'styles/abstracts/variables' as *;
+@use 'base/reset' as *;
+@use 'layout/global' as *;
+@use 'abstracts/variables' as *;
+
+@import "tailwindcss";
+
+

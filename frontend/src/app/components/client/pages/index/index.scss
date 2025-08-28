@@ -1,6 +1,7 @@
-//@use 'styles/abstracts/_variables' as *;
-//
-//h1 {
-//  color: $heigh-light !important;
-//
-//}
+@use 'base/reset' as *;
+@use 'abstracts/variables' as *;
+
+h1 {
+  color: $primary-pink;
+}
+
