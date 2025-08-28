@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-index',
   imports: [],
   templateUrl: './index.html',
-  styleUrl: './index.css'
+  styleUrl: './index.scss'
 })
 export class Index {
 
