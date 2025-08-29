@@ -13,7 +13,7 @@ import {FabricInterface} from '../../../../../models/interfaces/fabric-interface
     NgIf
   ],
   templateUrl: './fabric-update.html',
-  styleUrl: './fabric-update.css'
+  styleUrl: './fabric-update.scss'
 })
 export class FabricUpdate {
 

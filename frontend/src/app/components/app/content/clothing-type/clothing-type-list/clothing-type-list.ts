@@ -13,7 +13,7 @@ import {Popup} from '../../../partials/popup/popup';
     ClothingTypeCreate, ClothingTypeUpdate, Popup
   ],
   templateUrl: './clothing-type-list.html',
-  styleUrl: './clothing-type-list.css'
+  styleUrl: './clothing-type-list.scss'
 })
 export class ClothingTypeList implements OnInit {
 

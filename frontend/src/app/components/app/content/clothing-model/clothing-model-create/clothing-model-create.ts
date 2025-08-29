@@ -11,7 +11,7 @@ import {NgClass, NgIf} from '@angular/common';
     FormsModule, NgClass, NgIf
   ],
   templateUrl: './clothing-model-create.html',
-  styleUrl: './clothing-model-create.css'
+  styleUrl: './clothing-model-create.scss'
 })
 export class ClothingModelCreate implements OnInit {
 

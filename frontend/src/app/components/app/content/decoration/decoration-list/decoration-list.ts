@@ -13,7 +13,7 @@ import {Popup} from '../../../partials/popup/popup';
     DecorationCreate, DecorationUpdate, Popup
   ],
   templateUrl: './decoration-list.html',
-  styleUrl: './decoration-list.css'
+  styleUrl: './decoration-list.scss'
 })
 export class DecorationList implements OnInit {
   decorations: DecorationInterface[] = [];

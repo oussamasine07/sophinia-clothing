@@ -15,7 +15,7 @@ import {NgClass, NgIf} from '@angular/common';
     NgIf
   ],
   templateUrl: './design-update.html',
-  styleUrl: './design-update.css'
+  styleUrl: './design-update.scss'
 })
 export class DesignUpdate implements OnInit {
   designService: DesignService = inject(DesignService)

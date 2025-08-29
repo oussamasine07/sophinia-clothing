@@ -13,7 +13,7 @@ import {ProductUpdate} from '../product-update/product-update';
     ProductCreate, ProductUpdate, Popup
   ],
   templateUrl: './product-list.html',
-  styleUrl: './product-list.css'
+  styleUrl: './product-list.scss'
 })
 export class ProductList implements OnInit {
 

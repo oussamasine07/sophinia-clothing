@@ -13,7 +13,7 @@ import {NgClass, NgIf} from '@angular/common';
     NgClass
   ],
   templateUrl: './clothing-type-create.html',
-  styleUrl: './clothing-type-create.css'
+  styleUrl: './clothing-type-create.scss'
 })
 export class ClothingTypeCreate implements OnInit {
 

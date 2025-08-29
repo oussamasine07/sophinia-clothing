@@ -11,7 +11,7 @@ import {Router, RouterOutlet} from '@angular/router';
     RouterOutlet
   ],
   templateUrl: './layout.html',
-  styleUrl: './layout.css'
+  styleUrl: './layout.scss'
 })
 export class Layout implements OnInit {
 

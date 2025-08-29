@@ -13,7 +13,7 @@ import {NgClass, NgIf} from '@angular/common';
     NgIf
   ],
   templateUrl: './decoration-create.html',
-  styleUrl: './decoration-create.css'
+  styleUrl: './decoration-create.scss'
 })
 export class DecorationCreate implements OnInit {
 

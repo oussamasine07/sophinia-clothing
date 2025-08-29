@@ -7,7 +7,7 @@ import {RouterLink} from '@angular/router';
     RouterLink
   ],
   templateUrl: './side-nav.html',
-  styleUrl: './side-nav.css'
+  styleUrl: './side-nav.scss'
 })
 export class SideNav {
 

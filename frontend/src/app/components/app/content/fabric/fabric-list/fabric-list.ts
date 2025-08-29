@@ -13,7 +13,7 @@ import {FabricUpdate} from '../fabric-update/fabric-update';
     FabricCreate, FabricUpdate, Popup
   ],
   templateUrl: './fabric-list.html',
-  styleUrl: './fabric-list.css'
+  styleUrl: './fabric-list.scss'
 })
 export class FabricList implements OnInit {
 

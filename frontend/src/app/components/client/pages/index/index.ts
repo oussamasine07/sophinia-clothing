@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import {Header} from '../../partials/header/header';
 
 @Component({
   selector: 'app-index',
-  imports: [],
+  imports: [
+    Header
+  ],
   templateUrl: './index.html',
   styleUrl: './index.scss'
 })

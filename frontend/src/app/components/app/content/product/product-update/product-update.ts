@@ -31,7 +31,7 @@ import Choices from 'choices.js';
     NgClass
   ],
   templateUrl: './product-update.html',
-  styleUrl: './product-update.css'
+  styleUrl: './product-update.scss'
 })
 export class ProductUpdate implements OnInit, AfterViewInit, OnChanges {
 
