@@ -8,11 +8,16 @@ import {ClothingModelList} from './components/app/content/clothing-model/clothin
 import {FabricList} from './components/app/content/fabric/fabric-list/fabric-list';
 import {ProductList} from './components/app/content/product/product-list/product-list';
 import {Index} from './components/client/pages/index';
+import {Store} from './components/client/pages/store/store';
 
 export const routes: Routes = [
   {
     path: "",
     component: Index
+  },
+  {
+    path: "store",
+    component: Store
   },
   {
     path: "app",

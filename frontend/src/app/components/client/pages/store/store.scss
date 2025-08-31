@@ -1,0 +1,56 @@
+@use 'base/reset' as *;
+@use 'abstracts/variables' as *;
+@use "layout/global" as *;
+
+.hero-page-wrapper {
+  padding: 50px 0;
+  border-radius: 20px;
+}
+
+.progress-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .progress {
+    width: 70%;
+    height: 5px;
+    background-color: $secondary-pink;
+    border-radius: 2.5px;
+    position: relative;
+
+    .progress-fill {
+      width: 25%;
+      height: 100%;
+      background-color: $primary-pink;
+      border-radius: 2.5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
