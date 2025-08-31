@@ -37,12 +37,48 @@
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 30px;
 
-  .steps-span, .products-span {
-    border: 1px solid black;
-  }
+  //.steps-span, .products-span {
+  //  border: 1px solid black;
+  //}
 
   .steps-span {
     grid-column: 1/4;
+
+    .steps-sidebar {
+      .step-item {
+        .step-link {
+          display: inline-block;
+          padding: 5px 15px;
+          margin: 2px 0;
+          width: 100%;
+          text-transform: capitalize;
+          color: $dark-blue;
+          transition: all .5s ease;
+          position: relative;
+          border-radius: 5px;
+
+          &:hover {
+            background-color: #e5f1ff;
+          }
+        }
+
+        .step-link.active {
+          background-color: #e5f1ff;
+
+          &:before {
+            content: "";
+            width: 3px;
+            height: 50%;
+            border-radius: 2px;
+            background-color: $dark-blue;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+    }
   }
 
   .products-span {
@@ -102,6 +138,54 @@
                 transition: all .5s ease;
               }
             }
+          }
+        }
+      }
+    }
+
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3px;
+
+      .btn-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .side-btn {
+          padding: 5px 20px;
+          border-radius: 8px;
+          background-color: $light-blue;
+          text-transform: capitalize;
+          font-size: 14px;
+          font-weight: bold;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0 2.5px;
+        }
+
+        .main-pages {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .page-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            padding: 5px;
+            margin: 0 2.5px;
+            border-radius: 8px;
+          }
+
+          .page-btn.page-btn-active {
+            background-color: $light-blue;
           }
         }
       }
