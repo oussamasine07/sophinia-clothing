@@ -50,7 +50,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path: "login",
+    path: "app/login",
     component: Admin
   }
 ];

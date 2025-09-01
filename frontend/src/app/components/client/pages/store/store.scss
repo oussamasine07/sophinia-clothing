@@ -190,6 +190,70 @@
         }
       }
     }
+
+    .order-form-wrapper {
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 20px;
+
+      .order-form {
+        .section-wrapper {
+          margin-bottom: 20px;
+
+          .form-heading {
+            font-size: 25px;
+            margin-bottom: 5px;
+            color: $dark-blue;
+          }
+
+          .form-label {
+            font-size: 20px;
+            text-transform: capitalize;
+            color: $light-blue;
+            margin-bottom: 5px;
+          }
+
+          .order-input {
+            width: 100%;
+            border: 1px solid #dfdfdf;
+            border-radius: 5px;
+            padding: 5px 15px;
+            font-size: 14px;
+
+            &::placeholder {
+              color: #c5c5c5;
+            }
+          }
+
+          .order-select {
+            width: 100%;
+            border: 1px solid #dfdfdf;
+            border-radius: 5px;
+            padding: 5px 15px;
+            font-size: 14px;
+            min-height: auto;          /* remove extra height */
+            background: #fff;
+            box-shadow: none;
+          }
+        }
+
+        .order-submit {
+          font-size: 18px;
+          color: $dark-blue;
+          text-transform: capitalize;
+          padding: 5px 30px;
+          background-color: $primary-pink;
+          border: 1px solid $primary-pink;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all .5s ease;
+
+          &:hover {
+            background-color: $secondary-pink;
+          }
+        }
+      }
+    }
   }
 }
 
