@@ -13,7 +13,7 @@ import {ProductService} from '../../../../services/product/product-service';
     NgClass
   ],
   templateUrl: './popup.html',
-  styleUrl: './popup.css'
+  styleUrl: './popup.scss'
 })
 export class Popup implements OnInit{
 

@@ -14,7 +14,7 @@ import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-t
     NgClass
   ],
   templateUrl: './clothing-type-update.html',
-  styleUrl: './clothing-type-update.css'
+  styleUrl: './clothing-type-update.scss'
 })
 export class ClothingTypeUpdate implements OnInit{
 

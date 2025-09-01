@@ -15,7 +15,7 @@ import {Popup} from '../../../partials/popup/popup';
     DesignCreate, DesignUpdate, Popup
   ],
   templateUrl: './design-list.html',
-  styleUrl: './design-list.css'
+  styleUrl: './design-list.scss'
 })
 export class DesignList implements OnInit{
 

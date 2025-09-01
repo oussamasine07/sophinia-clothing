@@ -16,7 +16,7 @@ import {ClothingTypeService} from '../../../../../services/clothing-type/clothin
     FormsModule, NgIf, NgClass, NgFor
   ],
   templateUrl: './product-create.html',
-  styleUrl: './product-create.css'
+  styleUrl: './product-create.scss'
 })
 export class ProductCreate implements OnInit, AfterViewInit {
 

@@ -1,12 +1,16 @@
-<aside class="sidebar w-64 text-white flex flex-col shrink-0 text-gray-900 px-4">
-  <div class="logo-container w-full flex justify-center align-center mb-12">
+<aside #asideComp class="sidebar h-screen overflow-hidden w-64 text-white flex flex-col shrink-0 text-gray-900 px-4">
+  <div #logoContainer class="logo-container w-full flex justify-center align-center mb-12">
     <div class="logo-wrapper bg-white p-4 rounded">
-      <!--          <img src="/assets/images/logo.svg" />-->
-      <img src="https://images.pexels.com/photos/47040/meter-tape-measure-measure-gage-47040.jpeg" alt="sophinia" class="logo w-24">
+      <img #logo src="/assets/images/logo.svg" alt="sophinia" class="logo w-24">
+<!--      <img src="https://images.pexels.com/photos/47040/meter-tape-measure-measure-gage-47040.jpeg" alt="sophinia" class="logo w-24">-->
     </div>
   </div>
 
-  <nav>
+  <nav
+    #nav
+    [style.height.px]="navHeight"
+    class="overflow-y-scroll no-scrollbar"
+  >
     <a class="block p-2 my-2 bg-[#DBEAFE] text-[#1447E6] rounded rounded-xl">
       <i class="fas fa-gauge mr-4"></i> Dashboard
     </a>

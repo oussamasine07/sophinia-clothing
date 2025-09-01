@@ -8,10 +8,11 @@ import {Router, RouterOutlet} from '@angular/router';
   imports: [
     SideNav,
     Navbar,
-    RouterOutlet
+    RouterOutlet,
   ],
   templateUrl: './layout.html',
-  styleUrl: './layout.css'
+  styleUrl: './layout.scss',
+  standalone: true
 })
 export class Layout implements OnInit {
 
@@ -20,7 +21,7 @@ export class Layout implements OnInit {
 
   ngOnInit () {
     if (!this.token) {
-      this.router.navigate(["/login"])
+      this.router.navigate(["/app/login"])
     }
   }
 

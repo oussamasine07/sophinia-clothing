@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
     FormsModule
   ],
   templateUrl: './admin.html',
-  styleUrl: './admin.css'
+  styleUrl: './admin.scss'
 })
 export class Admin implements OnInit {
 

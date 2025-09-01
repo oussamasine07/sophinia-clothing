@@ -13,7 +13,7 @@ import {NgClass, NgIf} from '@angular/common';
     NgIf
   ],
   templateUrl: './decoration-update.html',
-  styleUrl: './decoration-update.css'
+  styleUrl: './decoration-update.scss'
 })
 export class DecorationUpdate implements OnInit {
 

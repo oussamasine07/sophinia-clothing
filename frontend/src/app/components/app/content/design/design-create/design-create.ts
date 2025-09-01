@@ -15,7 +15,7 @@ import {NgClass, NgIf} from '@angular/common';
     NgIf
   ],
   templateUrl: './design-create.html',
-  styleUrl: './design-create.css'
+  styleUrl: './design-create.scss'
 })
 export class DesignCreate implements OnInit {
 

@@ -11,7 +11,7 @@ import {NgClass, NgIf} from '@angular/common';
     FormsModule, NgIf, NgClass
   ],
   templateUrl: './fabric-create.html',
-  styleUrl: './fabric-create.css'
+  styleUrl: './fabric-create.scss'
 })
 export class FabricCreate implements OnInit {
 

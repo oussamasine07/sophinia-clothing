@@ -16,7 +16,7 @@ import {ClothingModelUpdate} from '../clothing-model-update/clothing-model-updat
     ClothingModelCreate, ClothingModelUpdate, Popup
   ],
   templateUrl: './clothing-model-list.html',
-  styleUrl: './clothing-model-list.css'
+  styleUrl: './clothing-model-list.scss'
 })
 export class ClothingModelList implements OnInit {
 

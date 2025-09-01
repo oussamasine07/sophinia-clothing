@@ -1,0 +1,95 @@
+@use "abstracts/variables" as *;
+@use "layout/global" as *;
+
+.header {
+
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, .7);
+
+    .logo-link {
+      display: block;
+      .logo {
+        width: 60px;
+      }
+    }
+
+    .nav-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .nav-item {
+        margin: 0 20px;
+        .item-link {
+          text-transform: capitalize;
+          color: $dark-blue;
+          transition: all .5s ease;
+          &:hover {
+            color: $primary-pink;
+          }
+        }
+      }
+    }
+
+    .user {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .cart {
+        margin-right: 15px;
+        .cart-icon {
+          width: 30px;
+        }
+      }
+
+      .profile-link {
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        position: relative;
+        overflow: hidden;
+
+        .profile {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

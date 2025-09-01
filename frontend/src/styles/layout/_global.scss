@@ -1,0 +1,57 @@
+@use 'abstracts/variables' as *;
+
+.main-side-spacing {
+  padding: 0 100px 0 100px;
+}
+
+.section-y-magring {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.section-padding {
+  padding: 30px;
+}
+
+.margin-section-y {
+  margin: 25px 0 25px 0;
+}
+
+.section-radius {
+  border-radius: 20px;
+}
+
+.section-main-bg {
+  background-color: #ffffff;
+}
+
+.section-heading {
+  font-size: 30px;
+  color: $primary-pink;
+  text-transform: capitalize;
+  margin-bottom: 30px;
+}
+
+.hero-page-heading {
+  text-align: center;
+  font-size: 48px;
+  color: $primary-pink;
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
