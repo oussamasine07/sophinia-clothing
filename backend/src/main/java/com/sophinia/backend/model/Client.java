@@ -3,6 +3,7 @@ package com.sophinia.backend.model;
 import jakarta.persistence.*;
 
 import javax.security.auth.Subject;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
@@ -19,6 +20,11 @@ public class Client extends User {
 
     @Column(name = "postal_code")
     private String postalCode;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders;
+
+    public Client () {}
 
     public String getPhone() {
         return phone;

@@ -40,6 +40,9 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<MeasurementSet> measurementSets;
 
+    @ManyToOne
+    private Client client;
+
     public Order () {}
 
     public Long getId() {
