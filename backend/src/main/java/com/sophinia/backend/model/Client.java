@@ -21,6 +21,9 @@ public class Client extends User {
     @Column(name = "postal_code")
     private String postalCode;
 
+    @Column(name = "is_registered", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean isRegistered;
+
     @OneToMany(mappedBy = "client")
     private List<Order> orders;
 

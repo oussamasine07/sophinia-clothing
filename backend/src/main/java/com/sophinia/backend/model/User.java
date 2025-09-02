@@ -24,7 +24,7 @@ public abstract class User {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "account_locked")
