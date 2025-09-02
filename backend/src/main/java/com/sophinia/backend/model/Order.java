@@ -121,6 +121,14 @@ public class Order {
         return measurementSets;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public void setMeasurementSets(List<MeasurementSet> measurementSets) {
         this.measurementSets = measurementSets;
     }

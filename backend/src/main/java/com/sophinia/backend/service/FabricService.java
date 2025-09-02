@@ -5,6 +5,7 @@ import com.sophinia.backend.dto.mappingDTO.MappedFabricDTO;
 import com.sophinia.backend.dto.validation.FabricFormDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.mapper.FabricMapper;
+import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.repository.FabricRepository;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,13 @@ public class FabricService {
                 .toList();
 
         return new ResponseEntity<>(fabrics, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getFabricById ( Long fabricId ) {
+        Fabric fabric = fabricRepository.findById( fabricId )
+                .orElseThrow(() -> new NotFoundException("unfound fabric"));
+
+        return new ResponseEntity<>(fabric, HttpStatus.OK);
     }
 
     public ResponseEntity<?> createNewFabric (FabricFormDTO fabricFormDTO) {

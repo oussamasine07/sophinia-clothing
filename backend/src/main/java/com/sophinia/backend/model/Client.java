@@ -24,6 +24,22 @@ public class Client extends User {
     @Column(name = "is_registered", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isRegistered;
 
+    public boolean isRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(boolean registered) {
+        isRegistered = registered;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     @OneToMany(mappedBy = "client")
     private List<Order> orders;
 
