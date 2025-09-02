@@ -43,6 +43,10 @@ public class Order {
     @ManyToOne
     private Client client;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avialability_id", referencedColumnName = "id")
+    private Availability avialability;
+
     public Order () {}
 
     public Long getId() {
@@ -131,5 +135,13 @@ public class Order {
 
     public void setMeasurementSets(List<MeasurementSet> measurementSets) {
         this.measurementSets = measurementSets;
+    }
+
+    public Availability getAvialability() {
+        return avialability;
+    }
+
+    public void setAvialability(Availability avialability) {
+        this.avialability = avialability;
     }
 }

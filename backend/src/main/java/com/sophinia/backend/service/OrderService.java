@@ -1,12 +1,10 @@
 package com.sophinia.backend.service;
 
 
+import com.sophinia.backend.dto.validation.AvailabilityValidationDTO;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
 import com.sophinia.backend.model.*;
-import com.sophinia.backend.repository.ClientRepository;
-import com.sophinia.backend.repository.MeasurementSetRepository;
-import com.sophinia.backend.repository.OrderRepository;
-import com.sophinia.backend.repository.OrderStatusRepository;
+import com.sophinia.backend.repository.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,7 @@ public class OrderService {
     private final OrderStatusRepository orderStatusRepository;
     private final MeasurementSetRepository measurementSetRepository;
     private final ClientRepository clientRepository;
+    private final AvailabilityRepository availabilityRepository;
 
     private final ClientService clientService;
     private final ProductService productService;
@@ -34,6 +33,7 @@ public class OrderService {
             final OrderStatusRepository orderStatusRepository,
             final MeasurementSetRepository measurementSetRepository,
             ClientRepository clientRepository,
+            final AvailabilityRepository availabilityRepository,
 
             final ClientService clientService,
             final ProductService productService,
@@ -46,6 +46,7 @@ public class OrderService {
         this.orderStatusRepository = orderStatusRepository;
         this.measurementSetRepository = measurementSetRepository;
         this.clientRepository = clientRepository;
+        this.availabilityRepository = availabilityRepository;
 
         this.clientService = clientService;
         this.productService = productService;
@@ -98,6 +99,15 @@ public class OrderService {
         order.setDesign( design );
 
         order.setClient( client );
+
+        Availability availability = new Availability();
+        availability.setStartDate( orderValidationDTO.availability().startDate() );
+        availability.setEndDate( orderValidationDTO.availability().endDate() );
+        availability.setAvailabilityType( orderValidationDTO.availability().availabilityType() );
+
+        Availability savedAvailability = availabilityRepository.save( availability );
+
+        order.setAvialability( savedAvailability );
 
         // save the order
         Order savedOrder = orderRepository.save( order );

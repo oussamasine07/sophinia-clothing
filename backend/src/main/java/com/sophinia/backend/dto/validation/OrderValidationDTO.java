@@ -21,5 +21,9 @@ public record OrderValidationDTO(
 
         @Valid
         @NotNull(message = "client details are required is required")
-        ClientValidationDTO client
+        ClientValidationDTO client,
+
+        @Valid
+        @NotNull(message = "availability is reauired")
+        AvailabilityValidationDTO availability
 ) {}
