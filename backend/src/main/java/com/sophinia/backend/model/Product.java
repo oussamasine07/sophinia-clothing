@@ -41,6 +41,12 @@ public class Product {
     )
     private List<MeasurementField> productMeasurementFields;
 
+    @OneToMany(mappedBy = "product")
+    private List<MeasurementSet> measurementSets;
+
+    @OneToMany(mappedBy = "product")
+    private List<Order> orders;
+
     public Long getId() {
         return id;
     }
@@ -80,6 +86,24 @@ public class Product {
     public void setProductMeasurementFields(List<MeasurementField> productMeasurementFields) {
         this.productMeasurementFields = productMeasurementFields;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<MeasurementSet> getMeasurementSets() {
+        return measurementSets;
+    }
+
+    public void setMeasurementSets(List<MeasurementSet> measurementSets) {
+        this.measurementSets = measurementSets;
+    }
+
+
 }
 
 

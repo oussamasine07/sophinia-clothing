@@ -19,6 +19,9 @@ public class ClothingModel {
     @Column(name = "image")
     private String image;
 
+    @OneToMany(mappedBy = "clothingModel")
+    private List<Order> orders;
+
     public Long getId() {
         return id;
     }
@@ -42,4 +45,14 @@ public class ClothingModel {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+
 }

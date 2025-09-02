@@ -20,6 +20,9 @@ public class MeasurementField {
     @ManyToMany(mappedBy = "productMeasurementFields")
     private List<Product> products;
 
+    @OneToMany(mappedBy = "measurementField")
+    private List<MeasurementValue> measurementValues;
+
     public MeasurementField () {}
 
     public Long getId() {
@@ -36,5 +39,21 @@ public class MeasurementField {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public List<MeasurementValue> getMeasurementValues() {
+        return measurementValues;
+    }
+
+    public void setMeasurementValues(List<MeasurementValue> measurementValues) {
+        this.measurementValues = measurementValues;
     }
 }

@@ -2,6 +2,8 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "designs")
 public class Design {
@@ -15,6 +17,12 @@ public class Design {
 
     @Column(name = "image")
     private String image;
+
+    @ManyToOne
+    private Decoration decoration;
+
+    @OneToMany(mappedBy = "design")
+    private List<Order> orders;
 
     public Design () {}
 
@@ -40,5 +48,21 @@ public class Design {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Decoration getDecoration() {
+        return decoration;
+    }
+
+    public void setDecoration(Decoration decoration) {
+        this.decoration = decoration;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

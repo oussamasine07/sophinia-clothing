@@ -21,6 +21,8 @@ public class Fabric {
     @Column(name = "image", nullable = false)
     private String image;
 
+    @OneToMany(mappedBy = "fabric")
+    private List<Order> orders;
 
     public Long getId() {
         return id;
@@ -53,4 +55,14 @@ public class Fabric {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+
 }

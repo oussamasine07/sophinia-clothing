@@ -18,6 +18,12 @@ public class Decoration {
     @Column(name = "image")
     private String image;
 
+    @OneToMany(mappedBy = "decoration")
+    private List<Design> designs;
+
+    @OneToMany(mappedBy = "decoration")
+    private List<Order> orders;
+
     public Decoration () {}
 
     public Long getId() {
@@ -43,4 +49,22 @@ public class Decoration {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<Design> getDesigns() {
+        return designs;
+    }
+
+    public void setDesigns(List<Design> designs) {
+        this.designs = designs;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+
 }
