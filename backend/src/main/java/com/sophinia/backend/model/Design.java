@@ -1,5 +1,6 @@
 package com.sophinia.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class Design {
     @ManyToOne
     private Decoration decoration;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "design")
     private List<Order> orders;
 

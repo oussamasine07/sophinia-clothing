@@ -4,6 +4,7 @@ import com.sophinia.backend.exception.CustomAccessDeniedHandler;
 import com.sophinia.backend.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -48,8 +49,20 @@ public class SecurityConfig {
                             "/api/v1/order/place-order"
                     )
                     .permitAll()
-//                    .requestMatchers("/api/v1/order/place-order")
-//                    .permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/v1/clothing-model")
+                    .permitAll()
+                            .requestMatchers(HttpMethod.GET, "/api/v1/clothing-model")
+                            .permitAll()
+                            .requestMatchers(HttpMethod.GET, "/api/v1/clothing-type")
+                            .permitAll()
+                            .requestMatchers(HttpMethod.GET, "/api/v1/decoration")
+                            .permitAll()
+                            .requestMatchers(HttpMethod.GET, "/api/v1/design")
+                            .permitAll()
+                            .requestMatchers(HttpMethod.GET, "/api/v1/fabric")
+                            .permitAll()
+                            .requestMatchers(HttpMethod.GET, "/api/v1/product")
+                            .permitAll()
                     .anyRequest()
                     .authenticated()
                 )

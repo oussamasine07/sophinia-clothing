@@ -20,6 +20,7 @@ public class MeasurementField {
     @ManyToMany(mappedBy = "productMeasurementFields")
     private List<Product> products;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "measurementField")
     private List<MeasurementValue> measurementValues;
 

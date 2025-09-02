@@ -1,6 +1,7 @@
 package com.sophinia.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -41,9 +42,11 @@ public class Product {
     )
     private List<MeasurementField> productMeasurementFields;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<MeasurementSet> measurementSets;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Order> orders;
 
