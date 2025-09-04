@@ -61,21 +61,16 @@ public class OrderService {
 
         // make client login first
         // check if client exists by email
-        Client foundClient = clientRepository.findClientByEmail(orderValidationDTO.client().email());
+        Client client = clientRepository.findClientByEmail(orderValidationDTO.client().email())
+                .orElseGet(() -> {
+                    Client c = new Client();
+                    c.setFirstName(orderValidationDTO.client().firstName());
+                    c.setLastName(orderValidationDTO.client().lastName());
+                    c.setEmail(orderValidationDTO.client().email());
+                    c.setPhone(orderValidationDTO.client().phone());
 
-        Client savedCliennt = null;
-        if ( foundClient != null) {
-            Client newClient = new Client();
-            newClient.setFirstName( orderValidationDTO.client().firstName() );
-            newClient.setLastName( orderValidationDTO.client().lastName() );
-            newClient.setEmail( orderValidationDTO.client().email() );
-            newClient.setPhone( orderValidationDTO.client().phone() );
-
-            savedCliennt = clientRepository.save( newClient );
-        }
-
-
-        Client client = foundClient != null ? foundClient : savedCliennt;
+                    return clientRepository.save(c);
+                });
 
         Order order = new Order();
 
