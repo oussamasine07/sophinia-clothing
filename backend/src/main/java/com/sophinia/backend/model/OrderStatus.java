@@ -1,5 +1,6 @@
 package com.sophinia.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class OrderStatus {
 
     private String status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "orderStatuse")
     private List<Order> orders;
 

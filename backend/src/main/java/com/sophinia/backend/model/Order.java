@@ -1,5 +1,6 @@
 package com.sophinia.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,30 +20,39 @@ public class Order {
     @Column(name = "delivery_date")
     private LocalDate deliveryDate;
 
+    @JsonIgnore
     @ManyToOne
     private OrderStatus orderStatuse;
 
+    @JsonIgnore
     @ManyToOne
     private Product product;
 
+    @JsonIgnore
     @ManyToOne
     private Decoration decoration;
 
+    @JsonIgnore
     @ManyToOne
     private Fabric fabric;
 
+    @JsonIgnore
     @ManyToOne
     private ClothingModel clothingModel;
 
+    @JsonIgnore
     @ManyToOne
     private Design design;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<MeasurementSet> measurementSets;
 
+    @JsonIgnore
     @ManyToOne
     private Client client;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "avialability_id", referencedColumnName = "id")
     private Availability avialability;

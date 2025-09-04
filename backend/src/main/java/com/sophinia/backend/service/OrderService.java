@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -121,6 +122,13 @@ public class OrderService {
         return new ResponseEntity(savedOrder, HttpStatus.OK);
 
 //        return null;
+    }
+
+    public ResponseEntity<?> getOrders () {
+        List<Order> orders = orderRepository.findAll();
+
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+
     }
 
 }
