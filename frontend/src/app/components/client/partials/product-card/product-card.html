@@ -1,0 +1,16 @@
+<div class="product-card">
+  <div class="product-image-wrapper">
+<!--    <img src="assets/images/models/jellaba.jpg" alt="product title" class="product-image">-->
+    <img [src]="card?.image" alt="product title" class="product-image">
+  </div>
+
+  <h2 class="product-title">{{ card?.name }}</h2>
+  <div class="button-wrapper">
+    <div class="product-choose">
+      <button class="product-btn" (click)="chooseStep( card )">
+        <span>Choose me</span>
+        <img src="assets/images/icons/right-arrow.png" alt="" class="btn-arrow">
+      </button>
+    </div>
+  </div>
+</div>

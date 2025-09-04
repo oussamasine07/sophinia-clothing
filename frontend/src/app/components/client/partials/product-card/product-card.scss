@@ -1,0 +1,56 @@
+@use 'base/reset' as *;
+@use 'abstracts/variables' as *;
+@use "layout/global" as *;
+
+.product-card {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+
+  .product-image-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    height: 260px;
+    background-color: black;
+  }
+
+  .product-title {
+    font-size: 18px;
+    text-transform: capitalize;
+    margin: 15px 0;
+    color: $dark-blue;
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+
+    .product-choose {
+      width: 170px;
+
+      .product-btn {
+        position: relative;
+        padding: 5px 30px;
+        color: $dark-blue;
+        background-color: $secondary-pink;
+        border-radius: 25px;
+        cursor: pointer;
+
+        &:hover {
+          .btn-arrow {
+            left: 92%;
+          }
+        }
+
+        .btn-arrow {
+          width: 28px;
+          position: absolute;
+          top: 50%;
+          left: 89%;
+          transform: translateY(-50%);
+          transition: all .5s ease;
+        }
+      }
+    }
+  }
+}
