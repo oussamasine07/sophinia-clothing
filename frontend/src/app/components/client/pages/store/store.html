@@ -141,7 +141,16 @@
 <app-footer></app-footer>
 
 
+<app-register-popup
+  *ngIf="showRegisterPopup"
+  (close)="closeRegisterPopup()"
+  (confirmRegister)="showRegisterForm()"
+></app-register-popup>
 
+<app-register-popup-form
+  *ngIf="showRegisterFormModel"
+  (close)="closeRegisterForm()"
+></app-register-popup-form>
 
 
 

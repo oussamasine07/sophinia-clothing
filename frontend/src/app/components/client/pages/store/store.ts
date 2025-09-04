@@ -21,12 +21,15 @@ import {clientTypeForm} from '../../../../models/types/clientTypeForm';
 import {availabilityFormType} from '../../../../models/types/availabilityFormType';
 import {FormsModule} from '@angular/forms';
 import {OrderService} from '../../../../services/order/order-service';
+import {RegisterPopup} from '../../partials/register-popup/register-popup';
+import {RegisterPopupForm} from '../../partials/register-popup-form/register-popup-form';
 
 @Component({
   selector: 'app-store',
   imports: [
-    FormsModule,
-    Header, Footer, ProductCard
+    FormsModule, NgIf,
+    Header, Footer, ProductCard, RegisterPopup,
+    RegisterPopupForm
   ],
   templateUrl: './store.html',
   styleUrl: './store.scss'
@@ -198,11 +201,11 @@ export class Store implements OnInit {
       }
     }
 
+    // register client details in the localstorage
+    localStorage.setItem('client', JSON.stringify(orderBody.client))
+
     this.orderService.placeOrder( orderBody ).subscribe({
       next: (res) => {
-
-        console.log( res )
-
         this.client = {
           lastName: "",
           firstName: "",
@@ -219,14 +222,42 @@ export class Store implements OnInit {
           availabilityType: ""
         }
 
-        console.log("order created")
+        // show register popup
+        this.openRegisterPopup();
+
+        this.stepIdx = 0;
+        this.currentLable = this.steps[ this.stepIdx ]
+        this.initializeCards( this.currentLable )
+
       },
       error: (err) => {
         console.log(err)
       }
     })
+  }
 
+  showRegisterPopup = false;
+  openRegisterPopup () {
+    this.showRegisterPopup = true;
+  }
 
+  closeRegisterPopup () {
+    this.showRegisterPopup = false
+    if (localStorage.getItem("client")) {
+      localStorage.removeItem("client");
+    }
+  }
+
+  showRegisterFormModel = true
+  showRegisterForm () {
+    this.showRegisterPopup = false
+    setTimeout(() => {
+      this.showRegisterFormModel = true;
+    }, 300)
+  }
+
+  closeRegisterForm() {
+    this.showRegisterFormModel = false
   }
 
 }
