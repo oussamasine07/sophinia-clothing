@@ -1,5 +1,6 @@
 package com.sophinia.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public class Fabric {
     @Column(name = "image", nullable = false)
     private String image;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "fabric")
+    private List<Order> orders;
 
     public Long getId() {
         return id;
@@ -53,4 +57,14 @@ public class Fabric {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+
 }

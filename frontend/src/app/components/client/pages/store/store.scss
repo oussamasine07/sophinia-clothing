@@ -77,6 +77,13 @@
             transform: translateY(-50%);
           }
         }
+
+        .step-link.disabled {
+          pointer-events: none;
+          color: #aaa;
+          cursor: not-allowed !important;
+          text-decoration: none;
+        }
       }
     }
   }

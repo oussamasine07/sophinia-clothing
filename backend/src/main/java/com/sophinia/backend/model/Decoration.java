@@ -1,5 +1,6 @@
 package com.sophinia.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,14 @@ public class Decoration {
 
     @Column(name = "image")
     private String image;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "decoration")
+    private List<Design> designs;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "decoration")
+    private List<Order> orders;
 
     public Decoration () {}
 
@@ -43,4 +52,22 @@ public class Decoration {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<Design> getDesigns() {
+        return designs;
+    }
+
+    public void setDesigns(List<Design> designs) {
+        this.designs = designs;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+
 }
