@@ -9,6 +9,14 @@ public class NextDateValidator  implements ConstraintValidator<NextDate, LocalDa
 
     @Override
     public boolean isValid(LocalDate date, ConstraintValidatorContext constraintValidatorContext) {
+        if (date == null) {
+            // Disable the default violation
+            constraintValidatorContext.disableDefaultConstraintViolation();
+            // Add a custom violation message
+            constraintValidatorContext.buildConstraintViolationWithTemplate("date cannot be blank")
+                    .addConstraintViolation();
+            return false;
+        }
         LocalDate currentDate = LocalDate.now();
         return !date.isBefore(currentDate);
     }

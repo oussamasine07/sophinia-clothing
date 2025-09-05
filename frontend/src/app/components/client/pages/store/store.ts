@@ -15,7 +15,7 @@ import {ClothingModelInterface} from '../../../../models/interfaces/clothing-mod
 import {DecorationInterface} from '../../../../models/interfaces/decoration-interface';
 import {DesignInterface} from '../../../../models/interfaces/design-interface';
 import {FabricInterface} from '../../../../models/interfaces/fabric-interface';
-import {NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {ProductCard} from '../../partials/product-card/product-card';
 import {clientTypeForm} from '../../../../models/types/clientTypeForm';
 import {availabilityFormType} from '../../../../models/types/availabilityFormType';
@@ -23,11 +23,16 @@ import {FormsModule} from '@angular/forms';
 import {OrderService} from '../../../../services/order/order-service';
 import {RegisterPopup} from '../../partials/register-popup/register-popup';
 import {RegisterPopupForm} from '../../partials/register-popup-form/register-popup-form';
+import {RemoveDashPipe} from '../../../../pipes/remove-dash-pipe';
+
+type OrderKey =
+  "product" | "clothingModel" | "clothingType" | "decoration" | "design" | "fabric" | "current";
+
 
 @Component({
   selector: 'app-store',
   imports: [
-    FormsModule, NgIf,
+    FormsModule, NgIf, RemoveDashPipe, NgClass,
     Header, Footer, ProductCard, RegisterPopup,
     RegisterPopupForm
   ],
@@ -47,7 +52,6 @@ export class Store implements OnInit {
   stepIdx: number = 0;
   steps: string[] = ["clothing-type", "clothing-model", "product", "fabric", "decoration", "design", "last-step"]
   currentLable: string = this.steps[ this.stepIdx ];
-  currentChoice: any = null;
 
   orderFromLocalStorage: any = (() => {
     const order = localStorage.getItem("order");
@@ -99,9 +103,19 @@ export class Store implements OnInit {
 
   ngOnInit () {
 
+    this.order = {
+      product: this.orderFromLocalStorage ? this.orderFromLocalStorage.product : null,
+      clothingModel: this.orderFromLocalStorage ? this.orderFromLocalStorage.clothingModel : null,
+      clothingType: this.orderFromLocalStorage ? this.orderFromLocalStorage.clothingType : null,
+      decoration: this.orderFromLocalStorage ? this.orderFromLocalStorage.decoration : null,
+      design: this.orderFromLocalStorage ? this.orderFromLocalStorage.design : null,
+      fabric: this.orderFromLocalStorage ? this.orderFromLocalStorage.fabric : null,
+      current: this.orderFromLocalStorage ? this.orderFromLocalStorage.current : 0
+    }
+
     this.stepIdx = this.orderFromLocalStorage ? this.orderFromLocalStorage.current : 0;
+    this.currentLable = this.steps[ this.stepIdx ];
     this.initializeCards( this.currentLable )
-    console.log(this.stepIdx)
 
   }
 
@@ -180,6 +194,7 @@ export class Store implements OnInit {
 
   }
 
+  fieldErrors: Record<string, string | string[]> = {}
   onOrderSubmit (form: FormsModule) {
 
     const orderBody = {
@@ -200,6 +215,8 @@ export class Store implements OnInit {
         availabilityType: this.availability.availabilityType
       }
     }
+
+    console.log( orderBody )
 
     // register client details in the localstorage
     localStorage.setItem('client', JSON.stringify(orderBody.client))
@@ -228,15 +245,16 @@ export class Store implements OnInit {
         this.stepIdx = 0;
         this.currentLable = this.steps[ this.stepIdx ]
         this.initializeCards( this.currentLable )
-
+        localStorage.removeItem("order")
       },
       error: (err) => {
-        console.log(err)
+        this.fieldErrors = err.error;
+        console.log( this.fieldErrors["availability.availabilityType"] )
       }
     })
   }
 
-  showRegisterPopup = false;
+  showRegisterPopup = true;
   openRegisterPopup () {
     this.showRegisterPopup = true;
   }
@@ -248,7 +266,7 @@ export class Store implements OnInit {
     }
   }
 
-  showRegisterFormModel = true
+  showRegisterFormModel = false
   showRegisterForm () {
     this.showRegisterPopup = false
     setTimeout(() => {
@@ -260,6 +278,24 @@ export class Store implements OnInit {
     this.showRegisterFormModel = false
   }
 
+  toCamelCase(str: string): keyof typeof this.order {
+    const camel = str
+      .toLowerCase()
+      .split(/[-_\s]+/)
+      .map((word, index) =>
+        index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+      )
+      .join("");
+
+    return camel as keyof typeof this.order;
+  }
+
+  onStepClick (idx: number, e: Event) {
+    e.preventDefault();
+    this.stepIdx = idx;
+    this.currentLable = this.steps[this.stepIdx]
+    this.initializeCards( this.currentLable );
+  }
 }
 
 

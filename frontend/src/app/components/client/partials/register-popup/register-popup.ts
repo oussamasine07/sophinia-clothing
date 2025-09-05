@@ -10,11 +10,21 @@ import {NgClass} from '@angular/common';
   styleUrl: './register-popup.scss'
 })
 export class RegisterPopup implements OnInit {
+
+  orderFromLocalStorage: any = (() => {
+    const client = localStorage.getItem("client");
+    return client ? JSON.parse(client) : null;
+  })();
+
+  clientName: string | null = null;
+
   animate: boolean = false;
   ngOnInit (){
     setTimeout(() => {
       this.animate = true
     }, 10)
+
+    this.clientName = this.orderFromLocalStorage.firstName;
   }
 
   @Output() close = new EventEmitter();

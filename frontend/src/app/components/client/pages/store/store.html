@@ -2,7 +2,7 @@
 
 <section class="hero-page main-side-spacing" >
   <div class="hero-page-wrapper" style="background: url('assets/images/section/dress_fabric_texture_bg.jpg')">
-    <h1 class="hero-page-heading">Clothing Type</h1>
+    <h1 class="hero-page-heading capitalize">{{ currentLable | removeDash }}</h1>
   </div>
 </section>
 
@@ -18,21 +18,18 @@
   <div class="store-steps-wrapper">
     <div class="steps-span">
       <ul class="steps-sidebar">
-        <li class="step-item">
-          <a href="#" class="step-link active">clothing type</a>
-        </li>
-        <li class="step-item">
-          <a href="#" class="step-link">clothing model</a>
-        </li>
-        <li class="step-item">
-          <a href="#" class="step-link">fabric</a>
-        </li>
-        <li class="step-item">
-          <a href="#" class="step-link">decoration</a>
-        </li>
-        <li class="step-item">
-          <a href="#" class="step-link">design</a>
-        </li>
+        @for ( step of steps; track step; let i = $index ) {
+          <li class="step-item">
+            <a href="#"
+               class="step-link disabled"
+               [ngClass]="{
+                 'active': currentLable == step,
+                 'disabled': !order[toCamelCase(step)] && currentLable != step
+               }"
+              (click)="onStepClick(i, $event)"
+            >{{ step | removeDash }}</a>
+          </li>
+        }
       </ul>
     </div>
 
@@ -78,11 +75,12 @@
                 <div class="form-group col-span-4">
                   <label class="form-label block">From</label>
                   <input type="date" class="order-input" placeholder="Enter start date" id="from" name="startDate" [(ngModel)]="availability.startDate">
-                  <p class="error-input text-red-300 italic text-sm px-2">this field is required</p>
+                  <p *ngIf="this.fieldErrors['availability.startDate']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.startDate'] }}</p>
                 </div>
                 <div class="form-group col-span-4">
                   <label for="to" class="form-label block">To</label>
                   <input type="date" class="order-input" placeholder="Enter end date" id="to" name="endDate" [(ngModel)]="availability.endDate">
+                  <p *ngIf="this.fieldErrors['availability.endDate']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.endDate'] }}</p>
                 </div>
                 <div class="form-group col-span-4">
                   <label for="place" class="form-label block">Place</label>
@@ -90,6 +88,7 @@
                     <option value="AT_HOME">At home</option>
                     <option value="AT_SHOP">At shop</option>
                   </select>
+                  <p *ngIf="this.fieldErrors['availability.availabilityType']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.availabilityType'] }}</p>
                 </div>
               </div>
             </div>
@@ -100,19 +99,22 @@
                 <div class="form-group col-span-3">
                   <label for="firstname" class="form-label block">First name</label>
                   <input type="text" class="order-input" placeholder="Enter first name" id="firstname" name="firstName" [(ngModel)]="client.firstName">
-                  <p class="error-input text-red-300 italic text-sm px-2">this field is required</p>
+                  <p *ngIf="this.fieldErrors['client.firstName']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.firstName'] }}</p>
                 </div>
                 <div class="form-group col-span-3">
                   <label for="lastname" class="form-label block">last name</label>
                   <input type="text" class="order-input" placeholder="Enter last name" id="lastname" name="lastName" [(ngModel)]="client.lastName">
+                  <p *ngIf="this.fieldErrors['client.lastName']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.lastName'] }}</p>
                 </div>
                 <div class="form-group col-span-3">
                   <label for="email" class="form-label block">email</label>
                   <input type="text" class="order-input" placeholder="Enter email" id="email" name="email" [(ngModel)]="client.email">
+                  <p *ngIf="this.fieldErrors['client.email']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.email'] }}</p>
                 </div>
                 <div class="form-group col-span-3">
                   <label for="phone" class="form-label block">phone</label>
                   <input type="text" class="order-input" placeholder="Enter phone" id="phone" name="phone" [(ngModel)]="client.phone">
+                  <p *ngIf="this.fieldErrors['client.phone']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.phone'] }}</p>
                 </div>
                 <div class="form-group col-span-6">
                   <label for="address" class="form-label block">address</label>
