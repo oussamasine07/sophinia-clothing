@@ -63,6 +63,8 @@ public class SecurityConfig {
                             .permitAll()
                             .requestMatchers(HttpMethod.GET, "/api/v1/product")
                             .permitAll()
+                            .requestMatchers(HttpMethod.PUT, "/api/v1/client/update-client-after-order")
+                            .permitAll()
                     .anyRequest()
                     .authenticated()
                 )
