@@ -29,4 +29,9 @@ public class OrderController {
         return orderService.makeOrder( orderValidationDTO );
     }
 
+    @GetMapping("get-orders-with-clients")
+    public ResponseEntity<?> getOrdersWithCients () {
+        return orderService.getOrdersWithClients();
+    }
+
 }

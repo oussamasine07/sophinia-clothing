@@ -1,6 +1,7 @@
 package com.sophinia.backend.service;
 
 
+import com.sophinia.backend.dto.mappingDTO.OrderWithClientDTO;
 import com.sophinia.backend.dto.validation.AvailabilityValidationDTO;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
 import com.sophinia.backend.model.*;
@@ -124,6 +125,12 @@ public class OrderService {
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
 
+    }
+
+    public ResponseEntity<?> getOrdersWithClients () {
+        List<OrderWithClientDTO> orders = orderRepository.getOrdersWithClient();
+
+        return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
 }
