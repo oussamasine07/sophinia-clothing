@@ -1,9 +1,9 @@
 package com.sophinia.backend.service;
 
 
-import com.sophinia.backend.dto.mappingDTO.OrderWithClientDTO;
-import com.sophinia.backend.dto.validation.AvailabilityValidationDTO;
+import com.sophinia.backend.dto.mappingDTO.*;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
+import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.*;
 import org.springframework.http.HttpStatus;
@@ -132,6 +132,53 @@ public class OrderService {
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
+
+    public ResponseEntity<?> getOrderDetails (Long id) {
+
+        List<Object[]> rows = orderRepository.getOrderDetails(id);
+
+        if (rows.isEmpty()) {
+            throw  new NotFoundException("this order not found");
+        }
+
+        Object[] row = rows.get(0);
+        ProductDTO product = new ProductDTO((String) row[1], (String) row[2], (String) row[3]);
+        List<OrderMeasurementFieldDTO> measurementFields = rows.stream()
+                .map(r -> {
+
+                    System.out.println("row 4 " + r[4]);
+                    System.out.println("row 5 " + r[5]);
+
+                    return new OrderMeasurementFieldDTO(
+                            ((Number) r[4]).longValue(),
+                            (String) r[5]
+                    );
+                })
+                .distinct()
+                .toList();
+
+        product.setFields(measurementFields);
+
+        OrderDetailsDTO orderDetails = new OrderDetailsDTO(
+                ((Number) row[0]).longValue(),
+                product,
+                new ClothingModelDTO((String) row[6], (String) row[7]),
+                new DecorationDTO((String) row[8], (String) row[9]),
+                new DesignDTO((String) row[10], (String) row[11]),
+                new ClientDTO(
+                        (String) row[12],
+                        (String) row[13],
+                        (String) row[14],
+                        (String) row[15],
+                        (String) row[16],
+                        (String) row[17],
+                        (String) row[18]
+                )
+        );
+
+        return new ResponseEntity<>( orderDetails, HttpStatus.OK );
+    }
+
 
 }
 

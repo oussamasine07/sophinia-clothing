@@ -24,6 +24,11 @@ public class OrderController {
         return orderService.getOrders();
     }
 
+    @GetMapping("/details/{id}")
+    public ResponseEntity<?> orderDetails (@PathVariable Long id) {
+        return orderService.getOrderDetails( id );
+    }
+
     @PostMapping("/place-order")
     public ResponseEntity<?> placeAnOrder ( @Valid @RequestBody OrderValidationDTO orderValidationDTO ) {
         return orderService.makeOrder( orderValidationDTO );
