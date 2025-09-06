@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, throwError} from 'rxjs';
+import {catchError, Observable, throwError} from 'rxjs';
+import {OrderWithClientInterface} from '../../models/interfaces/order-with-client-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class OrderService {
         return throwError(() => err);
       })
     );
+  }
+
+  getOrdersWithClients (): Observable<OrderWithClientInterface[]> {
+    return this.httpClient.get<OrderWithClientInterface[]>(`${this.url}/get-orders-with-clients`);
   }
 
 }
