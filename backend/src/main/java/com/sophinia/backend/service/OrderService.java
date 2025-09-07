@@ -184,10 +184,28 @@ public class OrderService {
                         (String) row[16],
                         (String) row[17],
                         (String) row[18]
-                )
+                ),
+                ((Number) row[19]).longValue()
         );
 
-        return new ResponseEntity<>( orderDetails, HttpStatus.OK );
+        List<Object[]> measurementRows = orderRepository.getMeaserementValues(orderDetails.getMeasurementSet());
+        List<MeasurementValuesDTO> measurements = measurementRows.stream()
+                .map(r -> {
+                    return new MeasurementValuesDTO(
+                            (String) r[0],
+                            (Double) r[1]
+                    );
+                })
+                .distinct()
+                .toList();
+
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("order", orderDetails);
+        result.put("measures", measurements);
+
+
+        return new ResponseEntity<>( result, HttpStatus.OK );
     }
 
     public ResponseEntity<?> setMeasures ( MeasurementsValuesDTO measurementsValuesDTO ) {

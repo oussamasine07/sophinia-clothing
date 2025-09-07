@@ -7,6 +7,7 @@ public class OrderDetailsDTO {
     private DecorationDTO decoration;
     private DesignDTO design;
     private ClientDTO client;
+    private Long measurementSet;
 
     public OrderDetailsDTO (
             Long orderId,
@@ -14,7 +15,8 @@ public class OrderDetailsDTO {
             ClothingModelDTO clothingModelDTO,
             DecorationDTO decorationDTO,
             DesignDTO designDTO,
-            ClientDTO clientDTO
+            ClientDTO clientDTO,
+            Long measurementSet
     ) {
         this.orderId = orderId;
         this.product = productDTO;
@@ -22,6 +24,7 @@ public class OrderDetailsDTO {
         this.decoration = decorationDTO;
         this.design = designDTO;
         this.client = clientDTO;
+        this.measurementSet = measurementSet;
     }
 
     public Long getOrderId() {
@@ -70,5 +73,13 @@ public class OrderDetailsDTO {
 
     public void setClient(ClientDTO client) {
         this.client = client;
+    }
+
+    public Long getMeasurementSet() {
+        return measurementSet;
+    }
+
+    public void setMeasurementSet(Long measurementSet) {
+        this.measurementSet = measurementSet;
     }
 }
