@@ -9,7 +9,7 @@ public class ProductDTO {
     private String image;
     private List<OrderMeasurementFieldDTO> fields;
 
-    public ProductDTO (String pName, String pDescription, String pImage) {
+    public ProductDTO (String pName, String pImage, String pDescription) {
         this.name = pName;
         this.description = pDescription;
         this.image = pImage;

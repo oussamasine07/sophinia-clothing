@@ -2,11 +2,13 @@ import {Component, inject, OnInit} from '@angular/core';
 import {OrderService} from '../../../../services/order/order-service';
 import {OrderWithClientInterface} from '../../../../models/interfaces/order-with-client-interface';
 import {NgClass} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-order',
   imports: [
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './order.html',
   styleUrl: './order.scss'

@@ -10,6 +10,7 @@ import {ProductList} from './components/app/content/product/product-list/product
 import {Index} from './components/client/pages/index';
 import {Store} from './components/client/pages/store/store';
 import {Order} from './components/app/content/order/order';
+import {OrderDetails} from './components/app/content/order-details/order-details';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
       {
         path: "order",
         component: Order
+      },
+      {
+        path: "order/order-details/:id",
+        component: OrderDetails
       }
     ]
   },
