@@ -28,4 +28,12 @@ export class OrderService {
     return this.httpClient.get<OrderDetailsInterface>(`${this.url}/details/${ id }`);
   }
 
+  setMeasures (body: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/set-measures`, body).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err);
+      })
+    );
+  }
+
 }

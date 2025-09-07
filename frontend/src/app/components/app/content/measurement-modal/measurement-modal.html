@@ -1,0 +1,94 @@
+
+<!-- Backdrop -->
+<div class="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center z-50">
+  <!-- Modal Card -->
+  <div
+    class="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-xl transform transition-all duration-300 ease-out"
+    [ngClass]="{
+      'opacity-100 translate-y-0': animate,
+      'opacity-0 -translate-y-5': !animate
+    }"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold text-gray-800">Set measurments</h2>
+
+      <button (click)="onCloseClick()" class="text-gray-500 hover:text-red-500 text-lg">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Modal Content (Form or Inputs) -->
+    <form #createMeasurmentsForm (ngSubmit)="onCreateMeasurementsSubmit( createMeasurmentsForm )" >
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <!-- Name (with validation style example) -->
+        @for (field of fields ; track field) {
+          <div class="col-span-1 mb-3">
+            <label class="block text-sm font-medium text-gray-700 mb-1 capitalize">{{ field.name }}</label>
+            <input type="hidden" name="measurementFieldId" value="{{ field.measurementId }}">
+            <input type="hidden" name="measurementSetId" value="{{ field.measurementId }}">
+            <input
+              type="number"
+              class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+              [ngClass]="{
+                'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['name'],
+                'border-gray-300 focus:ring-indigo-400': !fieldErrors['name']
+              }"
+              placeholder="{{ field.name }} value"
+              name="value"
+              [(ngModel)]="measurementValues[field.measurementId].value"
+            />
+            <p *ngIf="fieldErrors['name']" class="mt-1 text-sm text-red-500">{{ fieldErrors['name'] }}</p>
+          </div>
+        }
+      </div>
+
+      <!-- Submit and Cancel -->
+      <div class="flex justify-end space-x-2 mt-4">
+        <!-- TODO MAKE A CLICK EVEN HERE -->
+<!--        <button type="button"-->
+<!--                class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-700">Cancel</button>-->
+        <button type="submit"
+                class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
