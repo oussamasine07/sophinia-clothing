@@ -2,16 +2,21 @@ package com.sophinia.backend.service;
 
 
 import com.sophinia.backend.dto.mappingDTO.*;
+import com.sophinia.backend.dto.validation.MeasurementsValuesDTO;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.*;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,6 +27,8 @@ public class OrderService {
     private final MeasurementSetRepository measurementSetRepository;
     private final ClientRepository clientRepository;
     private final AvailabilityRepository availabilityRepository;
+    private final MeasurementFieldRepository measurementFieldRepository;
+    private final MeasurementValueRepository measurementValueRepository;
 
     private final ClientService clientService;
     private final ProductService productService;
@@ -34,8 +41,10 @@ public class OrderService {
             final OrderRepository orderRepository,
             final OrderStatusRepository orderStatusRepository,
             final MeasurementSetRepository measurementSetRepository,
-            ClientRepository clientRepository,
+            final ClientRepository clientRepository,
             final AvailabilityRepository availabilityRepository,
+            final MeasurementFieldRepository measurementFieldRepository,
+            final MeasurementValueRepository measurementValueRepository,
 
             final ClientService clientService,
             final ProductService productService,
@@ -49,6 +58,7 @@ public class OrderService {
         this.measurementSetRepository = measurementSetRepository;
         this.clientRepository = clientRepository;
         this.availabilityRepository = availabilityRepository;
+        this.measurementValueRepository = measurementValueRepository;
 
         this.clientService = clientService;
         this.productService = productService;
@@ -56,6 +66,7 @@ public class OrderService {
         this.fabricService = fabricService;
         this.decorationService = decorationService;
         this.designService = designService;
+        this.measurementFieldRepository = measurementFieldRepository;
     }
 
     public ResponseEntity<?> makeOrder (OrderValidationDTO orderValidationDTO) {
@@ -177,6 +188,35 @@ public class OrderService {
         );
 
         return new ResponseEntity<>( orderDetails, HttpStatus.OK );
+    }
+
+    public ResponseEntity<?> setMeasures ( MeasurementsValuesDTO measurementsValuesDTO ) {
+
+        measurementsValuesDTO.measurementValues()
+                .forEach(measure -> {
+                    MeasurementValue measurementValue = new MeasurementValue();
+                    // get measurment set form db
+                    MeasurementSet measurementSet = measurementSetRepository.findById( measure.measurementSetId() )
+                            .orElseThrow(() -> new NotFoundException("this measurement set not found"));
+
+                    // get measurement field from db
+                    MeasurementField measurementField = measurementFieldRepository.findById( measure.measurementFieldId() )
+                            .orElseThrow(() -> new NotFoundException("this measurement field not found"));
+
+                    // insert into measurement values
+                    measurementValue.setMeasurementSet( measurementSet );
+                    measurementValue.setMeasurementField( measurementField );
+                    measurementValue.setValue( measure.value() );
+
+                    // save measurement values
+                    measurementValueRepository.save( measurementValue );
+                });
+
+        Map<String, Object> res = new HashMap<>();
+        res.put("status", "success");
+        res.put("message", "all measures are well set");
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
 
