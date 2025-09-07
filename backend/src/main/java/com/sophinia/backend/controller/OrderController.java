@@ -1,6 +1,7 @@
 package com.sophinia.backend.controller;
 
 
+import com.sophinia.backend.dto.validation.MeasurementsValuesDTO;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
 import com.sophinia.backend.service.OrderService;
 import jakarta.validation.Valid;
@@ -24,9 +25,24 @@ public class OrderController {
         return orderService.getOrders();
     }
 
+    @GetMapping("/details/{id}")
+    public ResponseEntity<?> orderDetails (@PathVariable Long id) {
+        return orderService.getOrderDetails( id );
+    }
+
     @PostMapping("/place-order")
     public ResponseEntity<?> placeAnOrder ( @Valid @RequestBody OrderValidationDTO orderValidationDTO ) {
         return orderService.makeOrder( orderValidationDTO );
+    }
+
+    @GetMapping("get-orders-with-clients")
+    public ResponseEntity<?> getOrdersWithCients () {
+        return orderService.getOrdersWithClients();
+    }
+
+    @PostMapping("/set-measures")
+    public ResponseEntity<?> takeMeasures ( @Valid @RequestBody MeasurementsValuesDTO measurementsValuesDTO ) {
+        return orderService.setMeasures( measurementsValuesDTO );
     }
 
 }

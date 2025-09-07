@@ -1,0 +1,142 @@
+
+<div class="w-full py-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Client Details -->
+    <section class="bg-white border border-gray-300 rounded-2xl shadow-sm p-6 lg:col-span-1">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+          {{ orderDetails?.order?.client?.firstName }} {{ orderDetails?.order?.client?.lastName }}
+      </h2>
+      <div class="space-y-2 text-gray-700 text-sm">
+        <div class="flex gap-2 items-center">
+          <i class="fas fa-envelope text-gray-600 w-6 flex-1"></i>
+          <span class="flex-[3]">{{ orderDetails?.order?.client?.email }}</span>
+        </div>
+
+        <div class="flex gap-2 items-center">
+          <i class="fas fa-phone text-gray-600 w-6 flex-1"></i>
+          <span class="flex-[3]">{{ orderDetails?.order?.client?.phone }}</span>
+        </div>
+
+        <div class="flex gap-2 items-center">
+          <i class="fas fa-map-marker-alt text-gray-600 w-6 flex-1"></i>
+          <span class="flex-[3]">{{ orderDetails?.order?.client?.address }}</span>
+        </div>
+
+        <div class="flex gap-2 items-center">
+          <i class="fas fa-city text-gray-600 w-6 flex-1"></i>
+          <span class="flex-[3]">{{ orderDetails?.order?.client?.city }}</span>
+        </div>
+
+        <div class="flex gap-2 items-center">
+          <i class="fas fa-mail-bulk text-gray-600 w-6 flex-1"></i>
+          <span class="flex-[3]">{{ orderDetails?.order?.client?.postalCode }}</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Product Details -->
+    <section class="bg-white border border-gray-300 rounded-2xl shadow-sm p-6 lg:col-span-2">
+      <div class="flex flex-col md:flex-row md:items-start gap-6">
+        <!-- Product Image -->
+        <div class="flex-shrink-0 w-full md:w-1/3">
+          <img src="{{ orderDetails?.order?.product?.image }}" alt="Product Image"
+               class="w-full h-56 object-cover rounded-lg border">
+        </div>
+
+        <!-- Product Info -->
+        <div class="flex-1">
+          <!-- Order Info -->
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-gray-800">Order #{{ orderDetails?.order?.orderId }}</h2>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+              Completed
+            </span>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-6">
+            <h3 class="text-sm font-medium text-gray-700">Description</h3>
+            <p class="text-sm text-gray-600 mt-1">
+              {{ orderDetails?.order?.product?.description }}
+            </p>
+          </div>
+
+          <!-- Measurement -->
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sm font-medium text-gray-700">Measurements</h3>
+              @if ((orderDetails?.measures?.length ?? 0) == 0) {
+                <button
+                  class="px-3 py-1 text-sm bg-indigo-500 text-white rounded-lg shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+                  (click)="openMeasurementModal()"
+                >
+                  Take measures
+                </button>
+              }
+            </div>
+
+            @if ((orderDetails?.measures?.length ?? 0) > 0) {
+              @for (f of orderDetails?.measures ; track f ) {
+                <div class="flex items-center gap-4 my-1">
+                  <span class="font-medium text-sm text-gray-700 w-24">{{ f?.measurementField }}:</span>
+                  <input
+                    type="text"
+                    placeholder="Enter value"
+                    value="{{ f?.measurementValue }}"
+                    disabled
+                    class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+              }
+            } @else {
+              @for (f of orderDetails?.order?.product?.fields ; track f ) {
+                <div class="flex items-center gap-4 my-1">
+                  <span class="font-medium text-sm text-gray-700 w-24">{{ f.name }}:</span>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+        <!-- Clothing Model -->
+        <div class="bg-gray-50 rounded-lg p-3 flex items-center gap-3 border border-gray-300">
+          <img class="w-14 h-14 object-cover rounded-md border"
+               src="{{ orderDetails?.order?.clothingModel?.image }}" alt="">
+          <div>
+            <p class="text-sm font-medium text-gray-800">{{ orderDetails?.order?.clothingModel?.name }}</p>
+          </div>
+        </div>
+
+        <!-- Decoration -->
+        <div class="bg-gray-50 rounded-lg p-3 flex items-center gap-3 border border-gray-300">
+          <img class="w-14 h-14 object-cover rounded-md border"
+               src="{{ orderDetails?.order?.decoration?.image }}" alt="">
+          <div>
+            <p class="text-sm font-medium text-gray-800">{{ orderDetails?.order?.decoration?.name }}</p>
+          </div>
+        </div>
+
+        <!-- Design -->
+        <div class="bg-gray-50 rounded-lg p-3 flex items-center gap-3 border border-gray-300">
+          <img class="w-14 h-14 object-cover rounded-md border"
+               src="{{ orderDetails?.order?.design?.image }}" alt="">
+          <div>
+            <p class="text-sm font-medium text-gray-800">{{ orderDetails?.order?.design?.name }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<app-measurement-modal
+  *ngIf="showMeasurementModal"
+  (close)="closeMeasurementModal()"
+  [fields]="measurmentFields"
+  [measurementSet]="measurementSetId"
+></app-measurement-modal>
