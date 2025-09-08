@@ -32,6 +32,26 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-sophinia-app:3306/sophinia?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8090/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # frontend
+  frontend-service:
+    build:
+      context: ./frontend
+    image: sophinia-frontend-image
+    container_name: sophinia-frontend-container
+    ports:
+      - "4200:80"
+    depends_on:
+      backend-service:
+        condition: service_healthy
+    networks:
+      - sophinia
+
 
 networks:
   sophinia:
