@@ -254,7 +254,7 @@ export class Store implements OnInit {
     })
   }
 
-  showRegisterPopup = true;
+  showRegisterPopup = false;
   openRegisterPopup () {
     this.showRegisterPopup = true;
   }

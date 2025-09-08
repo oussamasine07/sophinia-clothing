@@ -1,0 +1,61 @@
+
+services:
+  #  MySQL configs
+  mysql-sophinia-app:
+    image: mysql
+    container_name: sophinia-mysql-container
+    ports:
+      - "3307:3306"
+    networks:
+      - sophinia
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: sophinia
+    volumes:
+      - mysql_sophinia:/var/lib/mysql
+
+
+  #  backend configs
+  backend-service:
+    build:
+      context: ./backend
+    image: sophnia-backend-image
+    container_name: sophinia-backend-container
+    ports:
+      - "8090:8090"
+    depends_on:
+      - mysql-sophinia-app
+    networks:
+      - sophinia
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-sophinia-app:3306/sophinia?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8090/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # frontend
+  frontend-service:
+    build:
+      context: ./frontend
+    image: sophinia-frontend-image
+    container_name: sophinia-frontend-container
+    ports:
+      - "4200:80"
+    depends_on:
+      backend-service:
+        condition: service_healthy
+    networks:
+      - sophinia
+
+
+networks:
+  sophinia:
+    driver: bridge
+
+volumes:
+  mysql_sophinia:
