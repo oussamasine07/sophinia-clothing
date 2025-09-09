@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,20 +37,20 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<?> index () {
+    public ResponseEntity<List<Product>> index () {
         return productService.getAllProducts();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create ( @Valid ProductValidationDTO productValidationDTO ) {
+    public ResponseEntity<Product> create ( @Valid ProductValidationDTO productValidationDTO ) {
         
         return productService.createProduct( productValidationDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> update (
+    public ResponseEntity<Product> update (
             @Valid @ModelAttribute ProductValidationDTO productValidationDTO,
             @PathVariable Long id
     ) {
@@ -59,7 +60,7 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete ( @PathVariable Long id ) {
+    public ResponseEntity<Map<String, Object>> delete (@PathVariable Long id ) {
         return productService.deleteProduct( id );
     }
 

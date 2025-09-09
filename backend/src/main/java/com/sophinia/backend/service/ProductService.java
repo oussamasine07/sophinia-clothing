@@ -40,19 +40,19 @@ public class ProductService {
         this.fileUpload = fileUpload;
     }
 
-    public ResponseEntity<?> getAllProducts () {
+    public ResponseEntity<List<Product>> getAllProducts () {
         List<Product> products = productRepository.findAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getProductById ( Long id ) {
+    public ResponseEntity<Product> getProductById ( Long id ) {
         Product product = productRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this product not found"));
 
         return new ResponseEntity<>( product, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> createProduct ( ProductValidationDTO productValidationDTO ) {
+    public ResponseEntity<Product> createProduct ( ProductValidationDTO productValidationDTO ) {
 
         Product product = new Product();
 
@@ -105,7 +105,7 @@ public class ProductService {
     }
 
 
-    public ResponseEntity<?> updateProduct (ProductValidationDTO productValidationDTO, Long id) {
+    public ResponseEntity<Product> updateProduct (ProductValidationDTO productValidationDTO, Long id) {
         Product updatedProduct = productRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this product not found"));
 
@@ -155,7 +155,7 @@ public class ProductService {
         return new ResponseEntity<>( productRepository.save( updatedProduct ), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteProduct ( Long id ) {
+    public ResponseEntity<Map<String, Object>> deleteProduct ( Long id ) {
 
         Product deletedProduct = productRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this product not found"));
