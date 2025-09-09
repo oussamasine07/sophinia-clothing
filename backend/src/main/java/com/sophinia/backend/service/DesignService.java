@@ -31,26 +31,26 @@ public class DesignService {
         this.orderRepository = orderRepository;
     }
 
-    public ResponseEntity<?> getAllDesigns () {
+    public ResponseEntity<List<Design>> getAllDesigns () {
         List<Design> designs = designRepository.findAll();
 
         return new ResponseEntity<>( designs, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> getDesignById (Long id) {
+    public ResponseEntity<Design> getDesignById (Long id) {
         Design design = designRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Design not found"));
 
         return new ResponseEntity<>( design, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> createDesign ( Design design ) {
+    public ResponseEntity<Design> createDesign ( Design design ) {
         Design newDesign = designRepository.save(design);
 
         return new ResponseEntity<>(newDesign, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> updateDesignById (
+    public ResponseEntity<Design> updateDesignById (
             Long id,
             DesignValidateDTO designValidateDTO
     ) {
@@ -75,9 +75,9 @@ public class DesignService {
 
     }
 
-    public ResponseEntity<?> deleteDesignById (Long id) {
+    public ResponseEntity<Map<String, Object>> deleteDesignById (Long id) {
         if (orderRepository.existsByDesignId(id)) {
-            Map<String, String> error = new HashMap<>();
+            Map<String, Object> error = new HashMap<>();
             error.put("message", "you can't remove a design related to orders");
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
