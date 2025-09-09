@@ -43,7 +43,7 @@ public class ClientService {
         return new ResponseEntity<>( savedClient, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> updateClientAfterOrder ( UpdateClientValidationDTO updateClientValidationDTO) {
+    public ResponseEntity<Map<String, Object>> updateClientAfterOrder ( UpdateClientValidationDTO updateClientValidationDTO) {
         Client client = clientRepository.findClientByEmail( updateClientValidationDTO.email() )
                 .orElseThrow(() -> new NotFoundException("this client not found"));
 

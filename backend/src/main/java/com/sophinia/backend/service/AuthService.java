@@ -52,7 +52,7 @@ public class AuthService {
         this.authenticationManager = authenticationManager;
     }
 
-    public ResponseEntity<?> loginUser (LoginValidationDTO loginValidationDTO) {
+    public ResponseEntity<Map<String, String>> loginUser (LoginValidationDTO loginValidationDTO) {
         try {
             Authentication authentication = authenticationManager
                     .authenticate(

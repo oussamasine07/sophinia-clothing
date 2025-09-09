@@ -32,20 +32,20 @@ public class ClothingModelService {
         this.orderRepository = orderRepository;
     }
 
-    public ResponseEntity<?> getAllClothingModels () {
+    public ResponseEntity<List<ClothingModel>> getAllClothingModels () {
         List<ClothingModel> clothingModels = clothingModelRepository.findAll();
 
         return new ResponseEntity<>( clothingModels, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> getClothingModel ( Long id ) {
+    public ResponseEntity<ClothingModel> getClothingModel ( Long id ) {
         ClothingModel clothingModel = clothingModelRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
 
         return new ResponseEntity<>(clothingModel, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createClothingModel ( ClothingModelValidationDTO clothingModelValidationDTO ) {
+    public ResponseEntity<ClothingModel> createClothingModel ( ClothingModelValidationDTO clothingModelValidationDTO ) {
         ClothingModel clothingModel = new ClothingModel();
 
         clothingModel.setName( clothingModelValidationDTO.name() );
@@ -60,7 +60,7 @@ public class ClothingModelService {
 
     }
 
-    public ResponseEntity<?> updateClothingModel ( ClothingModelValidationDTO clothingModelValidationDTO, Long id) {
+    public ResponseEntity<ClothingModel> updateClothingModel ( ClothingModelValidationDTO clothingModelValidationDTO, Long id) {
         ClothingModel foundClothingModel = clothingModelRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
 
@@ -73,9 +73,9 @@ public class ClothingModelService {
         return new ResponseEntity<>( clothingModelRepository.save( foundClothingModel ), HttpStatus.OK );
     }
 
-    public ResponseEntity<?> deleteClothingModel ( Long id ) {
+    public ResponseEntity<Map<String, Object>> deleteClothingModel ( Long id ) {
         if (orderRepository.existsByClothingModelId(id)) {
-            Map<String, String> error = new HashMap<>();
+            Map<String, Object> error = new HashMap<>();
             error.put("message", "you can't remove a design related to orders");
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
