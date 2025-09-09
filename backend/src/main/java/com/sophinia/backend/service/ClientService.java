@@ -5,7 +5,6 @@ import com.sophinia.backend.dto.validation.UpdateClientValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Client;
 import com.sophinia.backend.repository.ClientRepository;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +27,7 @@ public class ClientService {
         this.encoder = encoder;
     }
 
-    public ResponseEntity<?> createClientOnOrder (ClientValidationDTO clientValidationDTO) {
+    public ResponseEntity<Client> createClientOnOrder (ClientValidationDTO clientValidationDTO) {
 
         Client client = new Client();
 

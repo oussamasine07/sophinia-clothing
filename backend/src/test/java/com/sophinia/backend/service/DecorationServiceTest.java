@@ -4,6 +4,7 @@ package com.sophinia.backend.service;
 import com.sophinia.backend.dto.validation.ValidateDecorationDTO;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.repository.DecorationRepository;
+import com.sophinia.backend.repository.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,6 +29,8 @@ public class DecorationServiceTest {
 
     @Mock
     DecorationRepository decorationRepository;
+    @Mock
+    OrderRepository orderRepository;
 
     @InjectMocks
     DecorationService decorationService;
@@ -114,15 +117,18 @@ public class DecorationServiceTest {
     void deleteDecoration () {
         Decoration d1 = new Decoration();
         d1.setId(1L);
-        d1.setName("decoration 1");
+        d1.setName("deco");
 
-        when(decorationRepository.findById( 1L )).thenReturn( Optional.of( d1 ) );
+        when(orderRepository.existsByDesignId(1L)).thenReturn(false);
+        when(decorationRepository.findById(1L)).thenReturn(Optional.of(d1));
         doNothing().when(decorationRepository).deleteById(1L);
 
-        ResponseEntity<Map<String, String>> result = (ResponseEntity<Map<String, String>>) decorationService.deleteDecoration(1L);
+        ResponseEntity<Map<String, Object>> result = decorationService.deleteDecoration(1L);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals("success", result.getBody().get("status"));
+        assertEquals("decoration deco removed", result.getBody().get("message"));
+        assertEquals(1L, result.getBody().get("id"));
 
     }
 }

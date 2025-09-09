@@ -7,11 +7,9 @@ import com.sophinia.backend.dto.validation.OrderValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.*;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.util.HashMap;

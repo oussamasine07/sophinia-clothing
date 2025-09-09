@@ -2,7 +2,6 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
-import javax.security.auth.Subject;
 import java.util.List;
 
 @Entity

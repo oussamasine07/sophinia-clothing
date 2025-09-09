@@ -5,7 +5,6 @@ import com.sophinia.backend.dto.mappingDTO.MappedFabricDTO;
 import com.sophinia.backend.dto.validation.FabricFormDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.mapper.FabricMapper;
-import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.repository.FabricRepository;
 import com.sophinia.backend.repository.OrderRepository;

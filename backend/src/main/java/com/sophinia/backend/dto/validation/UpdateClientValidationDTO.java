@@ -2,24 +2,29 @@ package com.sophinia.backend.dto.validation;
 
 import com.sophinia.backend.validation.IsPasswordConfirmed;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @IsPasswordConfirmed
 public record UpdateClientValidationDTO(
-        @NotBlank(message = "first name is required")
+        @NotNull(message = "first name field is required")
+        @Size(min = 1, message = "first name is required")
         String firstName,
 
-        @NotBlank(message = "last name is required")
+        @NotNull(message = "last name field is required")
+        @Size(min = 1, message = "last name is required")
         String lastName,
 
-        @NotBlank(message = "email is required")
+        @NotNull(message = "email field is required")
+        @Size(min = 1, message = "email is required")
         @Email(message = "it should be a valid email")
         String email,
 
-        @NotBlank(message = "password is required")
+        @NotNull(message = "password field is required")
+        @Size(min = 1, message = "password is required")
         String password,
 
-        @NotBlank(message = "confirm password is required")
+        @NotNull(message = "confirm password field is required")
+        @Size(min = 1, message = "confirm password is required")
         String confirmPassword
 ) {}

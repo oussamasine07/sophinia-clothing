@@ -10,13 +10,11 @@ import com.sophinia.backend.mapper.EmployeeMapper;
 import com.sophinia.backend.mapper.UserMapper;
 import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
