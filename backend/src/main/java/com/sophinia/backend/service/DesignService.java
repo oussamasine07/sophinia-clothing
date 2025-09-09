@@ -5,6 +5,7 @@ import com.sophinia.backend.dto.validation.DesignValidateDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Design;
 import com.sophinia.backend.repository.DesignRepository;
+import com.sophinia.backend.repository.OrderRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,16 @@ public class DesignService {
 
     private final DesignRepository designRepository;
     private final FileUpload fileUpload;
+    private final OrderRepository orderRepository;
 
     public DesignService (
             final DesignRepository designRepository,
-            final FileUpload fileUpload
+            final FileUpload fileUpload,
+            final OrderRepository orderRepository
     ) {
         this.designRepository = designRepository;
         this.fileUpload = fileUpload;
+        this.orderRepository = orderRepository;
     }
 
     public ResponseEntity<?> getAllDesigns () {
@@ -72,6 +76,11 @@ public class DesignService {
     }
 
     public ResponseEntity<?> deleteDesignById (Long id) {
+        if (orderRepository.existsByDesignId(id)) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "you can't remove a design related to orders");
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
         Design design = designRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("you can't delete a not found design"));
 

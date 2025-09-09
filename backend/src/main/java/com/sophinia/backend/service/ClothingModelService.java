@@ -6,6 +6,7 @@ import com.sophinia.backend.dto.validation.ClothingModelValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.ClothingModel;
 import com.sophinia.backend.repository.ClothingModelRepository;
+import com.sophinia.backend.repository.OrderRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,16 @@ public class ClothingModelService {
 
     private final ClothingModelRepository clothingModelRepository;
     private final FileUpload fileUpload;
+    private final OrderRepository orderRepository;
 
     public ClothingModelService (
             final ClothingModelRepository clothingModelRepository,
-            final FileUpload fileUpload
+            final FileUpload fileUpload,
+            final OrderRepository orderRepository
     ) {
         this.clothingModelRepository = clothingModelRepository;
         this.fileUpload = fileUpload;
+        this.orderRepository = orderRepository;
     }
 
     public ResponseEntity<?> getAllClothingModels () {
@@ -70,6 +74,12 @@ public class ClothingModelService {
     }
 
     public ResponseEntity<?> deleteClothingModel ( Long id ) {
+        if (orderRepository.existsByClothingModelId(id)) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "you can't remove a design related to orders");
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
+
         ClothingModel foundClothingModel = clothingModelRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
 

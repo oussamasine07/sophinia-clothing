@@ -5,6 +5,7 @@ import com.sophinia.backend.dto.validation.ValidateDecorationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.repository.DecorationRepository;
+import com.sophinia.backend.repository.OrderRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,16 @@ public class DecorationService {
 
     private final DecorationRepository decorationRepository;
     private final FileUpload fileUpload;
+    private final OrderRepository orderRepository;
 
     public DecorationService (
             final DecorationRepository decorationRepository,
-            final FileUpload fileUpload
+            final FileUpload fileUpload,
+            final OrderRepository orderRepository
     ) {
         this.decorationRepository = decorationRepository;
         this.fileUpload = fileUpload;
+        this.orderRepository = orderRepository;
     }
 
     public ResponseEntity<?> getAllDecorations () {
@@ -67,6 +71,12 @@ public class DecorationService {
     }
 
     public ResponseEntity<?> deleteDecoration ( Long decorationId ) {
+        if (orderRepository.existsByDesignId(decorationId)) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "you can't remove a design related to orders");
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
+
         Decoration decoration = decorationRepository.findById( decorationId )
                 .orElseThrow(() -> new NotFoundException("you cant delete an unfound decoration"));
 

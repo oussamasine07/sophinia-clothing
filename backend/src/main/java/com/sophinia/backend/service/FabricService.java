@@ -8,6 +8,7 @@ import com.sophinia.backend.mapper.FabricMapper;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.repository.FabricRepository;
+import com.sophinia.backend.repository.OrderRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,15 +23,18 @@ public class FabricService {
     private final FabricRepository fabricRepository;
     private final FabricMapper fabricMapper;
     private final FileUpload fileUpload;
+    private final OrderRepository orderRepository;
 
     public FabricService (
             final FabricRepository fabricRepository,
             final FabricMapper fabricMapper,
-            final FileUpload fileUpload
+            final FileUpload fileUpload,
+            final OrderRepository orderRepository
     ) {
         this.fabricRepository = fabricRepository;
         this.fabricMapper = fabricMapper;
         this.fileUpload = fileUpload;
+        this.orderRepository = orderRepository;
     }
 
     public ResponseEntity<?> getFabrics () {
@@ -83,6 +87,12 @@ public class FabricService {
     }
 
     public ResponseEntity<?> deleteFabric (Long fabricId) {
+        if (orderRepository.existsByFabricId( fabricId )) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "you can't remove a design related to orders");
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
+
         Fabric deletedFabric = fabricRepository.findById( fabricId )
                 .orElseThrow(() -> new NotFoundException("you can't delete an unfound fabric"));
 
