@@ -69,7 +69,7 @@ public class OrderService {
         this.measurementFieldRepository = measurementFieldRepository;
     }
 
-    public ResponseEntity<?> makeOrder (OrderValidationDTO orderValidationDTO) {
+    public ResponseEntity<Order> makeOrder (OrderValidationDTO orderValidationDTO) {
 
         // make client login first
         // check if client exists by email
@@ -131,20 +131,20 @@ public class OrderService {
 //        return null;
     }
 
-    public ResponseEntity<?> getOrders () {
+    public ResponseEntity<List<Order>> getOrders () {
         List<Order> orders = orderRepository.findAll();
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
 
     }
 
-    public ResponseEntity<?> getOrdersWithClients () {
+    public ResponseEntity<List<OrderWithClientDTO>> getOrdersWithClients () {
         List<OrderWithClientDTO> orders = orderRepository.getOrdersWithClient();
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getOrderDetails (Long id) {
+    public ResponseEntity<Map<String, Object>> getOrderDetails (Long id) {
 
         List<Object[]> rows = orderRepository.getOrderDetails(id);
 
@@ -208,7 +208,7 @@ public class OrderService {
         return new ResponseEntity<>( result, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> setMeasures ( MeasurementsValuesDTO measurementsValuesDTO ) {
+    public ResponseEntity<Map<String, Object>> setMeasures ( MeasurementsValuesDTO measurementsValuesDTO ) {
 
         measurementsValuesDTO.measurementValues()
                 .forEach(measure -> {

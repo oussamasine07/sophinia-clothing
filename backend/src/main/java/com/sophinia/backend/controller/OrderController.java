@@ -1,12 +1,17 @@
 package com.sophinia.backend.controller;
 
 
+import com.sophinia.backend.dto.mappingDTO.OrderWithClientDTO;
 import com.sophinia.backend.dto.validation.MeasurementsValuesDTO;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
+import com.sophinia.backend.model.Order;
 import com.sophinia.backend.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/order")
@@ -21,27 +26,27 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getOrders () {
+    public ResponseEntity<List<Order>> getOrders () {
         return orderService.getOrders();
     }
 
     @GetMapping("/details/{id}")
-    public ResponseEntity<?> orderDetails (@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> orderDetails (@PathVariable Long id) {
         return orderService.getOrderDetails( id );
     }
 
     @PostMapping("/place-order")
-    public ResponseEntity<?> placeAnOrder ( @Valid @RequestBody OrderValidationDTO orderValidationDTO ) {
+    public ResponseEntity<Order> placeAnOrder (@Valid @RequestBody OrderValidationDTO orderValidationDTO ) {
         return orderService.makeOrder( orderValidationDTO );
     }
 
     @GetMapping("get-orders-with-clients")
-    public ResponseEntity<?> getOrdersWithCients () {
+    public ResponseEntity<List<OrderWithClientDTO>> getOrdersWithCients () {
         return orderService.getOrdersWithClients();
     }
 
     @PostMapping("/set-measures")
-    public ResponseEntity<?> takeMeasures ( @Valid @RequestBody MeasurementsValuesDTO measurementsValuesDTO ) {
+    public ResponseEntity<Map<String, Object>> takeMeasures ( @Valid @RequestBody MeasurementsValuesDTO measurementsValuesDTO ) {
         return orderService.setMeasures( measurementsValuesDTO );
     }
 
