@@ -1,6 +1,7 @@
 package com.sophinia.backend.controller;
 
 
+import com.sophinia.backend.dto.mappingDTO.MappedFabricDTO;
 import com.sophinia.backend.dto.validation.FabricFormDTO;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.service.FabricService;
@@ -8,6 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/fabric")
@@ -22,13 +26,13 @@ public class FabricController {
     }
 
     @GetMapping
-    public ResponseEntity<?> index () {
+    public ResponseEntity<List<MappedFabricDTO>> index () {
         return fabricService.getFabrics();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create (@Valid FabricFormDTO fabricFormDTO) {
+    public ResponseEntity<Fabric> create (@Valid FabricFormDTO fabricFormDTO) {
 
 
         return fabricService.createNewFabric( fabricFormDTO );
@@ -36,14 +40,14 @@ public class FabricController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> update (@Valid FabricFormDTO fabricFormDTO, @PathVariable Long id ) {
+    public ResponseEntity<Fabric> update (@Valid FabricFormDTO fabricFormDTO, @PathVariable Long id ) {
 
         return fabricService.updateFabric( fabricFormDTO, id );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete (@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> delete (@PathVariable Long id) {
         return fabricService.deleteFabric( id );
     }
 

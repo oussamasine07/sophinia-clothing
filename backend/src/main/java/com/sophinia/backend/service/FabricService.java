@@ -37,7 +37,7 @@ public class FabricService {
         this.orderRepository = orderRepository;
     }
 
-    public ResponseEntity<?> getFabrics () {
+    public ResponseEntity<List<MappedFabricDTO>> getFabrics () {
         List<MappedFabricDTO> fabrics = fabricRepository.findAll()
                 .stream()
                 .map(this.fabricMapper::toDTO)
@@ -46,14 +46,14 @@ public class FabricService {
         return new ResponseEntity<>(fabrics, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getFabricById ( Long fabricId ) {
+    public ResponseEntity<Fabric> getFabricById ( Long fabricId ) {
         Fabric fabric = fabricRepository.findById( fabricId )
                 .orElseThrow(() -> new NotFoundException("unfound fabric"));
 
         return new ResponseEntity<>(fabric, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createNewFabric (FabricFormDTO fabricFormDTO) {
+    public ResponseEntity<Fabric> createNewFabric (FabricFormDTO fabricFormDTO) {
         Fabric fabric = new Fabric();
 
         fabric.setName(fabricFormDTO.name());
@@ -68,7 +68,7 @@ public class FabricService {
         return new ResponseEntity<>(newFabric, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> updateFabric (FabricFormDTO fabricFormDTO, Long fabricId) {
+    public ResponseEntity<Fabric> updateFabric (FabricFormDTO fabricFormDTO, Long fabricId) {
         Fabric updatedFabric = fabricRepository.findById( fabricId )
                 .orElseThrow(() -> new NotFoundException("you can't update an unfound fabric"));
 
@@ -86,9 +86,9 @@ public class FabricService {
 
     }
 
-    public ResponseEntity<?> deleteFabric (Long fabricId) {
+    public ResponseEntity<Map<String, Object>> deleteFabric (Long fabricId) {
         if (orderRepository.existsByFabricId( fabricId )) {
-            Map<String, String> error = new HashMap<>();
+            Map<String, Object> error = new HashMap<>();
             error.put("message", "you can't remove a design related to orders");
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
