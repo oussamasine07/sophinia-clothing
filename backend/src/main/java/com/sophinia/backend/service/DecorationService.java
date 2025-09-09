@@ -31,20 +31,20 @@ public class DecorationService {
         this.orderRepository = orderRepository;
     }
 
-    public ResponseEntity<?> getAllDecorations () {
+    public ResponseEntity<List<Decoration>> getAllDecorations () {
         List<Decoration> decorations = decorationRepository.findAll();
 
         return new ResponseEntity<>(decorations, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getDecorationById (Long decorationId) {
+    public ResponseEntity<Decoration> getDecorationById (Long decorationId) {
         Decoration decoration = decorationRepository.findById( decorationId )
                 .orElseThrow(() -> new NotFoundException("unfound decoration"));
 
         return new ResponseEntity<>(decoration, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createNewDecoration (ValidateDecorationDTO validateDecorationDTO) {
+    public ResponseEntity<Decoration> createNewDecoration (ValidateDecorationDTO validateDecorationDTO) {
         Decoration decoration = new Decoration();
         decoration.setName(validateDecorationDTO.name());
 
@@ -56,7 +56,7 @@ public class DecorationService {
         return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> updateDecoration (ValidateDecorationDTO validateDecorationDTO, Long decorationId) {
+    public ResponseEntity<Decoration> updateDecoration (ValidateDecorationDTO validateDecorationDTO, Long decorationId) {
         Decoration decoration = decorationRepository.findById( decorationId )
                 .orElseThrow(() -> new NotFoundException("you cant update an unfound decoration"));
 
@@ -70,9 +70,9 @@ public class DecorationService {
         return new ResponseEntity<>(decorationRepository.save(decoration), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteDecoration ( Long decorationId ) {
+    public ResponseEntity<Map<String, Object>> deleteDecoration ( Long decorationId ) {
         if (orderRepository.existsByDesignId(decorationId)) {
-            Map<String, String> error = new HashMap<>();
+            Map<String, Object> error = new HashMap<>();
             error.put("message", "you can't remove a design related to orders");
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
