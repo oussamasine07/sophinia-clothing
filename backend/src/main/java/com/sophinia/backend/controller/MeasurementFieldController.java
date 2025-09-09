@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/measurement-field")
 public class MeasurementFieldController {
@@ -23,19 +25,19 @@ public class MeasurementFieldController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
-    public ResponseEntity<?> index () {
+    public ResponseEntity<List<MeasurementField>> index () {
         return measurementFieldService.getMEasurementFields();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
-    public ResponseEntity<?> show (@PathVariable Long id) {
+    public ResponseEntity<MeasurementField> show (@PathVariable Long id) {
         return measurementFieldService.getMeasurementFieldById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create (@Valid @RequestBody MeasurementFieldValidationDTO measurementFieldValidationDTO) {
+    public ResponseEntity<MeasurementField> create (@Valid @RequestBody MeasurementFieldValidationDTO measurementFieldValidationDTO) {
         MeasurementField measurementField = new MeasurementField();
         measurementField.setName( measurementFieldValidationDTO.name());
 
@@ -44,7 +46,7 @@ public class MeasurementFieldController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> update (
+    public ResponseEntity<MeasurementField> update (
             @Valid @RequestBody MeasurementFieldValidationDTO measurementFieldValidationDTO,
             @PathVariable Long id
     ) {
@@ -56,7 +58,7 @@ public class MeasurementFieldController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete ( @PathVariable Long id ) {
+    public ResponseEntity<String> delete ( @PathVariable Long id ) {
 
         return measurementFieldService.deleteMeasurementField( id );
 

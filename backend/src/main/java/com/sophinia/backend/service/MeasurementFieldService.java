@@ -20,26 +20,26 @@ public class MeasurementFieldService {
         this.measurementFieldRepository = measurementFieldRepository;
     }
 
-    public ResponseEntity<?> getMEasurementFields () {
+    public ResponseEntity<List<MeasurementField>> getMEasurementFields () {
         List<MeasurementField> measurementFields = measurementFieldRepository.findAll();
 
         return new ResponseEntity<>(measurementFields, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getMeasurementFieldById ( Long id ) {
+    public ResponseEntity<MeasurementField> getMeasurementFieldById ( Long id ) {
         MeasurementField measurementField = measurementFieldRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this measurement not found"));
 
         return new ResponseEntity<>(measurementField, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createMeasurementField (MeasurementField measurementField) {
+    public ResponseEntity<MeasurementField> createMeasurementField (MeasurementField measurementField) {
         MeasurementField savedMeasurmentField = measurementFieldRepository.save( measurementField );
         return new ResponseEntity<>(savedMeasurmentField, HttpStatus.OK);
 
     }
 
-    public ResponseEntity<?> updateMeasurementField ( Long id, MeasurementField measurementField ) {
+    public ResponseEntity<MeasurementField> updateMeasurementField ( Long id, MeasurementField measurementField ) {
         MeasurementField updatedMeasurementField = measurementFieldRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this measurement not found"));
 
@@ -48,7 +48,7 @@ public class MeasurementFieldService {
         return new ResponseEntity<>(measurementFieldRepository.save( updatedMeasurementField ), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteMeasurementField ( Long id ) {
+    public ResponseEntity<String> deleteMeasurementField ( Long id ) {
         MeasurementField measurementField = measurementFieldRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("this measurement not found"));
 
