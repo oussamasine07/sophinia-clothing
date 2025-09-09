@@ -27,7 +27,7 @@ public class ClothingTypeService {
         this.fileUpload = fileUpload;
     }
 
-    public ResponseEntity<?> getAllClothingTypes () {
+    public ResponseEntity<List<ClothingType>> getAllClothingTypes () {
 
         List<ClothingType> clothingTypes = clothingTypeRepository.findAll();
 
@@ -35,14 +35,14 @@ public class ClothingTypeService {
 
     }
 
-    public ResponseEntity<?> getClothingTypeById ( Long id ) {
+    public ResponseEntity<ClothingType> getClothingTypeById ( Long id ) {
         ClothingType clothingType = clothingTypeRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("Unfound clothing type"));
 
         return new ResponseEntity<>(clothingType, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createClothingType ( ClothingTypeValidationDTO clothingTypeValidationDTO ) {
+    public ResponseEntity<ClothingType> createClothingType ( ClothingTypeValidationDTO clothingTypeValidationDTO ) {
         ClothingType clothingType = new ClothingType();
 
         clothingType.setName(clothingTypeValidationDTO.name());
@@ -55,7 +55,7 @@ public class ClothingTypeService {
         return new ResponseEntity<>( clothingTypeRepository.save(clothingType), HttpStatus.OK );
     }
 
-    public ResponseEntity<?> updateClothingType (
+    public ResponseEntity<ClothingType> updateClothingType (
             ClothingTypeValidationDTO clothingTypeValidationDTO,
             Long id
     ) {
@@ -73,7 +73,7 @@ public class ClothingTypeService {
 
     }
 
-    public ResponseEntity<?> deleteClothingType ( Long id ) {
+    public ResponseEntity<Map<String, Object>> deleteClothingType ( Long id ) {
         ClothingType clothingType = clothingTypeRepository.findById( id )
                 .orElseThrow(() -> new NotFoundException("you can't update an not found clothing type"));
 
