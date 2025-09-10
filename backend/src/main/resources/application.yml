@@ -1,0 +1,24 @@
+
+spring:
+  application:
+    name: backend
+  datasource:
+    url: ${secrets.db.url}
+    username: ${secrets.db.username}
+    password: ${secrets.db.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  config:
+    import: "classpath:secrets.yml"
+
+server:
+  port: 8090
+
+cloudinary:
+  cloud_name: ${secrets.cloudinary.cloud_name}
+  api_key: ${secrets.cloudinary.api_key}
+  api_secret: ${secrets.cloudinary.api_secret}
+
