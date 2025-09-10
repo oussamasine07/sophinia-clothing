@@ -21,6 +21,7 @@ public class ClothingModelService {
     private final ClothingModelRepository clothingModelRepository;
     private final FileUpload fileUpload;
     private final OrderRepository orderRepository;
+    private static final String CLOTHING_MODEL_NOT_FOUND = "this clothing model is not found";
 
     public ClothingModelService (
             final ClothingModelRepository clothingModelRepository,
@@ -40,7 +41,7 @@ public class ClothingModelService {
 
     public ResponseEntity<ClothingModel> getClothingModel ( Long id ) {
         ClothingModel clothingModel = clothingModelRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_MODEL_NOT_FOUND));
 
         return new ResponseEntity<>(clothingModel, HttpStatus.OK);
     }
@@ -62,7 +63,7 @@ public class ClothingModelService {
 
     public ResponseEntity<ClothingModel> updateClothingModel ( ClothingModelValidationDTO clothingModelValidationDTO, Long id) {
         ClothingModel foundClothingModel = clothingModelRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_MODEL_NOT_FOUND));
 
         foundClothingModel.setName( clothingModelValidationDTO.name() );
         if ( clothingModelValidationDTO.image() != null) {
@@ -81,7 +82,7 @@ public class ClothingModelService {
         }
 
         ClothingModel foundClothingModel = clothingModelRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this clothing model is not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_MODEL_NOT_FOUND));
 
         Map<String, Object> response = new HashMap<>();
         response.put("status", "success");

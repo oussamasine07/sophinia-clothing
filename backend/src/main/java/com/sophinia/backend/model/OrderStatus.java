@@ -19,7 +19,9 @@ public class OrderStatus {
     @OneToMany(mappedBy = "orderStatuse")
     private List<Order> orders;
 
-    public OrderStatus () {}
+    public OrderStatus () {
+        // Required by JPA: default constructor for entity instantiation
+    }
 
     public List<Order> getOrders() {
         return orders;

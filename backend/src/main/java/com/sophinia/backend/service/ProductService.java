@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
 
+    private static final String PRODUCT_NOT_FOUND = "this product not found";
+
     private final ProductRepository productRepository;
     private final ClothingTypeService clothingTypeService;
     private final MeasurementFieldService measurementFieldService;
@@ -46,7 +48,7 @@ public class ProductService {
 
     public ResponseEntity<Product> getProductById ( Long id ) {
         Product product = productRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this product not found"));
+                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND));
 
         return new ResponseEntity<>( product, HttpStatus.OK );
     }
@@ -106,7 +108,7 @@ public class ProductService {
 
     public ResponseEntity<Product> updateProduct (ProductValidationDTO productValidationDTO, Long id) {
         Product updatedProduct = productRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this product not found"));
+                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND));
 
         updatedProduct.setName(productValidationDTO.name());
         updatedProduct.setDescription(productValidationDTO.description());
@@ -157,7 +159,7 @@ public class ProductService {
     public ResponseEntity<Map<String, Object>> deleteProduct ( Long id ) {
 
         Product deletedProduct = productRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this product not found"));
+                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND));
 
         Map<String, Object> response = new HashMap<>();
         response.put("status", "success");

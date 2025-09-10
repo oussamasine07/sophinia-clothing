@@ -12,6 +12,8 @@ import java.util.List;
 @Service
 public class MeasurementFieldService {
 
+    private static final String CLOTHING_FIELD_NOT_FOUND = "this measurement not found";
+
     private final MeasurementFieldRepository measurementFieldRepository;
 
     public MeasurementFieldService (
@@ -28,7 +30,7 @@ public class MeasurementFieldService {
 
     public ResponseEntity<MeasurementField> getMeasurementFieldById ( Long id ) {
         MeasurementField measurementField = measurementFieldRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_FIELD_NOT_FOUND));
 
         return new ResponseEntity<>(measurementField, HttpStatus.OK);
     }
@@ -41,7 +43,7 @@ public class MeasurementFieldService {
 
     public ResponseEntity<MeasurementField> updateMeasurementField ( Long id, MeasurementField measurementField ) {
         MeasurementField updatedMeasurementField = measurementFieldRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_FIELD_NOT_FOUND));
 
         updatedMeasurementField.setName( measurementField.getName() );
 
@@ -50,7 +52,7 @@ public class MeasurementFieldService {
 
     public ResponseEntity<String> deleteMeasurementField ( Long id ) {
         MeasurementField measurementField = measurementFieldRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_FIELD_NOT_FOUND));
 
         measurementFieldRepository.deleteById( id );
 

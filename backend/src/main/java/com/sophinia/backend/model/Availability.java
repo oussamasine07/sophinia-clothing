@@ -25,7 +25,9 @@ public class Availability {
     @OneToOne(mappedBy = "avialability")
     private Order order;
 
-    public Availability() {}
+    public Availability() {
+        // Required by JPA: default constructor for entity instantiation
+    }
 
     public Long getId() {
         return id;

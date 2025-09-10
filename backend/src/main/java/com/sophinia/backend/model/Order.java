@@ -57,7 +57,9 @@ public class Order {
     @JoinColumn(name = "avialability_id", referencedColumnName = "id")
     private Availability avialability;
 
-    public Order () {}
+    public Order () {
+        // Required by JPA: default constructor for entity instantiation
+    }
 
     public Long getId() {
         return id;

@@ -26,7 +26,9 @@ public class Design {
     @OneToMany(mappedBy = "design")
     private List<Order> orders;
 
-    public Design () {}
+    public Design () {
+        // Required by JPA: default constructor for entity instantiation
+    }
 
     public Long getId() {
         return id;
