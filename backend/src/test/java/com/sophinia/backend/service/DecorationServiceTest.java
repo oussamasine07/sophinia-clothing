@@ -73,7 +73,7 @@ class DecorationServiceTest {
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertThat(result.getBody()).isNotNull();
-        assertEquals(result.getBody().getName(), "decoration 1");
+        assertEquals("decoration 1", result.getBody().getName());
 
     }
 
