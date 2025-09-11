@@ -40,9 +40,10 @@ public class SecurityConfig {
 
         return http
                 .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf
-                        .csrfTokenRepository(tokenRepository)
-                )
+//                .csrf(csrf -> csrf
+//                        .csrfTokenRepository(tokenRepository)
+//                )
+                .csrf(c -> c.disable())
                 .authorizeHttpRequests( req ->
                     req.requestMatchers(
                             "/app/login",

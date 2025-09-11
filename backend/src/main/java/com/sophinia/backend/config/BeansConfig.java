@@ -51,9 +51,4 @@ public class BeansConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return userDetailsService;
-    }
-
 }
