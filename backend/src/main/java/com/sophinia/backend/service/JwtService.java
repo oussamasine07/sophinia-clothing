@@ -2,7 +2,8 @@ package com.sophinia.backend.service;
 
 
 
-import com.sophinia.backend.dto.mappingDTO.AuthUserDTO;
+import com.sophinia.backend.dto.mappingdto.AuthUserDTO;
+import com.sophinia.backend.exception.JwtKeyGenerationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -28,7 +29,7 @@ public class JwtService {
             secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
         }
         catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new JwtKeyGenerationException("Failed to generate HmacSHA256 secret key", e);
         }
     }
 

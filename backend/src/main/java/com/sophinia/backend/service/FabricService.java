@@ -1,7 +1,7 @@
 package com.sophinia.backend.service;
 
 import com.sophinia.backend.bean.FileUpload;
-import com.sophinia.backend.dto.mappingDTO.MappedFabricDTO;
+import com.sophinia.backend.dto.mappingdto.MappedFabricDTO;
 import com.sophinia.backend.dto.validation.FabricFormDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.mapper.FabricMapper;

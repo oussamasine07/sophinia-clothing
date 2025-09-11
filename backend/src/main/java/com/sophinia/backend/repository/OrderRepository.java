@@ -1,7 +1,7 @@
 package com.sophinia.backend.repository;
 
 
-import com.sophinia.backend.dto.mappingDTO.OrderWithClientDTO;
+import com.sophinia.backend.dto.mappingdto.OrderWithClientDTO;
 import com.sophinia.backend.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,19 +12,19 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query(value = """
-            select
-            orders.id as order_id,
-            order_status.status,
-            clients.first_name,
-            clients.last_name,
-            products.name as product_name
-            from orders
-            	inner join order_status
-            on orders.order_statuse_id = order_status.id
-                inner join clients
-            on orders.client_id = clients.id
-            	inner join products
-            on orders.product_id = products.id;
+select
+orders.id as order_id,
+order_status.status,
+clients.first_name,
+clients.last_name,
+products.name as product_name
+from orders
+inner join order_status
+on orders.order_statuse_id = order_status.id
+inner join clients
+on orders.client_id = clients.id
+inner join products
+on orders.product_id = products.id;
         """, nativeQuery = true)
     List<OrderWithClientDTO> getOrdersWithClient ();
 
@@ -32,7 +32,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = """
             select
             orders.id as order_id,
-              products.name as product_name,
+            products.name as product_name,
               products.image as product_image,
               products.description as product_description,
             measurement_fields.id as field_id,
@@ -72,20 +72,16 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     """, nativeQuery = true)
     List<Object[]> getOrderDetails(@Param("id") Long id );
 
-    @Query(
-            value = """
-                        select
-                            measurement_fields.name as measurement_field_name,
-                            measurement_values.value as measure_value
-                        from measurement_values
-                            inner join measuremet_sets
-                        on measuremet_sets.id = measurement_values.measurement_set_id
-                            inner join measurement_fields
-                        on measurement_fields.id = measurement_values.measurement_field_id
-                        where measurement_values.measurement_set_id = :id;
-                    """,
-            nativeQuery = true
-    )
+    @Query(value = """
+select
+measurement_fields.name as measurement_field_name,
+measurement_values.value as measure_value
+from measurement_values
+inner join measuremet_sets
+on measuremet_sets.id = measurement_values.measurement_set_id
+inner join measurement_fields
+on measurement_fields.id = measurement_values.measurement_field_id
+where measurement_values.measurement_set_id = :id;""", nativeQuery = true)
     List<Object[]> getMeaserementValues(@Param("id") Long id);
 
 

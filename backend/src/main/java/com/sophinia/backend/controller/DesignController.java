@@ -15,7 +15,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/design")
-@CrossOrigin
 public class DesignController {
 
     private final DesignService designService;

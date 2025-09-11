@@ -1,6 +1,6 @@
 package com.sophinia.backend.mapper;
 
-import com.sophinia.backend.dto.mappingDTO.AuthUserDTO;
+import com.sophinia.backend.dto.mappingdto.AuthUserDTO;
 import com.sophinia.backend.model.Admin;
 import org.mapstruct.Mapper;
 

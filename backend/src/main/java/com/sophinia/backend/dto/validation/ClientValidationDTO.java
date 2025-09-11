@@ -19,7 +19,7 @@ public record ClientValidationDTO (
         @NotNull(message = "phone is required")
         @Size(min = 1, message = "phone is required")
         @Pattern(
-                regexp = "^((06)|(05)|(07))([0-9]{8})$",
+                regexp = "^((06)|(05)|(07))(\\d{8})$",
                 message = "Invalid phone number"
         )
         String phone,

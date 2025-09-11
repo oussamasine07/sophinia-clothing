@@ -13,36 +13,36 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 public class SecurityConfig {
 
-    private final AuthenticationProvider authenticationProvider;
+
     private final JwtFilter jwtFilter;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     public SecurityConfig(
-            final AuthenticationProvider authenticationProvider,
             final JwtFilter jwtFilter,
             final CustomAccessDeniedHandler customAccessDeniedHandler
     ) {
-        this.authenticationProvider = authenticationProvider;
         this.jwtFilter = jwtFilter;
         this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http)
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationProvider authenticationProvider)
             throws Exception {
-//        http
-//                .csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-//                .formLogin(form -> form.disable())
-//                .httpBasic(basic -> basic.disable());
-//        return http.build();
+
+        CookieCsrfTokenRepository tokenRepository = new CookieCsrfTokenRepository();
+        tokenRepository.setCookieName("XSRF-TOKEN");
+        tokenRepository.setCookiePath("/");
+
         return http
                 .cors(Customizer.withDefaults())
-                .csrf(c -> c.disable())
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(tokenRepository)
+                )
                 .authorizeHttpRequests( req ->
                     req.requestMatchers(
                             "/app/login",

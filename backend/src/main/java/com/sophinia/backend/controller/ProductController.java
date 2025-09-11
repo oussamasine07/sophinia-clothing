@@ -3,8 +3,6 @@ package com.sophinia.backend.controller;
 
 import com.sophinia.backend.dto.validation.ProductValidationDTO;
 import com.sophinia.backend.model.Product;
-import com.sophinia.backend.service.ClothingTypeService;
-import com.sophinia.backend.service.MeasurementFieldService;
 import com.sophinia.backend.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

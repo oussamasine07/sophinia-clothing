@@ -61,7 +61,7 @@ public class ProductService {
         product.setDescription(productValidationDTO.description());
 
         // get clothing type
-        ClothingType clothingType = (ClothingType) clothingTypeService
+        ClothingType clothingType = clothingTypeService
                 .getClothingTypeById( productValidationDTO.clothing_type() )
                 .getBody();
         product.setClothingType( clothingType );
@@ -73,11 +73,9 @@ public class ProductService {
                 :  productValidationDTO
                 .measurements_fields_ids()
                 .stream()
-                .map(id -> {
-                    return (MeasurementField) measurementFieldService
+                .map(id -> measurementFieldService
                             .getMeasurementFieldById( id )
-                            .getBody();
-                })
+                            .getBody())
                 .collect(Collectors.toCollection(ArrayList::new));
 
         if (productValidationDTO.measurement_fields() != null) {
@@ -86,7 +84,7 @@ public class ProductService {
                         MeasurementField newMeasure = new MeasurementField();
                         newMeasure.setName( measure.name() );
 
-                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
+                        MeasurementField savedMeasure = measurementFieldService
                                 .createMeasurementField( newMeasure )
                                 .getBody();
 
@@ -114,7 +112,7 @@ public class ProductService {
         updatedProduct.setDescription(productValidationDTO.description());
 
         // get clothing type
-        ClothingType clothingType = (ClothingType) clothingTypeService
+        ClothingType clothingType = clothingTypeService
                 .getClothingTypeById( productValidationDTO.clothing_type() )
                 .getBody();
         updatedProduct.setClothingType( clothingType );
@@ -125,11 +123,9 @@ public class ProductService {
                 :  productValidationDTO
                 .measurements_fields_ids()
                 .stream()
-                .map(mId -> {
-                    return (MeasurementField) measurementFieldService
+                .map(mId -> measurementFieldService
                             .getMeasurementFieldById( mId )
-                            .getBody();
-                })
+                            .getBody())
                 .collect(Collectors.toCollection(ArrayList::new));
 
         if (productValidationDTO.measurement_fields() != null) {
@@ -138,7 +134,7 @@ public class ProductService {
                         MeasurementField newMeasure = new MeasurementField();
                         newMeasure.setName( measure.name() );
 
-                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
+                        MeasurementField savedMeasure = measurementFieldService
                                 .createMeasurementField( newMeasure )
                                 .getBody();
 

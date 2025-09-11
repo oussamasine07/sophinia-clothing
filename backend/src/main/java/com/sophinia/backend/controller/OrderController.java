@@ -1,7 +1,7 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.mappingDTO.OrderWithClientDTO;
+import com.sophinia.backend.dto.mappingdto.OrderWithClientDTO;
 import com.sophinia.backend.dto.validation.MeasurementsValuesDTO;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
 import com.sophinia.backend.model.Order;

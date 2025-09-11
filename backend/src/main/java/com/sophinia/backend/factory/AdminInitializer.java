@@ -10,8 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 @Configuration
 public class AdminInitializer {
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminInitializer.class);
 
     @Value("${secrets.initializer.admin_password}")
     private String password;
@@ -30,7 +35,7 @@ public class AdminInitializer {
                 userRepository.save(newUser);
 
             } else {
-                System.out.println("this user is already exists");
+                logger.info("this admin already exists");
             }
         };
     }

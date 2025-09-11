@@ -1,7 +1,7 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.mappingDTO.MappedFabricDTO;
+import com.sophinia.backend.dto.mappingdto.MappedFabricDTO;
 import com.sophinia.backend.dto.validation.FabricFormDTO;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.service.FabricService;

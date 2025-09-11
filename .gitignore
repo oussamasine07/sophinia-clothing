@@ -4,6 +4,7 @@
 /backend/!**/src/main/**/target/
 /backend/!**/src/test/**/target/
 /backend/src/main/resources/application.properties
+/backend/src/main/resources/secrets.yml
 
 
 ### STS ###

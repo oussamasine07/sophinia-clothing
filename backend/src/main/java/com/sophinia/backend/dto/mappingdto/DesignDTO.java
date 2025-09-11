@@ -1,4 +1,4 @@
-package com.sophinia.backend.dto.mappingDTO;
+package com.sophinia.backend.dto.mappingdto;
 
 public class DesignDTO {
     private String name;
