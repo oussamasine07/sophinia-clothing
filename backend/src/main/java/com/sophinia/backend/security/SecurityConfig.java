@@ -66,6 +66,14 @@ public class SecurityConfig {
                             .permitAll()
                             .requestMatchers(HttpMethod.PUT, "/api/v1/client/update-client-after-order")
                             .permitAll()
+                            .requestMatchers(
+                                    "/swagger-ui/**",
+                                    "/v3/api-docs/**",
+                                    "/v3/api-docs.yaml",
+                                    "/swagger-resources/**",
+                                    "/webjars/**"
+                            )
+                            .permitAll()
                     .anyRequest()
                     .authenticated()
                 )
