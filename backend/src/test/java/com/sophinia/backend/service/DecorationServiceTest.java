@@ -3,28 +3,23 @@ package com.sophinia.backend.service;
 
 import com.sophinia.backend.bean.FileUpload;
 import com.sophinia.backend.dto.validation.ValidateDecorationDTO;
+import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.repository.DecorationRepository;
 import com.sophinia.backend.repository.OrderRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -43,11 +38,6 @@ class DecorationServiceTest {
     @Mock
     private FileUpload fileUpload;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
     void getAllDecorations () {
         Decoration d1 = new Decoration();
@@ -63,75 +53,158 @@ class DecorationServiceTest {
         ResponseEntity<List<Decoration>> result = decorationService.getAllDecorations();
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertThat(result.getBody()).isNotNull();
+        assertThat(result.getBody()).hasSize(2);
+        assertThat(result.getBody()).extracting(Decoration::getName)
+                .containsExactly("decoration 1", "decoration 2");
 
     }
 
     @Test
     void getDecorationById () {
+        Decoration d = new Decoration();
+        d.setId(1L);
+        d.setName("decoration 1");
+        d.setImage("desing image url");
 
-        Decoration d1 = new Decoration();
-        d1.setId(1L);
-        d1.setName("decoration 1");
+        when(decorationRepository.findById(1L)).thenReturn(Optional.of( d ));
 
-        when(decorationRepository.findById( 1L )).thenReturn( Optional.of( d1 ) );
-
-        ResponseEntity<Decoration> result = decorationService.getDecorationById( 1L );
+        ResponseEntity<Decoration> result = decorationService.getDecorationById(1L);
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertThat(result.getBody()).isNotNull();
+        assertEquals(result.getBody().getName(), "decoration 1");
 
     }
 
     @Test
     void createNewDecoration () {
-
-        MultipartFile multipartFile = new MockMultipartFile(
-                "image", "test.png", "image/png", "fake-image-content".getBytes()
+        MockMultipartFile mockFile = new MockMultipartFile(
+                "image",
+                "test-image.jpg",
+                "image/jpeg",
+                "fake-image-content".getBytes()
         );
 
-        ValidateDecorationDTO dto = new ValidateDecorationDTO("Test Decoration", multipartFile);
+        ValidateDecorationDTO dto = new ValidateDecorationDTO("New Decoration", mockFile);
 
+        // Step 2: Mock fileUpload.upload
+        when(fileUpload.upload(mockFile, "design")).thenReturn("fake-image-url");
+
+        // Step 3: Mock decorationRepository.save
         Decoration savedDecoration = new Decoration();
-        savedDecoration.setName("Test Decoration");
-        savedDecoration.setImage("uploaded-image-path");
+        savedDecoration.setName("New Decoration");
+        savedDecoration.setImage("fake-image-url");
+        when(decorationRepository.save(any(Decoration.class))).thenReturn(savedDecoration);
 
-        when(fileUpload.upload(multipartFile, "design"))
-                .thenReturn("uploaded-image-path");
-
-        when(decorationRepository.save(any(Decoration.class)))
-                .thenReturn(savedDecoration);
-
-        // Act
+        // Step 4: Call the service
         ResponseEntity<Decoration> response = decorationService.createNewDecoration(dto);
 
-        // Assert
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getName()).isEqualTo("Test Decoration");
-        assertThat(response.getBody().getImage()).isEqualTo("uploaded-image-path");
+        // Step 5: Assertions
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("New Decoration", response.getBody().getName());
+        assertEquals("fake-image-url", response.getBody().getImage());
 
-        verify(fileUpload, times(1)).upload(multipartFile, "design");
-        verify(decorationRepository, times(1)).save(any(Decoration.class));
+        // Step 6: Verify mocks were called
+        verify(fileUpload).upload(mockFile, "design");
+        verify(decorationRepository).save(any(Decoration.class));
+    }
+
+    @Test
+    void updateDecoration () {
+
+        MockMultipartFile mockFile = new MockMultipartFile(
+                "image",
+                "test-image.jpg",
+                "image/jpeg",
+                "fake-image-content".getBytes()
+        );
+
+        ValidateDecorationDTO dto = new ValidateDecorationDTO("New Decoration", mockFile);
+
+        when(fileUpload.upload(mockFile, "design")).thenReturn("fake-image-url");
+
+        Decoration foundDecoration = new Decoration();
+        foundDecoration.setId(1L);
+        foundDecoration.setName("old Decoration");
+        foundDecoration.setImage("old fake-image-url");
+
+        when(decorationRepository.findById(1L)).thenReturn(Optional.of( foundDecoration ));
+
+        Decoration savedDecoration = new Decoration();
+        savedDecoration.setName("New Decoration");
+        savedDecoration.setImage("fake-image-url");
+
+        foundDecoration.setName(savedDecoration.getName());
+        foundDecoration.setImage(savedDecoration.getImage());
+
+        when(decorationRepository.save(any(Decoration.class))).thenReturn(savedDecoration);
+
+        ResponseEntity<Decoration> response = decorationService.updateDecoration(dto, 1L);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("New Decoration", response.getBody().getName());
+        assertEquals("fake-image-url", response.getBody().getImage());
+
+        verify(fileUpload).upload(mockFile, "design");
+        verify(decorationRepository).save(any(Decoration.class));
 
     }
 
     @Test
-    void deleteDecoration () {
-        Decoration d1 = new Decoration();
-        d1.setId(1L);
-        d1.setName("deco");
+    void deleteDecorationIfOrderExists () {
 
-        when(orderRepository.existsByDesignId(1L)).thenReturn(false);
-        when(decorationRepository.findById(1L)).thenReturn(Optional.of(d1));
-        doNothing().when(decorationRepository).deleteById(1L);
+        Long decorationId = 1L;
+        when(orderRepository.existsByDecorationId( decorationId )).thenReturn( true );
 
-        ResponseEntity<Map<String, Object>> result = decorationService.deleteDecoration(1L);
+        ResponseEntity<Map<String, Object>> response = decorationService.deleteDecoration( decorationId );
 
-        assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals("success", Objects.requireNonNull(result.getBody()).get("status"));
-        assertEquals("decoration deco removed", result.getBody().get("message"));
-        assertEquals(1L, result.getBody().get("id"));
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("you can't remove a design related to orders", response.getBody().get("message"));
 
     }
+
+    @Test
+    void deleteDecorationIfOrderNotExist () {
+        Long decorationId = 1L;
+        when(orderRepository.existsByDecorationId( decorationId )).thenReturn( false );
+
+        Decoration foundDecoration = new Decoration();
+        foundDecoration.setId(1L);
+        foundDecoration.setName("old Decoration");
+        foundDecoration.setImage("old fake-image-url");
+
+        when(decorationRepository.findById(1L)).thenReturn(Optional.of( foundDecoration ));
+
+        ResponseEntity<Map<String, Object>> response = decorationService.deleteDecoration( decorationId );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("decoration " + foundDecoration.getName() + " removed" , response.getBody().get("message"));
+
+        verify(orderRepository).existsByDecorationId(decorationId);
+        verify(decorationRepository).deleteById(decorationId);
+    }
+
+    @Test
+    void deleteDecorationIfNotExists () {
+        Long decorationId = 1L;
+
+        when(orderRepository.existsByDecorationId(decorationId)).thenReturn(false);
+        when(decorationRepository.findById(decorationId)).thenReturn(Optional.empty());
+
+        assertThrows(NotFoundException.class, () -> {
+            decorationService.deleteDecoration(decorationId);
+        });
+
+        verify(orderRepository).existsByDecorationId(decorationId);
+        verify(decorationRepository, never()).deleteById(anyLong());
+
+    }
+
 }
 
 

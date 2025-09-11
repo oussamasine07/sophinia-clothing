@@ -71,7 +71,7 @@ public class DecorationService {
     }
 
     public ResponseEntity<Map<String, Object>> deleteDecoration ( Long decorationId ) {
-        if (orderRepository.existsByDesignId(decorationId)) {
+        if (orderRepository.existsByDecorationId(decorationId)) {
             Map<String, Object> error = new HashMap<>();
             error.put("message", "you can't remove a design related to orders");
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
