@@ -107,7 +107,7 @@ class DecorationServiceTest {
         assertEquals("fake-image-url", response.getBody().getImage());
 
         // Step 6: Verify mocks were called
-        verify(fileUpload).upload(mockFile, "design");
+        verify(fileUpload).upload(mockFile, "decoration");
         verify(decorationRepository).save(any(Decoration.class));
     }
 
@@ -123,7 +123,7 @@ class DecorationServiceTest {
 
         ValidateDecorationDTO dto = new ValidateDecorationDTO("New Decoration", mockFile);
 
-        when(fileUpload.upload(mockFile, "design")).thenReturn("fake-image-url");
+        when(fileUpload.upload(mockFile, "decoration")).thenReturn("fake-image-url");
 
         Decoration foundDecoration = new Decoration();
         foundDecoration.setId(1L);
