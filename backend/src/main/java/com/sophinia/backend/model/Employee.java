@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-import javax.security.auth.Subject;
 
 @Entity
 @Table(name = "employees")

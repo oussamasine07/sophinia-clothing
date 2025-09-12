@@ -2,7 +2,6 @@ package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
 
-import javax.security.auth.Subject;
 import java.util.List;
 
 @Entity
@@ -24,6 +23,10 @@ public class Client extends User {
     @Column(name = "is_registered", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isRegistered;
 
+    public Client () {
+        // Required by JPA: default constructor for entity instantiation
+    }
+
     public boolean isRegistered() {
         return isRegistered;
     }
@@ -42,8 +45,6 @@ public class Client extends User {
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders;
-
-    public Client () {}
 
     public String getPhone() {
         return phone;

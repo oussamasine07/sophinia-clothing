@@ -23,7 +23,9 @@ public class ClothingType {
     @OneToMany(mappedBy = "clothingType")
     private List<Product> products;
 
-    public ClothingType () {}
+    public ClothingType () {
+        // Required by JPA: default constructor for entity instantiation
+    }
 
     public Long getId() {
         return id;

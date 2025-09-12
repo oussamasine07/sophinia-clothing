@@ -1,22 +1,16 @@
 package com.sophinia.backend.service;
 
-import com.sophinia.backend.dto.mappingDTO.AuthUserDTO;
+import com.sophinia.backend.dto.mappingdto.AuthUserDTO;
 import com.sophinia.backend.dto.validation.LoginValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.exception.PasswordIncorrectException;
-import com.sophinia.backend.mapper.AdminMapper;
-import com.sophinia.backend.mapper.ClientMapper;
-import com.sophinia.backend.mapper.EmployeeMapper;
-import com.sophinia.backend.mapper.UserMapper;
 import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -26,33 +20,21 @@ import java.util.Map;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final AdminMapper adminMapper;
-    private final ClientMapper clientMapper;
-    private final EmployeeMapper employeeMapper;
-    private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
 
     public AuthService(
             UserRepository userRepository,
-            AdminMapper adminMapper,
-            ClientMapper clientMapper,
-            EmployeeMapper employeeMapper,
-            UserMapper userMapper,
             JwtService jwtService,
             AuthenticationManager authenticationManager
     ) {
         this.userRepository = userRepository;
-        this.adminMapper = adminMapper;
-        this.clientMapper = clientMapper;
-        this.employeeMapper = employeeMapper;
-        this.userMapper = userMapper;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
     }
 
-    public ResponseEntity<?> loginUser (LoginValidationDTO loginValidationDTO) {
+    public ResponseEntity<Map<String, String>> loginUser (LoginValidationDTO loginValidationDTO) {
         try {
             Authentication authentication = authenticationManager
                     .authenticate(
@@ -85,14 +67,14 @@ public class AuthService {
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
         UserPrincipal principal = new UserPrincipal(authenticatedUser);
-        AuthUserDTO authUserDTO = new AuthUserDTO(
+        return new AuthUserDTO(
                 authenticatedUser.getId(),
                 authenticatedUser.getFirstName(),
                 authenticatedUser.getLastName(),
                 authenticatedUser.getEmail(),
                 principal.getAuthorities()  // correct authorities set here
         );
-        return authUserDTO;
+
     }
 
 

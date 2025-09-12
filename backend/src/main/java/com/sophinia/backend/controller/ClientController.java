@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/client")
 public class ClientController {
@@ -22,7 +24,7 @@ public class ClientController {
     }
 
     @PutMapping("/update-client-after-order")
-    public ResponseEntity<?> upadateClientAfterOrder (@Valid @RequestBody UpdateClientValidationDTO updateClientValidationDTO) {
+    public ResponseEntity<Map<String, Object>> upadateClientAfterOrder (@Valid @RequestBody UpdateClientValidationDTO updateClientValidationDTO) {
         return clientService.updateClientAfterOrder( updateClientValidationDTO );
     }
 

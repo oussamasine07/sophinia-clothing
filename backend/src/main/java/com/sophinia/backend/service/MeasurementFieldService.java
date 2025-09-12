@@ -12,6 +12,8 @@ import java.util.List;
 @Service
 public class MeasurementFieldService {
 
+    private static final String CLOTHING_FIELD_NOT_FOUND = "this measurement not found";
+
     private final MeasurementFieldRepository measurementFieldRepository;
 
     public MeasurementFieldService (
@@ -20,37 +22,37 @@ public class MeasurementFieldService {
         this.measurementFieldRepository = measurementFieldRepository;
     }
 
-    public ResponseEntity<?> getMEasurementFields () {
+    public ResponseEntity<List<MeasurementField>> getMEasurementFields () {
         List<MeasurementField> measurementFields = measurementFieldRepository.findAll();
 
         return new ResponseEntity<>(measurementFields, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getMeasurementFieldById ( Long id ) {
+    public ResponseEntity<MeasurementField> getMeasurementFieldById ( Long id ) {
         MeasurementField measurementField = measurementFieldRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_FIELD_NOT_FOUND));
 
         return new ResponseEntity<>(measurementField, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> createMeasurementField (MeasurementField measurementField) {
+    public ResponseEntity<MeasurementField> createMeasurementField (MeasurementField measurementField) {
         MeasurementField savedMeasurmentField = measurementFieldRepository.save( measurementField );
         return new ResponseEntity<>(savedMeasurmentField, HttpStatus.OK);
 
     }
 
-    public ResponseEntity<?> updateMeasurementField ( Long id, MeasurementField measurementField ) {
+    public ResponseEntity<MeasurementField> updateMeasurementField ( Long id, MeasurementField measurementField ) {
         MeasurementField updatedMeasurementField = measurementFieldRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_FIELD_NOT_FOUND));
 
         updatedMeasurementField.setName( measurementField.getName() );
 
         return new ResponseEntity<>(measurementFieldRepository.save( updatedMeasurementField ), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteMeasurementField ( Long id ) {
+    public ResponseEntity<String> deleteMeasurementField ( Long id ) {
         MeasurementField measurementField = measurementFieldRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this measurement not found"));
+                .orElseThrow(() -> new NotFoundException(CLOTHING_FIELD_NOT_FOUND));
 
         measurementFieldRepository.deleteById( id );
 

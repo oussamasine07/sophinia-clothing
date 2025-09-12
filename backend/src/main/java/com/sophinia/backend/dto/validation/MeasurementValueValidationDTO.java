@@ -1,14 +1,19 @@
 package com.sophinia.backend.dto.validation;
 
-import jakarta.validation.constraints.NotBlank;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public record MeasurementValueValidationDTO (
-        @NotBlank(message = "measurement set id is required")
+        @NotNull(message = "measurement set field is required")
+        @Size(min = 1, message = "measurement set is required")
         Long measurementSetId,
 
-        @NotBlank(message = "measurement set id is required")
+        @NotNull(message = "measurement id field is required")
+        @Size(min = 1, message = "measurement set is required")
         Long measurementFieldId,
 
-        @NotBlank(message = "measurement set id is required")
+        @NotNull(message = "measurement value is required")
+        @Size(min = 1, message = "measurement value is required")
         Double value
 ){}

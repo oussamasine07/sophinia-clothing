@@ -7,15 +7,14 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class CustomException {
+public class CustomErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleInputValidationException (
+    public ResponseEntity<Map<String, String>> handleInputValidationException (
             MethodArgumentNotValidException ex
     ) {
         Map<String, String> errors = new HashMap<>();
@@ -32,7 +31,7 @@ public class CustomException {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> handleNotFoundException (
+    public ResponseEntity<Map<String, String>> handleNotFoundException (
             NotFoundException ex
     ) {
 
@@ -45,7 +44,7 @@ public class CustomException {
     }
 
     @ExceptionHandler(PasswordIncorrectException.class)
-    public ResponseEntity<?> handlePasswordIncorrectException (
+    public ResponseEntity<Map<String, String>> handlePasswordIncorrectException (
             PasswordIncorrectException ex
     ) {
         Map<String, String> error = new HashMap<>();

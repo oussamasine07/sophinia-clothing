@@ -13,35 +13,36 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 public class SecurityConfig {
 
-    private final AuthenticationProvider authenticationProvider;
+
     private final JwtFilter jwtFilter;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     public SecurityConfig(
-            final AuthenticationProvider authenticationProvider,
             final JwtFilter jwtFilter,
             final CustomAccessDeniedHandler customAccessDeniedHandler
     ) {
-        this.authenticationProvider = authenticationProvider;
         this.jwtFilter = jwtFilter;
         this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http)
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationProvider authenticationProvider)
             throws Exception {
-//        http
-//                .csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-//                .formLogin(form -> form.disable())
-//                .httpBasic(basic -> basic.disable());
-//        return http.build();
+
+        CookieCsrfTokenRepository tokenRepository = new CookieCsrfTokenRepository();
+        tokenRepository.setCookieName("XSRF-TOKEN");
+        tokenRepository.setCookiePath("/");
+
         return http
                 .cors(Customizer.withDefaults())
+//                .csrf(csrf -> csrf
+//                        .csrfTokenRepository(tokenRepository)
+//                )
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests( req ->
                     req.requestMatchers(
@@ -64,6 +65,14 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.GET, "/api/v1/product")
                             .permitAll()
                             .requestMatchers(HttpMethod.PUT, "/api/v1/client/update-client-after-order")
+                            .permitAll()
+                            .requestMatchers(
+                                    "/swagger-ui/**",
+                                    "/v3/api-docs/**",
+                                    "/v3/api-docs.yaml",
+                                    "/swagger-resources/**",
+                                    "/webjars/**"
+                            )
                             .permitAll()
                     .anyRequest()
                     .authenticated()

@@ -1,11 +1,6 @@
 package com.sophinia.backend.model;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.security.Principal;
-import java.util.Collection;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

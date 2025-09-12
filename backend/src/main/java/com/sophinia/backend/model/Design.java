@@ -26,8 +26,6 @@ public class Design {
     @OneToMany(mappedBy = "design")
     private List<Order> orders;
 
-    public Design () {}
-
     public Long getId() {
         return id;
     }

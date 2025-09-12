@@ -1,17 +1,15 @@
 package com.sophinia.backend.service;
 
 
-import com.sophinia.backend.dto.mappingDTO.*;
+import com.sophinia.backend.dto.mappingdto.*;
 import com.sophinia.backend.dto.validation.MeasurementsValuesDTO;
 import com.sophinia.backend.dto.validation.OrderValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.*;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -30,7 +28,7 @@ public class OrderService {
     private final MeasurementFieldRepository measurementFieldRepository;
     private final MeasurementValueRepository measurementValueRepository;
 
-    private final ClientService clientService;
+
     private final ProductService productService;
     private final ClothingModelService clothingModelService;
     private final FabricService fabricService;
@@ -46,7 +44,7 @@ public class OrderService {
             final MeasurementFieldRepository measurementFieldRepository,
             final MeasurementValueRepository measurementValueRepository,
 
-            final ClientService clientService,
+
             final ProductService productService,
             final ClothingModelService clothingModelService,
             final FabricService fabricService,
@@ -60,7 +58,7 @@ public class OrderService {
         this.availabilityRepository = availabilityRepository;
         this.measurementValueRepository = measurementValueRepository;
 
-        this.clientService = clientService;
+
         this.productService = productService;
         this.clothingModelService = clothingModelService;
         this.fabricService = fabricService;
@@ -69,9 +67,8 @@ public class OrderService {
         this.measurementFieldRepository = measurementFieldRepository;
     }
 
-    public ResponseEntity<?> makeOrder (OrderValidationDTO orderValidationDTO) {
+    public ResponseEntity<Order> makeOrder (OrderValidationDTO orderValidationDTO) {
 
-        // make client login first
         // check if client exists by email
         Client client = clientRepository.findClientByEmail(orderValidationDTO.client().email())
                 .orElseGet(() -> {
@@ -89,21 +86,21 @@ public class OrderService {
         order.setOrderDate(LocalDate.now());
 
         Optional<OrderStatus> orderStatus = this.orderStatusRepository.findById(1L);
-        order.setOrderStatuse( orderStatus.get() );
+        orderStatus.ifPresent(order::setOrderStatuse);
 
-        Product product = (Product) productService.getProductById( orderValidationDTO.productId() ).getBody();
+        Product product = productService.getProductById( orderValidationDTO.productId() ).getBody();
         order.setProduct( product );
 
-        Decoration decoration = (Decoration) decorationService.getDecorationById( orderValidationDTO.decorationId() ).getBody();
+        Decoration decoration = decorationService.getDecorationById( orderValidationDTO.decorationId() ).getBody();
         order.setDecoration( decoration );
 
-        Fabric fabric = (Fabric) fabricService.getFabricById( orderValidationDTO.fabricId() ).getBody();
+        Fabric fabric = fabricService.getFabricById( orderValidationDTO.fabricId() ).getBody();
         order.setFabric( fabric );
 
-        ClothingModel clothingModel = (ClothingModel) clothingModelService.getClothingModel( orderValidationDTO.clothingModelId() ).getBody();
+        ClothingModel clothingModel = clothingModelService.getClothingModel( orderValidationDTO.clothingModelId() ).getBody();
         order.setClothingModel( clothingModel );
 
-        Design design = (Design) designService.getDesignById( orderValidationDTO.designId() ).getBody();
+        Design design = designService.getDesignById( orderValidationDTO.designId() ).getBody();
         order.setDesign( design );
 
         order.setClient( client );
@@ -126,25 +123,23 @@ public class OrderService {
         measurementSet.setOrder( savedOrder );
         measurementSetRepository.save( measurementSet );
 
-        return new ResponseEntity(savedOrder, HttpStatus.OK);
-
-//        return null;
+        return new ResponseEntity<>(savedOrder, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getOrders () {
+    public ResponseEntity<List<Order>> getOrders () {
         List<Order> orders = orderRepository.findAll();
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
 
     }
 
-    public ResponseEntity<?> getOrdersWithClients () {
+    public ResponseEntity<List<OrderWithClientDTO>> getOrdersWithClients () {
         List<OrderWithClientDTO> orders = orderRepository.getOrdersWithClient();
 
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getOrderDetails (Long id) {
+    public ResponseEntity<Map<String, Object>> getOrderDetails (Long id) {
 
         List<Object[]> rows = orderRepository.getOrderDetails(id);
 
@@ -152,19 +147,13 @@ public class OrderService {
             throw  new NotFoundException("this order not found");
         }
 
-        Object[] row = rows.get(0);
+        Object[] row = rows.getFirst();
         ProductDTO product = new ProductDTO((String) row[1], (String) row[2], (String) row[3]);
         List<OrderMeasurementFieldDTO> measurementFields = rows.stream()
-                .map(r -> {
-
-                    System.out.println("row 4 " + r[4]);
-                    System.out.println("row 5 " + r[5]);
-
-                    return new OrderMeasurementFieldDTO(
+                .map(r -> new OrderMeasurementFieldDTO(
                             ((Number) r[4]).longValue(),
                             (String) r[5]
-                    );
-                })
+                    ))
                 .distinct()
                 .toList();
 
@@ -190,12 +179,10 @@ public class OrderService {
 
         List<Object[]> measurementRows = orderRepository.getMeaserementValues(orderDetails.getMeasurementSet());
         List<MeasurementValuesDTO> measurements = measurementRows.stream()
-                .map(r -> {
-                    return new MeasurementValuesDTO(
+                .map(r -> new MeasurementValuesDTO(
                             (String) r[0],
                             (Double) r[1]
-                    );
-                })
+                    ))
                 .distinct()
                 .toList();
 
@@ -208,12 +195,12 @@ public class OrderService {
         return new ResponseEntity<>( result, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> setMeasures ( MeasurementsValuesDTO measurementsValuesDTO ) {
+    public ResponseEntity<Map<String, Object>> setMeasures ( MeasurementsValuesDTO measurementsValuesDTO ) {
 
         measurementsValuesDTO.measurementValues()
                 .forEach(measure -> {
                     MeasurementValue measurementValue = new MeasurementValue();
-                    // get measurment set form db
+
                     MeasurementSet measurementSet = measurementSetRepository.findById( measure.measurementSetId() )
                             .orElseThrow(() -> new NotFoundException("this measurement set not found"));
 

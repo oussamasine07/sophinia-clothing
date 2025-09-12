@@ -1,23 +1,25 @@
 package com.sophinia.backend.dto.validation;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 public record ClientValidationDTO (
-        @NotBlank(message = "first name is required")
+        @NotNull(message = "first name is required")
+        @Size(min = 1, message = "first name is required")
         String firstName,
 
-        @NotBlank(message = "last name is required")
+        @NotNull(message = "last name is required")
+        @Size(min = 1, message = "last name is required")
         String lastName,
 
-        @NotBlank(message = "email is required")
+        @NotNull(message = "email is required")
+        @Size(min = 1, message = "email is required")
         @Email(message = "it should be a valid email")
         String email,
 
-        @NotBlank(message = "phone is required")
+        @NotNull(message = "phone is required")
+        @Size(min = 1, message = "phone is required")
         @Pattern(
-                regexp = "^((06)|(05)|(07))([0-9]{8})$",
+                regexp = "^((06)|(05)|(07))(\\d{8})$",
                 message = "Invalid phone number"
         )
         String phone,

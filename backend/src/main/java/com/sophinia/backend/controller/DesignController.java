@@ -9,11 +9,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/design")
-@CrossOrigin
 public class DesignController {
 
     private final DesignService designService;
@@ -28,18 +29,18 @@ public class DesignController {
     }
 
     @GetMapping
-    public ResponseEntity<?> index () {
+    public ResponseEntity<List<Design>> index () {
         return designService.getAllDesigns();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getDesign (@PathVariable Long id) {
+    public ResponseEntity<Design> getDesign (@PathVariable Long id) {
         return designService.getDesignById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> create (
+    public ResponseEntity<Design> create (
             @Valid DesignValidateDTO designValidateDTO
     ) {
         Design design = new Design();
@@ -56,7 +57,7 @@ public class DesignController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> update (
+    public ResponseEntity<Design> update (
             @PathVariable Long id,
             @Valid DesignValidateDTO designValidateDTO
     ) {
@@ -65,7 +66,7 @@ public class DesignController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete (@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> delete (@PathVariable Long id) {
         return designService.deleteDesignById( id );
     }
 }

@@ -1,9 +1,8 @@
 package com.sophinia.backend.service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.sophinia.backend.bean.FileUpload;
-import com.sophinia.backend.dto.mappingDTO.MeasurementFieldDTO;
 import com.sophinia.backend.dto.validation.ProductValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.ClothingType;
@@ -23,6 +22,8 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
 
+    private static final String PRODUCT_NOT_FOUND = "this product not found";
+
     private final ProductRepository productRepository;
     private final ClothingTypeService clothingTypeService;
     private final MeasurementFieldService measurementFieldService;
@@ -40,19 +41,19 @@ public class ProductService {
         this.fileUpload = fileUpload;
     }
 
-    public ResponseEntity<?> getAllProducts () {
+    public ResponseEntity<List<Product>> getAllProducts () {
         List<Product> products = productRepository.findAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    public ResponseEntity<?> getProductById ( Long id ) {
+    public ResponseEntity<Product> getProductById ( Long id ) {
         Product product = productRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this product not found"));
+                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND));
 
         return new ResponseEntity<>( product, HttpStatus.OK );
     }
 
-    public ResponseEntity<?> createProduct ( ProductValidationDTO productValidationDTO ) {
+    public ResponseEntity<Product> createProduct ( ProductValidationDTO productValidationDTO ) {
 
         Product product = new Product();
 
@@ -60,7 +61,7 @@ public class ProductService {
         product.setDescription(productValidationDTO.description());
 
         // get clothing type
-        ClothingType clothingType = (ClothingType) clothingTypeService
+        ClothingType clothingType = clothingTypeService
                 .getClothingTypeById( productValidationDTO.clothing_type() )
                 .getBody();
         product.setClothingType( clothingType );
@@ -72,11 +73,9 @@ public class ProductService {
                 :  productValidationDTO
                 .measurements_fields_ids()
                 .stream()
-                .map(id -> {
-                    return (MeasurementField) measurementFieldService
+                .map(id -> measurementFieldService
                             .getMeasurementFieldById( id )
-                            .getBody();
-                })
+                            .getBody())
                 .collect(Collectors.toCollection(ArrayList::new));
 
         if (productValidationDTO.measurement_fields() != null) {
@@ -85,7 +84,7 @@ public class ProductService {
                         MeasurementField newMeasure = new MeasurementField();
                         newMeasure.setName( measure.name() );
 
-                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
+                        MeasurementField savedMeasure = measurementFieldService
                                 .createMeasurementField( newMeasure )
                                 .getBody();
 
@@ -105,15 +104,15 @@ public class ProductService {
     }
 
 
-    public ResponseEntity<?> updateProduct (ProductValidationDTO productValidationDTO, Long id) {
+    public ResponseEntity<Product> updateProduct (ProductValidationDTO productValidationDTO, Long id) {
         Product updatedProduct = productRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this product not found"));
+                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND));
 
         updatedProduct.setName(productValidationDTO.name());
         updatedProduct.setDescription(productValidationDTO.description());
 
         // get clothing type
-        ClothingType clothingType = (ClothingType) clothingTypeService
+        ClothingType clothingType = clothingTypeService
                 .getClothingTypeById( productValidationDTO.clothing_type() )
                 .getBody();
         updatedProduct.setClothingType( clothingType );
@@ -124,11 +123,9 @@ public class ProductService {
                 :  productValidationDTO
                 .measurements_fields_ids()
                 .stream()
-                .map(mId -> {
-                    return (MeasurementField) measurementFieldService
+                .map(mId -> measurementFieldService
                             .getMeasurementFieldById( mId )
-                            .getBody();
-                })
+                            .getBody())
                 .collect(Collectors.toCollection(ArrayList::new));
 
         if (productValidationDTO.measurement_fields() != null) {
@@ -137,7 +134,7 @@ public class ProductService {
                         MeasurementField newMeasure = new MeasurementField();
                         newMeasure.setName( measure.name() );
 
-                        MeasurementField savedMeasure = (MeasurementField) measurementFieldService
+                        MeasurementField savedMeasure = measurementFieldService
                                 .createMeasurementField( newMeasure )
                                 .getBody();
 
@@ -155,10 +152,10 @@ public class ProductService {
         return new ResponseEntity<>( productRepository.save( updatedProduct ), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteProduct ( Long id ) {
+    public ResponseEntity<Map<String, Object>> deleteProduct ( Long id ) {
 
         Product deletedProduct = productRepository.findById( id )
-                .orElseThrow(() -> new NotFoundException("this product not found"));
+                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND));
 
         Map<String, Object> response = new HashMap<>();
         response.put("status", "success");

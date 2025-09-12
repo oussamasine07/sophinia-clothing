@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/clothing-type")
 public class ClothingTypeController {
@@ -22,24 +25,24 @@ public class ClothingTypeController {
     }
 
     @GetMapping
-    public ResponseEntity<?> index () {
+    public ResponseEntity<List<ClothingType>> index () {
         return clothingTypeService.getAllClothingTypes();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> show (@PathVariable Long id ) {
+    public ResponseEntity<ClothingType> show (@PathVariable Long id ) {
         return clothingTypeService.getClothingTypeById( id );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> create (@Valid ClothingTypeValidationDTO clothingTypeValidationDTO) {
+    public ResponseEntity<ClothingType> create (@Valid ClothingTypeValidationDTO clothingTypeValidationDTO) {
         return clothingTypeService.createClothingType( clothingTypeValidationDTO );
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> update (
+    public ResponseEntity<ClothingType> update (
             @Valid ClothingTypeValidationDTO clothingTypeValidationDTO,
             @PathVariable Long id
     ) {
@@ -49,7 +52,7 @@ public class ClothingTypeController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete ( @PathVariable Long id ) {
+    public ResponseEntity<Map<String, Object>> delete (@PathVariable Long id ) {
         return clothingTypeService.deleteClothingType( id );
     }
 

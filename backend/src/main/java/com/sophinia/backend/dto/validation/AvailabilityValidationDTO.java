@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sophinia.backend.model.AvailabilityType;
 import com.sophinia.backend.validation.IsDateAfter;
 import com.sophinia.backend.validation.NextDate;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;

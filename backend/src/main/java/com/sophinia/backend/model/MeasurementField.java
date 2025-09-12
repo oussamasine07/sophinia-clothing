@@ -24,7 +24,9 @@ public class MeasurementField {
     @OneToMany(mappedBy = "measurementField")
     private List<MeasurementValue> measurementValues;
 
-    public MeasurementField () {}
+    public MeasurementField () {
+        // Required by JPA: default constructor for entity instantiation
+    }
 
     public Long getId() {
         return id;

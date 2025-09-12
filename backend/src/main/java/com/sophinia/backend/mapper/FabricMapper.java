@@ -1,6 +1,6 @@
 package com.sophinia.backend.mapper;
 
-import com.sophinia.backend.dto.mappingDTO.MappedFabricDTO;
+import com.sophinia.backend.dto.mappingdto.MappedFabricDTO;
 import com.sophinia.backend.model.Fabric;
 import org.mapstruct.Mapper;
 

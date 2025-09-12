@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserPrincipal implements UserDetails {
 
-    private final User user;
+    private final transient User user;
 
     public UserPrincipal (User user) {
         this.user = user;
@@ -33,25 +33,24 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        //return UserDetails.super.isAccountNonExpired();
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        //return UserDetails.super.isAccountNonLocked();
+
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        //return UserDetails.super.isCredentialsNonExpired();
+
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-        //return UserDetails.super.isEnabled();
+
         return true;
     }
 }
