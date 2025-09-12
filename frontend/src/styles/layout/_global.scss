@@ -41,7 +41,76 @@
 
 
 
+/* =============================================================================================== */
+/* ==========================================  RESPONSIVE ======================================== */
+/* =============================================================================================== */
 
+/* Small mobile (320px - 374px) */
+@media (max-width: 374px) {
+  .main-side-spacing {
+    padding: 0 10px;
+  }
+
+  .section-heading {
+    font-size: 18px;
+  }
+
+  .hero-page-heading {
+    font-size: 24px;
+  }
+}
+
+/* Standard mobile (375px - 480px) */
+@media (max-width: 480px) and (min-width: 375px) {
+  .main-side-spacing {
+    padding: 0 20px;
+  }
+
+  .section-heading {
+    font-size: 20px;
+  }
+
+  .hero-page-heading {
+    font-size: 28px;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+  .main-side-spacing {
+    padding: 0 40px;
+  }
+
+  .section-heading {
+    font-size: 24px;
+  }
+
+  .hero-page-heading {
+    font-size: 32px;
+  }
+}
+
+/* Small laptops (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .main-side-spacing {
+    padding: 0 60px;
+  }
+
+  .hero-page-heading {
+    font-size: 40px;
+  }
+}
+
+/* Large screens (1025px+) */
+@media (min-width: 1025px) {
+  .main-side-spacing {
+    padding: 0 100px;
+  }
+
+  .hero-page-heading {
+    font-size: 48px;
+  }
+}
 
 
 

@@ -4,7 +4,7 @@
       <img src="assets/images/logo.svg" alt="sophinia logo" class="logo">
     </a>
 
-    <ul class="nav-item">
+    <ul class="nav-items">
       <li class="nav-item">
         <a href="/" class="item-link">home</a>
       </li>
@@ -17,15 +17,38 @@
     </ul>
 
     <div class="user">
-      <div class="cart">
-        <img src="assets/images/icons/shopping-bag.png" alt="" class="cart-icon">
-      </div>
+<!--      <div class="cart">-->
+<!--        <img src="assets/images/icons/shopping-bag.png" alt="" class="cart-icon">-->
+<!--      </div>-->
 
-      <a href="#" class="profile-link">
-        <img src="assets/images/user/girl.jpg" alt="" class="profile">
-      </a>
+<!--      <a href="#" class="profile-link">-->
+<!--        <img src="assets/images/user/girl.jpg" alt="" class="profile">-->
+<!--      </a>-->
+<!--      <a routerLink="#" class="auth-btn">register</a>-->
+<!--      <a routerLink="#" class="auth-btn">login</a>-->
+      <button class="burger-menu" (click)="onShowMobileNavClick()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </nav>
 
+    <div class="mobile-nav" [ngClass]="{'show' : showMobileNav}">
+      <ul class="mobile-items">
+        <li class="mobile-item">
+          <a routerLink="/" class="mobile-link">home</a>
+        </li>
+        <li class="mobile-item">
+          <a href="#" class="mobile-link">about</a>
+        </li>
+        <li class="mobile-item">
+          <a routerLink="/store" class="mobile-link">store</a>
+        </li>
+      </ul>
+
+      <div class="auth-wrapper">
+        <a href="#" class="auth-btn">register</a>
+        <a href="#" class="auth-btn">login</a>
+      </div>
+    </div>
   <!-- add responsive layout here -->
 </header>
