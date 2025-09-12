@@ -49,7 +49,7 @@ public class DecorationService {
         decoration.setName(validateDecorationDTO.name());
 
         if (validateDecorationDTO.image() != null) {
-            String image = fileUpload.upload( validateDecorationDTO.image(), "design");
+            String image = fileUpload.upload( validateDecorationDTO.image(), "decoration");
             decoration.setImage(image);
         }
 
@@ -63,7 +63,7 @@ public class DecorationService {
         decoration.setName( validateDecorationDTO.name());
 
         if (validateDecorationDTO.image() != null) {
-            String image = fileUpload.upload( validateDecorationDTO.image(), "design");
+            String image = fileUpload.upload( validateDecorationDTO.image(), "decoration");
             decoration.setImage(image);
         }
 

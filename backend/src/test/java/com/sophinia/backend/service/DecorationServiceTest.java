@@ -89,7 +89,7 @@ class DecorationServiceTest {
         ValidateDecorationDTO dto = new ValidateDecorationDTO("New Decoration", mockFile);
 
         // Step 2: Mock fileUpload.upload
-        when(fileUpload.upload(mockFile, "design")).thenReturn("fake-image-url");
+        when(fileUpload.upload(mockFile, "decoration")).thenReturn("fake-image-url");
 
         // Step 3: Mock decorationRepository.save
         Decoration savedDecoration = new Decoration();
@@ -148,7 +148,7 @@ class DecorationServiceTest {
         assertEquals("New Decoration", response.getBody().getName());
         assertEquals("fake-image-url", response.getBody().getImage());
 
-        verify(fileUpload).upload(mockFile, "design");
+        verify(fileUpload).upload(mockFile, "decoration");
         verify(decorationRepository).save(any(Decoration.class));
 
     }
