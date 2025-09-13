@@ -1,16 +1,69 @@
-<aside #asideComp class="sidebar h-screen overflow-hidden w-64 text-white flex flex-col shrink-0 text-gray-900 px-4">
+<!--<aside #asideComp class="sidebar h-screen overflow-hidden w-64 text-white flex flex-col shrink-0 text-gray-900 px-4">-->
+<!--  <div #logoContainer class="logo-container w-full flex justify-center align-center mb-12">-->
+<!--    <div class="logo-wrapper bg-white p-4 rounded" style="{width: 100px; height: 100px}">-->
+<!--      <img #logo src="/assets/images/logo.svg" alt="sophinia" class="logo" >-->
+<!--    </div>-->
+<!--  </div>-->
+<!--&lt;!&ndash;  [style.height.px]="navHeight"&ndash;&gt;-->
+<!--  <nav-->
+<!--    #nav-->
+<!--    class="overflow-y-scroll no-scrollbar"-->
+<!--  >-->
+<!--    <a class="block p-2 my-2 bg-[#DBEAFE] text-[#1447E6] rounded rounded-xl">-->
+<!--      <i class="fas fa-gauge mr-4"></i> Dashboard-->
+<!--    </a>-->
+<!--    <a routerLink="/app/design" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fas fa-paint-brush mr-4"></i> Design-->
+<!--    </a>-->
+<!--    <a routerLink="/app/decoration" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-image mr-4"></i> Decoration-->
+<!--    </a>-->
+<!--    <a routerLink="/app/clothing-type" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-shirt mr-4"></i> Clothing type-->
+<!--    </a>-->
+<!--    <a routerLink="/app/clothing-model" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-person-dress mr-4"></i> Clothing model-->
+<!--    </a>-->
+<!--    <a routerLink="/app/fabric" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-ribbon mr-4"></i> Fabric-->
+<!--    </a>-->
+<!--    <a routerLink="/app/product" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fas fa-boxes-stacked mr-4"></i> Products-->
+<!--    </a>-->
+<!--    <a routerLink="/app/order" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fas fa-receipt mr-4"></i> Orders-->
+<!--    </a>-->
+<!--    <a class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fas fa-users mr-4"></i> Clients-->
+<!--    </a>-->
+<!--  </nav>-->
+<!--</aside>-->
+
+
+<aside
+  #asideComp
+  class="sidebar h-screen overflow-hidden w-64 text-gray-900 flex flex-col shrink-0 px-4
+         fixed md:static top-0 left-0 z-50 transform transition-transform duration-300 ease-in-out
+         md:translate-x-0 bg-slate-100"
+  [ngClass]="{'-translate-x-full': !isOpen, 'translate-x-0': isOpen}"
+>
+  <!-- Close Button (Mobile Only) -->
+  <button
+    (click)="close()"
+    class="md:hidden fixed top-4 right-4 z-50 text-xl p-2 bg-[#DBEAFE] text-[#1447E6] rounded cursor-pointer"
+  >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <!-- Logo -->
   <div #logoContainer class="logo-container w-full flex justify-center align-center mb-12">
-    <div class="logo-wrapper bg-white p-4 rounded">
-      <img #logo src="/assets/images/logo.svg" alt="sophinia" class="logo w-24">
-<!--      <img src="https://images.pexels.com/photos/47040/meter-tape-measure-measure-gage-47040.jpeg" alt="sophinia" class="logo w-24">-->
+    <div class="logo-wrapper bg-white p-4 rounded" style="width:100px; height:100px">
+      <img #logo src="/assets/images/logo.svg" alt="sophinia" class="logo">
     </div>
   </div>
 
-  <nav
-    #nav
-    [style.height.px]="navHeight"
-    class="overflow-y-scroll no-scrollbar"
-  >
+  <!-- Navigation -->
+  <nav #nav class="overflow-y-scroll no-scrollbar">
     <a class="block p-2 my-2 bg-[#DBEAFE] text-[#1447E6] rounded rounded-xl">
       <i class="fas fa-gauge mr-4"></i> Dashboard
     </a>
@@ -38,11 +91,17 @@
     <a class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
       <i class="fas fa-users mr-4"></i> Clients
     </a>
-    <a class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fas fa-object-group mr-4"></i> Models
-    </a>
-    <a class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fas fa-ruler-combined mr-4"></i> Stitches
-    </a>
   </nav>
 </aside>
+
+
+
+
+
+
+
+
+
+
+
+
