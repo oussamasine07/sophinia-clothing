@@ -7,11 +7,11 @@
 </section>
 
 <div class="progress-wrapper main-side-spacing section-y-magring">
-  <div class="progress-wrapper">
-    <div class="progress">
-      <div class="progress-fill"></div>
-    </div>
-  </div>
+<!--  <div class="progress-wrapper">-->
+<!--    <div class="progress">-->
+<!--      <div class="progress-fill"></div>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
 
 <section class="store-steps main-side-spacing section-y-magring">
@@ -50,41 +50,111 @@
 
         </div>
 
-        <div class="pagination-wrapper section-y-magring">
-          <div class="btn-wrapper">
-            <a href="#" class="side-btn">prev</a>
-            <div class="main-pages">
-              <a href="#" class="page-btn page-btn-active">1</a>
-              <a href="#" class="page-btn">2</a>
-              <a href="#" class="page-btn">3</a>
-              <a href="#" class="page-btn">4</a>
-              <a href="#" class="page-btn">5</a>
-              <a href="#" class="page-btn">6</a>
-            </div>
-            <a href="#" class="side-btn">next</a>
-          </div>
-        </div>
+<!--        <div class="pagination-wrapper section-y-magring">-->
+<!--          <div class="btn-wrapper">-->
+<!--            <a href="#" class="side-btn">prev</a>-->
+<!--            <div class="main-pages">-->
+<!--              <a href="#" class="page-btn page-btn-active">1</a>-->
+<!--              <a href="#" class="page-btn">2</a>-->
+<!--              <a href="#" class="page-btn">3</a>-->
+<!--              <a href="#" class="page-btn">4</a>-->
+<!--              <a href="#" class="page-btn">5</a>-->
+<!--              <a href="#" class="page-btn">6</a>-->
+<!--            </div>-->
+<!--            <a href="#" class="side-btn">next</a>-->
+<!--          </div>-->
+<!--        </div>-->
       }
 
       @if (currentLable === 'last-step') {
+<!--        <div class="order-form-wrapper">-->
+<!--          <form class="order-form" #orderForm (ngSubmit)="onOrderSubmit(orderForm)" >-->
+<!--            <div class="section-wrapper">-->
+<!--              <h2 class="form-heading">I am available:</h2>-->
+<!--              <div class="input-grid grid grid-cols-12 gap-4">-->
+<!--                <div class="form-group col-span-4">-->
+<!--                  <label class="form-label block">From</label>-->
+<!--                  <input type="date" class="order-input" placeholder="Enter start date" id="from" name="startDate" [(ngModel)]="availability.startDate">-->
+<!--                  <p *ngIf="this.fieldErrors['availability.startDate']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.startDate'] }}</p>-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-4">-->
+<!--                  <label for="to" class="form-label block">To</label>-->
+<!--                  <input type="date" class="order-input" placeholder="Enter end date" id="to" name="endDate" [(ngModel)]="availability.endDate">-->
+<!--                  <p *ngIf="this.fieldErrors['availability.endDate']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.endDate'] }}</p>-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-4">-->
+<!--                  <label for="place" class="form-label block">Place</label>-->
+<!--                  <select id="place" class="order-select" name="availabilityType" [(ngModel)]="availability.availabilityType">-->
+<!--                    <option value="AT_HOME">At home</option>-->
+<!--                    <option value="AT_SHOP">At shop</option>-->
+<!--                  </select>-->
+<!--                  <p *ngIf="this.fieldErrors['availability.availabilityType']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.availabilityType'] }}</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="section-wrapper">-->
+<!--              <h2 class="form-heading">Client information:</h2>-->
+<!--              <div class="input-grid grid grid-cols-12 gap-4">-->
+<!--                <div class="form-group col-span-3">-->
+<!--                  <label for="firstname" class="form-label block">First name</label>-->
+<!--                  <input type="text" class="order-input" placeholder="Enter first name" id="firstname" name="firstName" [(ngModel)]="client.firstName">-->
+<!--                  <p *ngIf="this.fieldErrors['client.firstName']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.firstName'] }}</p>-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-3">-->
+<!--                  <label for="lastname" class="form-label block">last name</label>-->
+<!--                  <input type="text" class="order-input" placeholder="Enter last name" id="lastname" name="lastName" [(ngModel)]="client.lastName">-->
+<!--                  <p *ngIf="this.fieldErrors['client.lastName']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.lastName'] }}</p>-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-3">-->
+<!--                  <label for="email" class="form-label block">email</label>-->
+<!--                  <input type="text" class="order-input" placeholder="Enter email" id="email" name="email" [(ngModel)]="client.email">-->
+<!--                  <p *ngIf="this.fieldErrors['client.email']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.email'] }}</p>-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-3">-->
+<!--                  <label for="phone" class="form-label block">phone</label>-->
+<!--                  <input type="text" class="order-input" placeholder="Enter phone" id="phone" name="phone" [(ngModel)]="client.phone">-->
+<!--                  <p *ngIf="this.fieldErrors['client.phone']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.phone'] }}</p>-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-6">-->
+<!--                  <label for="address" class="form-label block">address</label>-->
+<!--                  <input type="text" class="order-input" placeholder="Enter address" id="address"  name="address" [(ngModel)]="client.address">-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-3">-->
+<!--                  <label for="postal_code" class="form-label block">postal code</label>-->
+<!--                  <input type="text" class="order-input" placeholder="Enter postal code" id="postal_code">-->
+<!--                </div>-->
+<!--                <div class="form-group col-span-3">-->
+<!--                  <label for="city" class="form-label block">city</label>-->
+<!--                  <input type="text" class="order-input" placeholder="Enter city" id="city">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <button class="order-submit" type="submit">place order</button>-->
+<!--          </form>-->
+<!--        </div>-->
+
         <div class="order-form-wrapper">
-          <form class="order-form" #orderForm (ngSubmit)="onOrderSubmit(orderForm)" >
+          <form class="order-form" #orderForm (ngSubmit)="onOrderSubmit(orderForm)">
             <div class="section-wrapper">
-              <h2 class="form-heading">I am available:</h2>
-              <div class="input-grid grid grid-cols-12 gap-4">
-                <div class="form-group col-span-4">
-                  <label class="form-label block">From</label>
-                  <input type="date" class="order-input" placeholder="Enter start date" id="from" name="startDate" [(ngModel)]="availability.startDate">
+              <h2 class="form-heading text-xl md:text-2xl mb-4 text-dark-blue">I am available:</h2>
+              <div class="input-grid grid grid-cols-1 md:grid-cols-12 gap-4">
+                <div class="form-group col-span-1 md:col-span-4">
+                  <label class="form-label block mb-1">From</label>
+                  <input type="date" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter start date" id="from" name="startDate" [(ngModel)]="availability.startDate">
                   <p *ngIf="this.fieldErrors['availability.startDate']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.startDate'] }}</p>
                 </div>
-                <div class="form-group col-span-4">
-                  <label for="to" class="form-label block">To</label>
-                  <input type="date" class="order-input" placeholder="Enter end date" id="to" name="endDate" [(ngModel)]="availability.endDate">
+
+                <div class="form-group col-span-1 md:col-span-4">
+                  <label for="to" class="form-label block mb-1">To</label>
+                  <input type="date" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter end date" id="to" name="endDate" [(ngModel)]="availability.endDate">
                   <p *ngIf="this.fieldErrors['availability.endDate']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['availability.endDate'] }}</p>
                 </div>
-                <div class="form-group col-span-4">
-                  <label for="place" class="form-label block">Place</label>
-                  <select id="place" class="order-select" name="availabilityType" [(ngModel)]="availability.availabilityType">
+
+                <div class="form-group col-span-1 md:col-span-4">
+                  <label for="place" class="form-label block mb-1">Place</label>
+                  <select id="place" class="order-select w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" name="availabilityType" [(ngModel)]="availability.availabilityType">
                     <option value="AT_HOME">At home</option>
                     <option value="AT_SHOP">At shop</option>
                   </select>
@@ -93,47 +163,54 @@
               </div>
             </div>
 
-            <div class="section-wrapper">
-              <h2 class="form-heading">Client information:</h2>
-              <div class="input-grid grid grid-cols-12 gap-4">
-                <div class="form-group col-span-3">
-                  <label for="firstname" class="form-label block">First name</label>
-                  <input type="text" class="order-input" placeholder="Enter first name" id="firstname" name="firstName" [(ngModel)]="client.firstName">
+            <div class="section-wrapper mt-6">
+              <h2 class="form-heading text-xl md:text-2xl mb-4 text-dark-blue">Client information:</h2>
+              <div class="input-grid grid grid-cols-1 md:grid-cols-12 gap-4">
+                <div class="form-group col-span-1 md:col-span-3">
+                  <label for="firstname" class="form-label block mb-1">First name</label>
+                  <input type="text" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter first name" id="firstname" name="firstName" [(ngModel)]="client.firstName">
                   <p *ngIf="this.fieldErrors['client.firstName']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.firstName'] }}</p>
                 </div>
-                <div class="form-group col-span-3">
-                  <label for="lastname" class="form-label block">last name</label>
-                  <input type="text" class="order-input" placeholder="Enter last name" id="lastname" name="lastName" [(ngModel)]="client.lastName">
+
+                <div class="form-group col-span-1 md:col-span-3">
+                  <label for="lastname" class="form-label block mb-1">Last name</label>
+                  <input type="text" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter last name" id="lastname" name="lastName" [(ngModel)]="client.lastName">
                   <p *ngIf="this.fieldErrors['client.lastName']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.lastName'] }}</p>
                 </div>
-                <div class="form-group col-span-3">
-                  <label for="email" class="form-label block">email</label>
-                  <input type="text" class="order-input" placeholder="Enter email" id="email" name="email" [(ngModel)]="client.email">
+
+                <div class="form-group col-span-1 md:col-span-3">
+                  <label for="email" class="form-label block mb-1">Email</label>
+                  <input type="text" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter email" id="email" name="email" [(ngModel)]="client.email">
                   <p *ngIf="this.fieldErrors['client.email']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.email'] }}</p>
                 </div>
-                <div class="form-group col-span-3">
-                  <label for="phone" class="form-label block">phone</label>
-                  <input type="text" class="order-input" placeholder="Enter phone" id="phone" name="phone" [(ngModel)]="client.phone">
+
+                <div class="form-group col-span-1 md:col-span-3">
+                  <label for="phone" class="form-label block mb-1">Phone</label>
+                  <input type="text" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter phone" id="phone" name="phone" [(ngModel)]="client.phone">
                   <p *ngIf="this.fieldErrors['client.phone']" class="mt-1 text-sm text-red-500">{{ this.fieldErrors['client.phone'] }}</p>
                 </div>
-                <div class="form-group col-span-6">
-                  <label for="address" class="form-label block">address</label>
-                  <input type="text" class="order-input" placeholder="Enter address" id="address"  name="address" [(ngModel)]="client.address">
+
+                <div class="form-group col-span-1 md:col-span-6">
+                  <label for="address" class="form-label block mb-1">Address</label>
+                  <input type="text" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter address" id="address" name="address" [(ngModel)]="client.address">
                 </div>
-                <div class="form-group col-span-3">
-                  <label for="postal_code" class="form-label block">postal code</label>
-                  <input type="text" class="order-input" placeholder="Enter postal code" id="postal_code">
+
+                <div class="form-group col-span-1 md:col-span-3">
+                  <label for="postal_code" class="form-label block mb-1">Postal code</label>
+                  <input type="text" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter postal code" id="postal_code">
                 </div>
-                <div class="form-group col-span-3">
-                  <label for="city" class="form-label block">city</label>
-                  <input type="text" class="order-input" placeholder="Enter city" id="city">
+
+                <div class="form-group col-span-1 md:col-span-3">
+                  <label for="city" class="form-label block mb-1">City</label>
+                  <input type="text" class="order-input w-full border border-gray-300 rounded px-3 py-2 text-sm md:text-base" placeholder="Enter city" id="city">
                 </div>
               </div>
             </div>
 
-            <button class="order-submit" type="submit">place order</button>
+            <button class="order-submit mt-4 w-full md:w-auto bg-primary-pink text-dark-blue px-6 py-2 rounded text-lg hover:bg-secondary-pink transition-colors" type="submit">Place order</button>
           </form>
         </div>
+
       }
 
     </div>
