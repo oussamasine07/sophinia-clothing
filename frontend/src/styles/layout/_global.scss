@@ -51,6 +51,11 @@
     padding: 0 10px;
   }
 
+  .section-y-magring {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
   .section-heading {
     font-size: 18px;
   }
@@ -58,12 +63,23 @@
   .hero-page-heading {
     font-size: 24px;
   }
+
+
 }
 
 /* Standard mobile (375px - 480px) */
 @media (max-width: 480px) and (min-width: 375px) {
   .main-side-spacing {
     padding: 0 20px;
+  }
+
+  .section-y-magring {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .section-padding {
+    padding: 15px;
   }
 
   .section-heading {
