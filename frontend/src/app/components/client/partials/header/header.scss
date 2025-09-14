@@ -94,6 +94,7 @@
         padding: 3px;
         font-size: 25px;
         color: $primary-pink;
+        display: none;
       }
     }
   }
@@ -167,6 +168,19 @@
   .nav-items {
     display: none;
   }
+
+  .auth-wrapper {
+    .auth-btn {
+      display: none;
+    }
+  }
+
+  .user {
+    .burger-menu {
+      display: block !important;
+    }
+  }
+
 }
 
 /* Standard mobile (375px - 480px) */
@@ -189,8 +203,19 @@
       }
 
     }
+
+    .auth-btn {
+      display: none;
+    }
+
+
   }
 
+  .user {
+    .burger-menu {
+      display: block !important;
+    }
+  }
 }
 
 /* Tablets (481px - 768px) */
@@ -212,7 +237,10 @@
     .user {
       margin-top: 0;
     }
+
+
   }
+
 }
 
 /* Small laptops (769px - 1024px) */
