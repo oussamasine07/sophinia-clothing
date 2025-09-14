@@ -2,10 +2,6 @@
 @use 'layout/global' as *;
 @use 'abstracts/variables' as *;
 
-@import "tailwindcss";
-
-//@tailwind base;
-//@tailwind components;
-//@tailwind utilities;
+@use "tailwindcss";
 
 
