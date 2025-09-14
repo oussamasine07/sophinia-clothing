@@ -5,6 +5,7 @@
 
   padding-top: 25px;
   padding-bottom: 25px;
+  position: relative;
 
   .navbar {
     width: 100%;
@@ -18,13 +19,15 @@
     background-color: rgba(255, 255, 255, .7);
 
     .logo-link {
+      flex: 1;
       display: block;
       .logo {
         width: 60px;
       }
     }
 
-    .nav-item {
+    .nav-items {
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -42,6 +45,7 @@
     }
 
     .user {
+      flex: 1;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -69,11 +73,199 @@
           left: 0;
         }
       }
+
+      .auth-btn {
+        padding: 8px 20px;
+        background-color: $primary-pink;
+        color: #ffffff;
+        border: 1.5px solid $primary-pink;
+        border-radius: 5px;
+        text-transform: capitalize;
+        font-weight: bold;
+        margin-left: 5px;
+        transition: all .5s ease;
+        &:hover {
+          background-color: #fff;
+          color: $primary-pink;
+        }
+      }
+
+      .burger-menu {
+        padding: 3px;
+        font-size: 25px;
+        color: $primary-pink;
+        display: none;
+      }
+    }
+  }
+
+  .mobile-nav {
+    padding: 0 10px 10px;
+    background-color: #fff;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    width: 90%;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    z-index: 500;
+
+    // Initial hidden state
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+
+    &.show {
+      max-height: 500px; // pick a value larger than content height
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    .mobile-items {
+      margin-bottom: 20px;
+      .mobile-item {
+        .mobile-link {
+          display: block;
+          padding: 10px 20px;
+          text-align: center;
+          border-bottom: 1px solid #DDDDDD;
+          font-size: 16px;
+          text-transform: capitalize;
+          color: $dark-blue;
+        }
+      }
+    }
+
+    .auth-wrapper {
+      .auth-btn {
+        display: block;
+        width: 100%;
+        padding: 10px 20px;
+        border: 1px solid $primary-pink;
+        border-radius: 5px;
+        background-color: $primary-pink;
+        color: #ffffff;
+        text-transform: capitalize;
+        margin-bottom: 5px;
+        text-align: center;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }
 
+/* ------------------------- MEDIA QUERIES ------------------------- */
 
+/* Small mobile (320px - 374px) */
+@media (max-width: 374px) {
+  .nav-items {
+    display: none;
+  }
+
+  .auth-wrapper {
+    .auth-btn {
+      display: none;
+    }
+  }
+
+  .user {
+    .burger-menu {
+      display: block !important;
+    }
+  }
+
+}
+
+/* Standard mobile (375px - 480px) */
+@media (max-width: 480px) and (min-width: 375px) {
+
+  .header {
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    .navbar {
+      padding: 10px;
+
+      .logo {
+        width: 40px !important;
+      }
+
+      .nav-items {
+        display: none !important;
+      }
+
+    }
+
+    .auth-btn {
+      display: none;
+    }
+
+
+  }
+
+  .user {
+    .burger-menu {
+      display: block !important;
+    }
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+  .navbar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 12px;
+
+    .nav-item {
+      flex-wrap: wrap;
+
+      .nav-item {
+        margin: 10px 10px;
+      }
+    }
+
+    .user {
+      margin-top: 0;
+    }
+
+
+  }
+
+}
+
+/* Small laptops (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .navbar {
+    padding: 14px;
+
+    .logo-link .logo {
+      width: 55px;
+    }
+
+    .nav-item .nav-item {
+      margin: 0 15px;
+    }
+
+    .user .cart .cart-icon {
+      width: 28px;
+    }
+
+    .profile-link {
+      width: 55px;
+      height: 55px;
+    }
+  }
+}
 
 
 

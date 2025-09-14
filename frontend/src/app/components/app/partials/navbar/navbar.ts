@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, inject, Output} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   standalone: true
 })
 export class Navbar {
+  @Output() toggleSidebar = new EventEmitter<void>();
 
+  router: Router = inject(Router)
+
+  onLogoutClick() {
+    localStorage.removeItem("token");
+    this.router.navigate(['/app/login']);
+  }
 }

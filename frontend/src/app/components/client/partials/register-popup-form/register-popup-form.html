@@ -1,31 +1,159 @@
 
+<!--&lt;!&ndash; Backdrop &ndash;&gt;-->
+<!--<div class="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center z-50">-->
+<!--  &lt;!&ndash; Modal Card &ndash;&gt;-->
+<!--  <div-->
+<!--    class="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-xl transform transition-all duration-300 ease-out"-->
+<!--    [ngClass]="{-->
+<!--      'opacity-100 translate-y-0': animate,-->
+<!--      'opacity-0 -translate-y-5': !animate-->
+<!--    }"-->
+<!--  >-->
+<!--    <div class="flex justify-between items-center mb-4">-->
+<!--      <h2 class="text-xl font-semibold text-gray-800">Welcom to client platform</h2>-->
+
+<!--      <button (click)="onCloseClick()" class="text-gray-500 hover:text-red-500 text-lg">-->
+<!--        <i class="fas fa-times"></i>-->
+<!--      </button>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Modal Content (Form or Inputs) &ndash;&gt;-->
+<!--    <form #registerClientForm (ngSubmit)="onRegisterClientSubmit(registerClientForm)" >-->
+<!--      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">-->
+<!--        &lt;!&ndash; Name (with validation style example) &ndash;&gt;-->
+<!--        <div class="col-span-1 mb-3">-->
+<!--          <label class="block text-sm font-medium text-gray-700 mb-1">First name</label>-->
+<!--          <input-->
+<!--            type="text"-->
+<!--            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"-->
+<!--            [ngClass]="{-->
+<!--              'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['firstName'],-->
+<!--              'border-gray-300 focus:ring-indigo-400': !fieldErrors['firstName']-->
+<!--            }"-->
+<!--            placeholder="Enter first name"-->
+<!--            name="firstName"-->
+<!--            [(ngModel)]="registerClientFormObj.firstName"-->
+<!--          />-->
+<!--          <p *ngIf="fieldErrors['firstName']" class="mt-1 text-sm text-red-500">{{ fieldErrors['firstName'] }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">-->
+<!--        &lt;!&ndash; Name (with validation style example) &ndash;&gt;-->
+<!--        <div class="col-span-1 mb-3">-->
+<!--          <label class="block text-sm font-medium text-gray-700 mb-1">Last name</label>-->
+<!--          <input-->
+<!--            type="text"-->
+<!--            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"-->
+<!--            [ngClass]="{-->
+<!--              'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['lastName'],-->
+<!--              'border-gray-300 focus:ring-indigo-400': !fieldErrors['lastName']-->
+<!--            }"-->
+<!--            placeholder="Enter last name"-->
+<!--            name="lastName"-->
+<!--            [(ngModel)]="registerClientFormObj.lastName"-->
+<!--          />-->
+<!--          <p *ngIf="fieldErrors['lastName']" class="mt-1 text-sm text-red-500">{{ fieldErrors['lastName'] }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">-->
+<!--        &lt;!&ndash; Name (with validation style example) &ndash;&gt;-->
+<!--        <div class="col-span-1 mb-3">-->
+<!--          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>-->
+<!--          <input-->
+<!--            type="text"-->
+<!--            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"-->
+<!--            [ngClass]="{-->
+<!--              'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['email'],-->
+<!--              'border-gray-300 focus:ring-indigo-400': !fieldErrors['email']-->
+<!--            }"-->
+<!--            placeholder="Enter email"-->
+<!--            name="email"-->
+<!--            [(ngModel)]="registerClientFormObj.email"-->
+<!--          />-->
+<!--          <p *ngIf="fieldErrors['email']" class="mt-1 text-sm text-red-500">{{ fieldErrors['email'] }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">-->
+<!--        &lt;!&ndash; Name (with validation style example) &ndash;&gt;-->
+<!--        <div class="col-span-1 mb-3">-->
+<!--          <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>-->
+<!--          <input-->
+<!--            type="password"-->
+<!--            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"-->
+<!--            [ngClass]="{-->
+<!--              'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['password'],-->
+<!--              'border-gray-300 focus:ring-indigo-400': !fieldErrors['password']-->
+<!--            }"-->
+<!--            placeholder="Enter password"-->
+<!--            name="password"-->
+<!--            [(ngModel)]="registerClientFormObj.password"-->
+<!--          />-->
+<!--          <p *ngIf="fieldErrors['password']" class="mt-1 text-sm text-red-500">{{ fieldErrors['password'] }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">-->
+<!--        &lt;!&ndash; Name (with validation style example) &ndash;&gt;-->
+<!--        <div class="col-span-1 mb-3">-->
+<!--          <label class="block text-sm font-medium text-gray-700 mb-1">Confirm password</label>-->
+<!--          <input-->
+<!--            type="password"-->
+<!--            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"-->
+<!--            [ngClass]="{-->
+<!--              'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['confirmPassword'],-->
+<!--              'border-gray-300 focus:ring-indigo-400': !fieldErrors['confirmPassword']-->
+<!--            }"-->
+<!--            placeholder="Confirm password"-->
+<!--            name="confirmPassword"-->
+<!--            [(ngModel)]="registerClientFormObj.confirmPassword"-->
+<!--          />-->
+<!--          <p *ngIf="fieldErrors['confirmPassword']" class="mt-1 text-sm text-red-500">{{ fieldErrors['confirmPassword'] }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Submit and Cancel &ndash;&gt;-->
+<!--      <div class="flex justify-end space-x-2 mt-4">-->
+<!--        <button type="submit"-->
+<!--                class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Register me</button>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+
 <!-- Backdrop -->
-<div class="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center z-50">
+<div class="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center z-50 p-4 sm:p-6">
   <!-- Modal Card -->
   <div
-    class="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-xl transform transition-all duration-300 ease-out"
+    class="bg-white w-full max-w-md sm:max-w-lg md:max-w-2xl p-4 sm:p-6 md:p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-out"
     [ngClass]="{
       'opacity-100 translate-y-0': animate,
       'opacity-0 -translate-y-5': !animate
     }"
   >
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-semibold text-gray-800">Welcom to client platform</h2>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2 sm:gap-0">
+      <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800">Welcome to client platform</h2>
 
-      <button (click)="onCloseClick()" class="text-gray-500 hover:text-red-500 text-lg">
+      <button (click)="onCloseClick()" class="text-gray-500 hover:text-red-500 text-lg self-end sm:self-auto">
         <i class="fas fa-times"></i>
       </button>
     </div>
 
     <!-- Modal Content (Form or Inputs) -->
-    <form #registerClientForm (ngSubmit)="onRegisterClientSubmit(registerClientForm)" >
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-        <!-- Name (with validation style example) -->
+    <form #registerClientForm (ngSubmit)="onRegisterClientSubmit(registerClientForm)">
+      <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
+        <!-- First name -->
         <div class="col-span-1 mb-3">
-          <label class="block text-sm font-medium text-gray-700 mb-1">First name</label>
+          <label class="block text-sm sm:text-base md:text-lg font-medium text-gray-700 mb-1">First name</label>
           <input
             type="text"
-            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 sm:text-base"
             [ngClass]="{
               'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['firstName'],
               'border-gray-300 focus:ring-indigo-400': !fieldErrors['firstName']
@@ -36,15 +164,13 @@
           />
           <p *ngIf="fieldErrors['firstName']" class="mt-1 text-sm text-red-500">{{ fieldErrors['firstName'] }}</p>
         </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-        <!-- Name (with validation style example) -->
+        <!-- Last name -->
         <div class="col-span-1 mb-3">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Last name</label>
+          <label class="block text-sm sm:text-base md:text-lg font-medium text-gray-700 mb-1">Last name</label>
           <input
             type="text"
-            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 sm:text-base"
             [ngClass]="{
               'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['lastName'],
               'border-gray-300 focus:ring-indigo-400': !fieldErrors['lastName']
@@ -55,15 +181,13 @@
           />
           <p *ngIf="fieldErrors['lastName']" class="mt-1 text-sm text-red-500">{{ fieldErrors['lastName'] }}</p>
         </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-        <!-- Name (with validation style example) -->
+        <!-- Email -->
         <div class="col-span-1 mb-3">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <label class="block text-sm sm:text-base md:text-lg font-medium text-gray-700 mb-1">Email</label>
           <input
             type="text"
-            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 sm:text-base"
             [ngClass]="{
               'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['email'],
               'border-gray-300 focus:ring-indigo-400': !fieldErrors['email']
@@ -74,15 +198,13 @@
           />
           <p *ngIf="fieldErrors['email']" class="mt-1 text-sm text-red-500">{{ fieldErrors['email'] }}</p>
         </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-        <!-- Name (with validation style example) -->
+        <!-- Password -->
         <div class="col-span-1 mb-3">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <label class="block text-sm sm:text-base md:text-lg font-medium text-gray-700 mb-1">Password</label>
           <input
             type="password"
-            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 sm:text-base"
             [ngClass]="{
               'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['password'],
               'border-gray-300 focus:ring-indigo-400': !fieldErrors['password']
@@ -93,15 +215,13 @@
           />
           <p *ngIf="fieldErrors['password']" class="mt-1 text-sm text-red-500">{{ fieldErrors['password'] }}</p>
         </div>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-        <!-- Name (with validation style example) -->
+        <!-- Confirm Password -->
         <div class="col-span-1 mb-3">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Confirm password</label>
+          <label class="block text-sm sm:text-base md:text-lg font-medium text-gray-700 mb-1">Confirm password</label>
           <input
             type="password"
-            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 sm:text-base"
             [ngClass]="{
               'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['confirmPassword'],
               'border-gray-300 focus:ring-indigo-400': !fieldErrors['confirmPassword']
@@ -114,19 +234,15 @@
         </div>
       </div>
 
-      <!-- Submit and Cancel -->
-      <div class="flex justify-end space-x-2 mt-4">
-        <button type="submit"
-                class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Register me</button>
+      <!-- Submit -->
+      <div class="flex flex-col sm:flex-row justify-end gap-2 mt-4">
+        <button type="submit" class="w-full sm:w-auto px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white sm:text-base">
+          Register me
+        </button>
       </div>
     </form>
   </div>
 </div>
-
-
-
-
-
 
 
 
