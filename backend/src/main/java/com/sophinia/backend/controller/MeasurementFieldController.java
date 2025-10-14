@@ -1,7 +1,7 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.validation.MeasurementFieldValidationDTO;
+import com.sophinia.backend.dto.request.MeasurementFieldValidationDTO;
 import com.sophinia.backend.model.MeasurementField;
 import com.sophinia.backend.service.MeasurementFieldService;
 import jakarta.validation.Valid;

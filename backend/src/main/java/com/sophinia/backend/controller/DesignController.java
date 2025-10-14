@@ -1,7 +1,7 @@
 package com.sophinia.backend.controller;
 
 import com.sophinia.backend.bean.FileUpload;
-import com.sophinia.backend.dto.validation.DesignValidateDTO;
+import com.sophinia.backend.dto.request.DesignValidateDTO;
 import com.sophinia.backend.model.Design;
 import com.sophinia.backend.service.DesignService;
 import jakarta.validation.Valid;
@@ -43,15 +43,8 @@ public class DesignController {
     public ResponseEntity<Design> create (
             @Valid DesignValidateDTO designValidateDTO
     ) {
-        Design design = new Design();
-        design.setName(designValidateDTO.name());
 
-        if (designValidateDTO.image() != null) {
-            String image = fileUpload.upload( designValidateDTO.image(), "design");
-            design.setImage(image);
-        }
-
-        return designService.createDesign( design );
+        return designService.createDesign( designValidateDTO );
 
     }
 

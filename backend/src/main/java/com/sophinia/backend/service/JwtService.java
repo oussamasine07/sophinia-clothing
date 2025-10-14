@@ -2,7 +2,7 @@ package com.sophinia.backend.service;
 
 
 
-import com.sophinia.backend.dto.mappingdto.AuthUserDTO;
+import com.sophinia.backend.dto.response.AuthUserDTO;
 import com.sophinia.backend.exception.JwtKeyGenerationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

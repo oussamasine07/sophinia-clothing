@@ -1,6 +1,6 @@
 package com.sophinia.backend.controller;
 
-import com.sophinia.backend.dto.validation.ValidateDecorationDTO;
+import com.sophinia.backend.dto.request.ValidateDecorationDTO;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.service.DecorationService;
 import jakarta.validation.Valid;

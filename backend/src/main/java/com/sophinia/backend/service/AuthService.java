@@ -1,7 +1,7 @@
 package com.sophinia.backend.service;
 
-import com.sophinia.backend.dto.mappingdto.AuthUserDTO;
-import com.sophinia.backend.dto.validation.LoginValidationDTO;
+import com.sophinia.backend.dto.response.AuthUserDTO;
+import com.sophinia.backend.dto.request.LoginValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.exception.PasswordIncorrectException;
 import com.sophinia.backend.model.*;

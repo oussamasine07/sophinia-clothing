@@ -1,4 +1,4 @@
-package com.sophinia.backend.dto.validation;
+package com.sophinia.backend.dto.request;
 
 import com.sophinia.backend.validation.IsPasswordConfirmed;
 import jakarta.validation.constraints.Email;

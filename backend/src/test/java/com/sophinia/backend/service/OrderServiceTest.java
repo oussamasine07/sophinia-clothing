@@ -1,9 +1,9 @@
 package com.sophinia.backend.service;
 
-import com.sophinia.backend.dto.mappingdto.*;
-import com.sophinia.backend.dto.validation.AvailabilityValidationDTO;
-import com.sophinia.backend.dto.validation.ClientValidationDTO;
-import com.sophinia.backend.dto.validation.OrderValidationDTO;
+import com.sophinia.backend.dto.response.*;
+import com.sophinia.backend.dto.request.AvailabilityValidationDTO;
+import com.sophinia.backend.dto.request.ClientValidationDTO;
+import com.sophinia.backend.dto.request.OrderValidationDTO;
 import com.sophinia.backend.model.*;
 import com.sophinia.backend.repository.*;
 import org.junit.jupiter.api.Test;

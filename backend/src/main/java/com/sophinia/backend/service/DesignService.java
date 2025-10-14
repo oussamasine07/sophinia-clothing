@@ -1,9 +1,11 @@
 package com.sophinia.backend.service;
 
 import com.sophinia.backend.bean.FileUpload;
-import com.sophinia.backend.dto.validation.DesignValidateDTO;
+import com.sophinia.backend.dto.request.DesignValidateDTO;
 import com.sophinia.backend.exception.NotFoundException;
+import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.model.Design;
+import com.sophinia.backend.repository.DecorationRepository;
 import com.sophinia.backend.repository.DesignRepository;
 import com.sophinia.backend.repository.OrderRepository;
 import org.springframework.http.HttpStatus;
@@ -20,15 +22,18 @@ public class DesignService {
     private final DesignRepository designRepository;
     private final FileUpload fileUpload;
     private final OrderRepository orderRepository;
+    private final DecorationRepository decorationRepository;
 
     public DesignService (
             final DesignRepository designRepository,
             final FileUpload fileUpload,
-            final OrderRepository orderRepository
+            final OrderRepository orderRepository,
+            final DecorationRepository decorationRepository
     ) {
         this.designRepository = designRepository;
         this.fileUpload = fileUpload;
         this.orderRepository = orderRepository;
+        this.decorationRepository = decorationRepository;
     }
 
     public ResponseEntity<List<Design>> getAllDesigns () {
@@ -44,7 +49,22 @@ public class DesignService {
         return new ResponseEntity<>( design, HttpStatus.OK );
     }
 
-    public ResponseEntity<Design> createDesign ( Design design ) {
+    public ResponseEntity<Design> createDesign ( DesignValidateDTO designValidateDTO ) {
+        Design design = new Design();
+        design.setName(designValidateDTO.name());
+
+        if (designValidateDTO.image() != null) {
+            String image = fileUpload.upload( designValidateDTO.image(), "design");
+            design.setImage(image);
+        }
+        design.setDescription( designValidateDTO.description());
+        design.setCost( designValidateDTO.cost() );
+
+        Decoration decoration = decorationRepository.findById(designValidateDTO.decoration_id())
+                .orElseThrow(() -> new NotFoundException("Design not found"));
+
+        design.setDecoration( decoration );
+
         Design newDesign = designRepository.save(design);
 
         return new ResponseEntity<>(newDesign, HttpStatus.OK);
@@ -55,10 +75,9 @@ public class DesignService {
             DesignValidateDTO designValidateDTO
     ) {
         Design updatedDesign = designRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("you can't update a not found design"));
+                .orElseThrow(() -> new NotFoundException("you can't update an unfound design"));
 
-        Design design = new Design();
-        design.setName( designValidateDTO.name());
+        updatedDesign.setName( designValidateDTO.name());
 
         if (designValidateDTO.image() != null) {
             // delete previouse image
@@ -66,10 +85,16 @@ public class DesignService {
 
             // upload the new image
             String image = fileUpload.upload( designValidateDTO.image(), "decorations");
-            design.setImage(image);
+            updatedDesign.setImage(image);
         }
 
-        updatedDesign.setName(design.getName());
+        updatedDesign.setDescription( designValidateDTO.description());
+        updatedDesign.setCost( designValidateDTO.cost() );
+
+        Decoration decoration = decorationRepository.findById(designValidateDTO.decoration_id())
+                .orElseThrow(() -> new NotFoundException("Design not found"));
+
+        updatedDesign.setDecoration( decoration );
 
         return new ResponseEntity<>( designRepository.save(updatedDesign), HttpStatus.OK);
 

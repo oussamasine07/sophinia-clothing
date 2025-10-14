@@ -1,7 +1,7 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.validation.ClothingModelValidationDTO;
+import com.sophinia.backend.dto.request.ClothingModelValidationDTO;
 import com.sophinia.backend.model.ClothingModel;
 import com.sophinia.backend.service.ClothingModelService;
 import jakarta.validation.Valid;

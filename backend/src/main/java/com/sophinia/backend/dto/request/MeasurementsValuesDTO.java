@@ -1,4 +1,4 @@
-package com.sophinia.backend.dto.validation;
+package com.sophinia.backend.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 
