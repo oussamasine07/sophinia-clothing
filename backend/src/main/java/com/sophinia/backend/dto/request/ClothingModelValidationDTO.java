@@ -1,11 +1,12 @@
-package com.sophinia.backend.dto.validation;
+package com.sophinia.backend.dto.request;
 
 import com.sophinia.backend.validation.FileSize;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
-public record ClothingTypeValidationDTO(
+public record ClothingModelValidationDTO (
+
         @NotNull(message = "name field is required")
         @Size(min = 1, message = "name is required")
         String name,
@@ -14,3 +15,4 @@ public record ClothingTypeValidationDTO(
         MultipartFile image
 ) {
 }
+

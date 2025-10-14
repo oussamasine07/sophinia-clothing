@@ -1,7 +1,7 @@
 package com.sophinia.backend.repository;
 
 
-import com.sophinia.backend.dto.mappingdto.OrderWithClientDTO;
+import com.sophinia.backend.dto.response.OrderWithClientDTO;
 import com.sophinia.backend.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

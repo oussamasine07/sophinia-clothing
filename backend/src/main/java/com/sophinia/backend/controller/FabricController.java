@@ -1,8 +1,8 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.mappingdto.MappedFabricDTO;
-import com.sophinia.backend.dto.validation.FabricFormDTO;
+import com.sophinia.backend.dto.response.MappedFabricDTO;
+import com.sophinia.backend.dto.request.FabricFormDTO;
 import com.sophinia.backend.model.Fabric;
 import com.sophinia.backend.service.FabricService;
 import jakarta.validation.Valid;

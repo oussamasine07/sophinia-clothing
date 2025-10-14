@@ -1,6 +1,6 @@
 package com.sophinia.backend.controller;
 
-import com.sophinia.backend.dto.validation.UpdateClientValidationDTO;
+import com.sophinia.backend.dto.request.UpdateClientValidationDTO;
 import com.sophinia.backend.service.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

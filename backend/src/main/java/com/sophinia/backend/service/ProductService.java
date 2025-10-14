@@ -3,7 +3,7 @@ package com.sophinia.backend.service;
 
 
 import com.sophinia.backend.bean.FileUpload;
-import com.sophinia.backend.dto.validation.ProductValidationDTO;
+import com.sophinia.backend.dto.request.ProductValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.ClothingType;
 import com.sophinia.backend.model.MeasurementField;

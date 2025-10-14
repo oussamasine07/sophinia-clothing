@@ -1,4 +1,4 @@
-package com.sophinia.backend.dto.validation;
+package com.sophinia.backend.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sophinia.backend.model.AvailabilityType;

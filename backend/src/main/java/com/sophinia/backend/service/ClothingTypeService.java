@@ -1,7 +1,7 @@
 package com.sophinia.backend.service;
 
 import com.sophinia.backend.bean.FileUpload;
-import com.sophinia.backend.dto.validation.ClothingTypeValidationDTO;
+import com.sophinia.backend.dto.request.ClothingTypeValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.ClothingType;
 import com.sophinia.backend.repository.ClothingTypeRepository;

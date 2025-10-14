@@ -19,6 +19,12 @@ public class Design {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "cost")
+    private Double cost;
+
     @ManyToOne
     private Decoration decoration;
 
@@ -50,6 +56,22 @@ public class Design {
         this.image = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
     public Decoration getDecoration() {
         return decoration;
     }
@@ -65,4 +87,5 @@ public class Design {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
 }

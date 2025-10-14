@@ -1,7 +1,7 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.validation.LoginValidationDTO;
+import com.sophinia.backend.dto.request.LoginValidationDTO;
 import com.sophinia.backend.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.sophinia.backend.service;
 
 import com.sophinia.backend.bean.FileUpload;
-import com.sophinia.backend.dto.validation.ValidateDecorationDTO;
+import com.sophinia.backend.dto.request.ValidateDecorationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Decoration;
 import com.sophinia.backend.repository.DecorationRepository;

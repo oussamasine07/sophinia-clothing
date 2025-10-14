@@ -1,7 +1,7 @@
 package com.sophinia.backend.service;
 
-import com.sophinia.backend.dto.validation.ClientValidationDTO;
-import com.sophinia.backend.dto.validation.UpdateClientValidationDTO;
+import com.sophinia.backend.dto.request.ClientValidationDTO;
+import com.sophinia.backend.dto.request.UpdateClientValidationDTO;
 import com.sophinia.backend.exception.NotFoundException;
 import com.sophinia.backend.model.Client;
 import com.sophinia.backend.repository.ClientRepository;

@@ -1,4 +1,4 @@
-package com.sophinia.backend.dto.mappingdto;
+package com.sophinia.backend.dto.response;
 
 public class OrderMeasurementFieldDTO {
     private Long measurementId;

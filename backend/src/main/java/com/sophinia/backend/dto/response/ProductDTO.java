@@ -1,4 +1,4 @@
-package com.sophinia.backend.dto.mappingdto;
+package com.sophinia.backend.dto.response;
 
 import java.util.List;
 

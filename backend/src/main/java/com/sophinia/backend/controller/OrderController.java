@@ -1,9 +1,9 @@
 package com.sophinia.backend.controller;
 
 
-import com.sophinia.backend.dto.mappingdto.OrderWithClientDTO;
-import com.sophinia.backend.dto.validation.MeasurementsValuesDTO;
-import com.sophinia.backend.dto.validation.OrderValidationDTO;
+import com.sophinia.backend.dto.response.OrderWithClientDTO;
+import com.sophinia.backend.dto.request.MeasurementsValuesDTO;
+import com.sophinia.backend.dto.request.OrderValidationDTO;
 import com.sophinia.backend.model.Order;
 import com.sophinia.backend.service.OrderService;
 import jakarta.validation.Valid;
