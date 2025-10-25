@@ -27,7 +27,8 @@ export class FabricUpdate {
 
     this.fabricFormObj = {
       name: this.current?.name || "",
-      description: this.current?.description || ""
+      description: this.current?.description || "",
+      price: this.current?.price || 0
     }
   }
 
@@ -57,7 +58,8 @@ export class FabricUpdate {
 
   fabricFormObj: fabricFormType = {
     name : "",
-    description: ""
+    description: "",
+    price: 0
   }
 
   onUpdateFabricSubmit (form: FormsModule) {
@@ -65,6 +67,7 @@ export class FabricUpdate {
     const formData = new FormData();
     formData.append("name", this.fabricFormObj.name);
     formData.append("description", this.fabricFormObj.description);
+    formData.append("price", this.fabricFormObj.price.toString());
 
     if (this.selectedFile) {
       formData.append("image", this.selectedFile)
@@ -75,7 +78,8 @@ export class FabricUpdate {
         this.emitUpdateFabric.emit( f )
         this.fabricFormObj = {
           name: "",
-          description: ""
+          description: "",
+          price: 0
         }
         this.selectedFile = null;
         this.onCloseClick()

@@ -48,13 +48,15 @@ export class FabricCreate implements OnInit {
   // form submit
   fabricFormObj: fabricFormType = {
     name : "",
-    description: ""
+    description: "",
+    price: 0
   }
   onCreateFabricSubmit (form: FormsModule) {
 
     const formData = new FormData();
     formData.append("name", this.fabricFormObj.name);
     formData.append("description", this.fabricFormObj.description);
+    formData.append("price", this.fabricFormObj.price.toString());
 
     if (this.selectedFile) {
       formData.append("image", this.selectedFile)
@@ -66,7 +68,8 @@ export class FabricCreate implements OnInit {
         this.onCloseClick()
         this.fabricFormObj = {
           name: "",
-          description: ""
+          description: "",
+          price: 0
         }
         this.selectedFile = null;
       },
