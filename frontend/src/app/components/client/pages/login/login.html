@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<section class="hero-page main-side-spacing" >
+  <div class="hero-page-wrapper" style="background: url('assets/images/section/dress_fabric_texture_bg.jpg')">
+    <h1 class="hero-page-heading capitalize">Login page</h1>
+  </div>
+</section>
+
+<section class="login-section main-side-spacing">
+  <div class="login-container">
+    <h2 class="login-title">Welcome Back</h2>
+
+    <form>
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+        <div class="error-message" >
+          <small >Email is required.</small>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        <div class="error-message" >
+          <small >Password is required.</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        Login
+      </button>
+    </form>
+  </div>
+</section>
+
+<app-footer></app-footer>

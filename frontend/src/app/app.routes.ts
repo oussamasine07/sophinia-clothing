@@ -11,6 +11,7 @@ import {Index} from './components/client/pages/index';
 import {Store} from './components/client/pages/store/store';
 import {Order} from './components/panel/content/order/order';
 import {OrderDetails} from './components/panel/content/order-details/order-details';
+import {Login} from './components/client/pages/login/login';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
   {
     path: "store",
     component: Store
+  },
+  {
+    path: "login",
+    component: Login
   },
   {
     path: "app",
