@@ -10,6 +10,9 @@ public record FabricFormDTO(
         @Size(min = 1, message = "name is required")
         String name,
 
+        @NotNull(message = "price field is required")
+        Double price,
+
         @NotNull(message = "description field is required")
         @Size(min = 1, message = "description is required")
         String description,

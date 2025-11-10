@@ -57,6 +57,7 @@ public class FabricService {
 
         fabric.setName(fabricFormDTO.name());
         fabric.setDescription( fabricFormDTO.description() );
+        fabric.setPrice( fabricFormDTO.price() );
 
         if (fabricFormDTO.image() != null) {
             String image = fileUpload.upload( fabricFormDTO.image(), "fabrics");

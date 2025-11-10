@@ -22,6 +22,9 @@ public class Fabric {
     @Column(name = "image", nullable = false)
     private String image;
 
+    @Column(name = "price", nullable = false)
+    private Double price;
+
     @JsonIgnore
     @OneToMany(mappedBy = "fabric")
     private List<Order> orders;
@@ -66,5 +69,11 @@ public class Fabric {
         this.orders = orders;
     }
 
+    public Double getPrice() {
+        return price;
+    }
 
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';
-import {ClientService} from '../../../../services/client/client-service';
+import {ClientService} from '../../../../core/services/client/client-service';
 
 @Component({
   selector: 'app-register-popup-form',
