@@ -8,17 +8,17 @@
 
 <section class="login-section main-side-spacing">
   <div class="login-container">
-    <h2 class="login-title">Welcome Back</h2>
 
-    <form>
-      <!-- Email Field -->
+    <form #loginForm (ngSubmit)="onLoginSubmit(loginForm)">
+
       <div class="form-group">
         <label for="email">Email</label>
         <input
           type="email"
           id="email"
-          formControlName="email"
           placeholder="Enter your email"
+          name="email"
+          [(ngModel)]="loginObj.email"
         />
         <div class="error-message" >
           <small >Email is required.</small>
@@ -31,8 +31,9 @@
         <input
           type="password"
           id="password"
-          formControlName="password"
           placeholder="Enter your password"
+          name="password"
+          [(ngModel)]="loginObj.password"
         />
         <div class="error-message" >
           <small >Password is required.</small>
