@@ -12,8 +12,8 @@ import {Store} from './components/client/pages/store/store';
 import {Order} from './components/panel/content/order/order';
 import {OrderDetails} from './components/panel/content/order-details/order-details';
 import {Login} from './components/client/pages/login/login';
-import {isAuthenticatedGuard} from './guards/is-authenticated-guard';
-import {isAdminGuard} from './guards/is-admin-guard';
+import {isAuthenticatedGuard} from './core/guards/is-authenticated-guard';
+import {isAdminGuard} from './core/guards/is-admin-guard';
 
 export const routes: Routes = [
   {

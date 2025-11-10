@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {OrderWithClientInterface} from '../../models/interfaces/order-with-client-interface';
-import {OrderDetailsInterface} from '../../models/interfaces/order-details-interface';
+import {OrderWithClientInterface} from '../../../models/interfaces/order-with-client-interface';
+import {OrderDetailsInterface} from '../../../models/interfaces/order-details-interface';
 
 @Injectable({
   providedIn: 'root'

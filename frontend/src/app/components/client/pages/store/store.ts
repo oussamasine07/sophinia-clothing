@@ -1,12 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Header} from '../../partials/header/header';
 import {Footer} from '../../partials/footer/footer';
-import {ProductService} from '../../../../services/product/product-service';
-import {ClothingModelService} from '../../../../services/clothing-model/clothing-model-service';
-import {ClothingTypeService} from '../../../../services/clothing-type/clothing-type-service';
-import {DecorationService} from '../../../../services/decoration/decoration-service';
-import {DesignService} from '../../../../services/design/design-service';
-import {FabricService} from '../../../../services/fabric/fabric-service';
+import {ProductService} from '../../../../core/services/product/product-service';
+import {ClothingModelService} from '../../../../core/services/clothing-model/clothing-model-service';
+import {ClothingTypeService} from '../../../../core/services/clothing-type/clothing-type-service';
+import {DecorationService} from '../../../../core/services/decoration/decoration-service';
+import {DesignService} from '../../../../core/services/design/design-service';
+import {FabricService} from '../../../../core/services/fabric/fabric-service';
 import {orderTypeForm} from '../../../../models/types/orderTypeForm';
 import {storeStepsType} from '../../../../models/types/storeStepsType';
 import {ProductInterface} from '../../../../models/interfaces/product-interface';
@@ -20,10 +20,10 @@ import {ProductCard} from '../../partials/product-card/product-card';
 import {clientTypeForm} from '../../../../models/types/clientTypeForm';
 import {availabilityFormType} from '../../../../models/types/availabilityFormType';
 import {FormsModule} from '@angular/forms';
-import {OrderService} from '../../../../services/order/order-service';
+import {OrderService} from '../../../../core/services/order/order-service';
 import {RegisterPopup} from '../../partials/register-popup/register-popup';
 import {RegisterPopupForm} from '../../partials/register-popup-form/register-popup-form';
-import {RemoveDashPipe} from '../../../../pipes/remove-dash-pipe';
+import {RemoveDashPipe} from '../../../../core/pipes/remove-dash-pipe';
 
 type OrderKey =
   "product" | "clothingModel" | "clothingType" | "decoration" | "design" | "fabric" | "current";

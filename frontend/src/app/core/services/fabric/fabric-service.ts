@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {FabricInterface} from '../../models/interfaces/fabric-interface';
+import {FabricInterface} from '../../../models/interfaces/fabric-interface';
 
 @Injectable({
   providedIn: 'root'

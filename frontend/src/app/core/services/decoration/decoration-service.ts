@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {DecorationInterface} from '../../models/interfaces/decoration-interface';
+import {DecorationInterface} from '../../../models/interfaces/decoration-interface';
 
 @Injectable({
   providedIn: 'root'

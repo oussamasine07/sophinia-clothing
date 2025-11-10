@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
-import {ProductService} from '../../../../../services/product/product-service';
+import {ProductService} from '../../../../../core/services/product/product-service';
 import {productFromType} from '../../../../../models/types/productFormType';
 import {NgClass, NgFor, NgIf} from '@angular/common';
-import {MeasurementFieldService} from '../../../../../services/measurement-field/measurement-field-service';
+import {MeasurementFieldService} from '../../../../../core/services/measurement-field/measurement-field-service';
 import {MeasurementFieldInterface} from '../../../../../models/interfaces/measurement-field-interface';
 import Choices from 'choices.js';
 import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-type-interface';
-import {ClothingTypeService} from '../../../../../services/clothing-type/clothing-type-service';
+import {ClothingTypeService} from '../../../../../core/services/clothing-type/clothing-type-service';
 
 @Component({
   selector: 'app-product-create',

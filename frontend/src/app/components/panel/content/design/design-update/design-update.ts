@@ -1,6 +1,6 @@
 import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DesignService} from '../../../../../services/design/design-service';
+import {DesignService} from '../../../../../core/services/design/design-service';
 import {designFormType} from '../../../../../models/types/designFormType';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
 import {ActivatedRoute, Router} from '@angular/router';

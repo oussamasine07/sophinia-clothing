@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Auth} from '../../../../services/auth/auth';
+import {Auth} from '../../../../core/services/auth/auth';
 import {FormsModule} from '@angular/forms';
 import {loginFromType} from '../../../../models/types/loginFormType';
 import {Token} from '../../../../models/interfaces/token';

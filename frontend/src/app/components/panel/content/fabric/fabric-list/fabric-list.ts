@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {FabricService} from '../../../../../services/fabric/fabric-service';
+import {FabricService} from '../../../../../core/services/fabric/fabric-service';
 import {FabricInterface} from '../../../../../models/interfaces/fabric-interface';
 import {NgForOf, NgIf} from '@angular/common';
 import {Popup} from '../../../partials/popup/popup';

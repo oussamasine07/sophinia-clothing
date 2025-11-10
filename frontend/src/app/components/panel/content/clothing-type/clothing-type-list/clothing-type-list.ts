@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {ClothingTypeService} from '../../../../../services/clothing-type/clothing-type-service';
+import {ClothingTypeService} from '../../../../../core/services/clothing-type/clothing-type-service';
 import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-type-interface';
 import {NgForOf, NgIf} from '@angular/common';
 import {ClothingTypeCreate} from '../clothing-type-create/clothing-type-create';

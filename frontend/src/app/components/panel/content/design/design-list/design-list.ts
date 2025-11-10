@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, Input} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {DesignService} from '../../../../../services/design/design-service';
+import {DesignService} from '../../../../../core/services/design/design-service';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
 import {NgFor, NgIf} from '@angular/common';
 import {DesignCreate} from '../design-create/design-create';

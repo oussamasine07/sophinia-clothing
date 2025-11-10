@@ -1,5 +1,5 @@
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
-import {FabricService} from '../../../../../services/fabric/fabric-service';
+import {FabricService} from '../../../../../core/services/fabric/fabric-service';
 import { FormsModule } from '@angular/forms';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
 import {fabricFormType} from '../../../../../models/types/fabricFormType';

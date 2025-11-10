@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {Header} from "../../partials/header/header";
 import {Footer} from '../../partials/footer/footer';
-import {Auth} from '../../../../services/auth/auth';
+import {Auth} from '../../../../core/services/auth/auth';
 import {Router} from '@angular/router';
 import {loginFromType} from '../../../../models/types/loginFormType';
 import {FormsModule} from '@angular/forms';

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
-import {DecorationService} from '../../../../../services/decoration/decoration-service';
+import {DecorationService} from '../../../../../core/services/decoration/decoration-service';
 import {decorationFormType} from '../../../../../models/types/decorationFormType';
 import {DecorationInterface} from '../../../../../models/interfaces/decoration-interface';
 import {NgClass, NgIf} from '@angular/common';

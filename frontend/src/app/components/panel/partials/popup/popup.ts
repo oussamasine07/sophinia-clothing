@@ -1,11 +1,11 @@
 import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {DesignService} from '../../../../services/design/design-service';
-import {DecorationService} from '../../../../services/decoration/decoration-service';
-import {ClothingTypeService} from '../../../../services/clothing-type/clothing-type-service';
-import {ClothingModelService} from '../../../../services/clothing-model/clothing-model-service';
-import {FabricService} from '../../../../services/fabric/fabric-service';
-import {ProductService} from '../../../../services/product/product-service';
+import {DesignService} from '../../../../core/services/design/design-service';
+import {DecorationService} from '../../../../core/services/decoration/decoration-service';
+import {ClothingTypeService} from '../../../../core/services/clothing-type/clothing-type-service';
+import {ClothingModelService} from '../../../../core/services/clothing-model/clothing-model-service';
+import {FabricService} from '../../../../core/services/fabric/fabric-service';
+import {ProductService} from '../../../../core/services/product/product-service';
 
 @Component({
   selector: 'app-popup',

@@ -9,15 +9,15 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {ProductService} from '../../../../../services/product/product-service';
+import {ProductService} from '../../../../../core/services/product/product-service';
 import {FabricInterface} from '../../../../../models/interfaces/fabric-interface';
 import {fabricFormType} from '../../../../../models/types/fabricFormType';
 import {FormsModule} from '@angular/forms';
 import {ProductInterface} from '../../../../../models/interfaces/product-interface';
 import {productFromType} from '../../../../../models/types/productFormType';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {MeasurementFieldService} from '../../../../../services/measurement-field/measurement-field-service';
-import {ClothingTypeService} from '../../../../../services/clothing-type/clothing-type-service';
+import {MeasurementFieldService} from '../../../../../core/services/measurement-field/measurement-field-service';
+import {ClothingTypeService} from '../../../../../core/services/clothing-type/clothing-type-service';
 import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-type-interface';
 import {MeasurementFieldInterface} from '../../../../../models/interfaces/measurement-field-interface';
 import Choices from 'choices.js';

@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {ProductService} from '../../../../../services/product/product-service';
+import {ProductService} from '../../../../../core/services/product/product-service';
 import {ProductInterface} from '../../../../../models/interfaces/product-interface';
 import {NgForOf, NgIf} from '@angular/common';
 import {ProductCreate} from '../product-create/product-create';

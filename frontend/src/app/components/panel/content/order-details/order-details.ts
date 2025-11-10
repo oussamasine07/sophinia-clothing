@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {OrderService} from '../../../../services/order/order-service';
+import {OrderService} from '../../../../core/services/order/order-service';
 import {OrderDetailsInterface} from '../../../../models/interfaces/order-details-interface';
 import {ActivatedRoute} from '@angular/router';
 import {FabricInterface} from '../../../../models/interfaces/fabric-interface';

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';
-import {FabricService} from '../../../../../services/fabric/fabric-service';
+import {FabricService} from '../../../../../core/services/fabric/fabric-service';
 import {fabricFormType} from '../../../../../models/types/fabricFormType';
 import {FabricInterface} from '../../../../../models/interfaces/fabric-interface';
 

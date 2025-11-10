@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {ClothingModelService} from '../../../../../services/clothing-model/clothing-model-service';
+import {ClothingModelService} from '../../../../../core/services/clothing-model/clothing-model-service';
 import {ClothingTypeInterface} from '../../../../../models/interfaces/clothing-type-interface';
 import {ClothingModelInterface} from '../../../../../models/interfaces/clothing-model-interface';
 import {ClothingTypeCreate} from '../../clothing-type/clothing-type-create/clothing-type-create';

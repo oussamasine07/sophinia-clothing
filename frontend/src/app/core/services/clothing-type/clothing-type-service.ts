@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {ClothingTypeInterface} from '../../models/interfaces/clothing-type-interface';
+import {ClothingTypeInterface} from '../../../models/interfaces/clothing-type-interface';
 
 @Injectable({
   providedIn: 'root'

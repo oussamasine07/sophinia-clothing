@@ -1,7 +1,7 @@
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {designFormType} from '../../../../../models/types/designFormType';
-import {DesignService} from '../../../../../services/design/design-service';
+import {DesignService} from '../../../../../core/services/design/design-service';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
 import {NgClass, NgIf} from '@angular/common';
 

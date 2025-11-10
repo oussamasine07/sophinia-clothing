@@ -1,7 +1,7 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
 import {DecorationInterface} from '../../../../../models/interfaces/decoration-interface';
-import {DecorationService} from '../../../../../services/decoration/decoration-service';
+import {DecorationService} from '../../../../../core/services/decoration/decoration-service';
 import {DecorationCreate} from '../decoration-create/decoration-create';
 import {DecorationUpdate} from '../decoration-update/decoration-update';
 import {Popup} from '../../../partials/popup/popup';

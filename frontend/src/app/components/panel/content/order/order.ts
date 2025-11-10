@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {OrderService} from '../../../../services/order/order-service';
+import {OrderService} from '../../../../core/services/order/order-service';
 import {OrderWithClientInterface} from '../../../../models/interfaces/order-with-client-interface';
 import {NgClass} from '@angular/common';
 import {RouterLink} from '@angular/router';

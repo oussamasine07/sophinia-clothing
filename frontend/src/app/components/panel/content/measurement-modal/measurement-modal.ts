@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import {designFormType} from '../../../../models/types/designFormType';
 import {DesignInterface} from '../../../../models/interfaces/design-interface';
 import {NgClass, NgIf} from '@angular/common';
-import {OrderService} from '../../../../services/order/order-service';
+import {OrderService} from '../../../../core/services/order/order-service';
 
 @Component({
   selector: 'app-measurement-modal',

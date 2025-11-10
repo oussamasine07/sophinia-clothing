@@ -1,7 +1,7 @@
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {DesignInterface} from '../../../../../models/interfaces/design-interface';
-import {ClothingTypeService} from '../../../../../services/clothing-type/clothing-type-service';
+import {ClothingTypeService} from '../../../../../core/services/clothing-type/clothing-type-service';
 import {clothingTypeFormType} from '../../../../../models/types/clothingTypeFormType';
 import {NgClass, NgIf} from '@angular/common';
 

@@ -1,9 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {Token} from '../../models/interfaces/token';
-import {loginFromType} from '../../models/types/loginFormType';
-import {User} from '../../models/interfaces/user';
+import {Token} from '../../../models/interfaces/token';
+import {loginFromType} from '../../../models/types/loginFormType';
+import {User} from '../../../models/interfaces/user';
 import {jwtDecode} from 'jwt-decode';
 
 @Injectable({
