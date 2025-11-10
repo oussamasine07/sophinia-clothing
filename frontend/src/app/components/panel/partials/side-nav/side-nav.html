@@ -64,30 +64,35 @@
 
   <!-- Navigation -->
   <nav #nav class="overflow-y-scroll no-scrollbar">
-    <a class="block p-2 my-2 bg-[#DBEAFE] text-[#1447E6] rounded rounded-xl">
-      <i class="fas fa-gauge mr-4"></i> Dashboard
-    </a>
-    <a routerLink="/app/design" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fas fa-paint-brush mr-4"></i> Design
-    </a>
-    <a routerLink="/app/decoration" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fa-solid fa-image mr-4"></i> Decoration
-    </a>
-    <a routerLink="/app/clothing-type" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fa-solid fa-shirt mr-4"></i> Clothing type
-    </a>
-    <a routerLink="/app/clothing-model" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fa-solid fa-person-dress mr-4"></i> Clothing model
-    </a>
-    <a routerLink="/app/fabric" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fa-solid fa-ribbon mr-4"></i> Fabric
-    </a>
-    <a routerLink="/app/product" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fas fa-boxes-stacked mr-4"></i> Products
-    </a>
-    <a routerLink="/app/order" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
-      <i class="fas fa-receipt mr-4"></i> Orders
-    </a>
+    @for (link of links ; track link) {
+      <a routerLink="{{ link.link}}" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">
+        <i class="{{ link.icon }}"></i> {{ link.item }}
+      </a>
+    }
+<!--    <a class="block p-2 my-2 bg-[#DBEAFE] text-[#1447E6] rounded rounded-xl">-->
+<!--      <i class="fas fa-gauge mr-4"></i> Dashboard-->
+<!--    </a>-->
+<!--    <a routerLink="/app/design" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fas fa-paint-brush mr-4"></i> Design-->
+<!--    </a>-->
+<!--    <a routerLink="/app/decoration" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-image mr-4"></i> Decoration-->
+<!--    </a>-->
+<!--    <a routerLink="/app/clothing-type" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-shirt mr-4"></i> Clothing type-->
+<!--    </a>-->
+<!--    <a routerLink="/app/clothing-model" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-person-dress mr-4"></i> Clothing model-->
+<!--    </a>-->
+<!--    <a routerLink="/app/fabric" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fa-solid fa-ribbon mr-4"></i> Fabric-->
+<!--    </a>-->
+<!--    <a routerLink="/app/product" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fas fa-boxes-stacked mr-4"></i> Products-->
+<!--    </a>-->
+<!--    <a routerLink="/app/order" class="block p-2 my-2 bg-[#fefefe] rounded rounded-xl text-[#3D5E8A]">-->
+<!--      <i class="fas fa-receipt mr-4"></i> Orders-->
+<!--    </a>-->
   </nav>
 </aside>
 

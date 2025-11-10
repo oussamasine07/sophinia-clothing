@@ -41,7 +41,7 @@ export class Auth {
   // get user role from token
   getUserRole ( token: string | null ) {
     const decoded: User | null = this.getDecodedToken(token);
-    return decoded ? decoded.role : null;
+    return decoded ? decoded.role : "";
   }
 
 }

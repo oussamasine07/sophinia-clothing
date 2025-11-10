@@ -1,6 +1,18 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NgClass} from '@angular/common';
+import {Auth} from '../../../../core/services/auth/auth';
+import {sidebarLinks} from '../../../../core/abstracts/panel.links';
 
 @Component({
   selector: 'app-side-nav',
@@ -12,7 +24,18 @@ import {NgClass} from '@angular/common';
   styleUrl: './side-nav.scss',
   standalone: true
 })
-export class SideNav {
+export class SideNav implements OnInit {
+
+  authService: Auth = inject( Auth );
+  token: string | null = localStorage.getItem('token');
+
+  role: 'admin' | 'employee' = this.authService.getUserRole( this.token) as 'admin' | 'employee'
+  links: any[] = []
+
+  ngOnInit () {
+    this.links = sidebarLinks[this.role]
+    console.log( this.links )
+  }
 
   @Input() isOpen = false;          // from layout
   @Output() closeSidebar = new EventEmitter<void>();
