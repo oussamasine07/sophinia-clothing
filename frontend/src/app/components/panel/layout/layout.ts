@@ -16,28 +16,13 @@ import {NgClass} from '@angular/common';
   styleUrl: './layout.scss',
   standalone: true
 })
-export class Layout implements OnInit {
-
-  // router: Router = inject(Router);
-  // token: string | null = localStorage.getItem('token');
-  //
-  // ngOnInit () {
-  //   if (!this.token) {
-  //     this.router.navigate(["/app/login"])
-  //   }
-  // }
+export class Layout {
 
   router: Router = inject(Router);
   token: string | null = localStorage.getItem('token');
 
   // Sidebar state
   isSidebarOpen = false;
-
-  ngOnInit() {
-    if (!this.token) {
-      this.router.navigate(['/app/login']);
-    }
-  }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

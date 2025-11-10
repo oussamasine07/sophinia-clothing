@@ -12,6 +12,8 @@ import {Store} from './components/client/pages/store/store';
 import {Order} from './components/panel/content/order/order';
 import {OrderDetails} from './components/panel/content/order-details/order-details';
 import {Login} from './components/client/pages/login/login';
+import {isAuthenticatedGuard} from './guards/is-authenticated-guard';
+import {isAdminGuard} from './guards/is-admin-guard';
 
 export const routes: Routes = [
   {
@@ -29,30 +31,37 @@ export const routes: Routes = [
   {
     path: "app",
     component: Layout,
+    canActivate: [ isAuthenticatedGuard ],
     children: [
       {
         path: "design",
-        component: DesignList
+        component: DesignList,
+        canActivate: [ isAdminGuard ]
       },
       {
         path: "decoration",
-        component: DecorationList
+        component: DecorationList,
+        canActivate: [ isAdminGuard ]
       },
       {
         path: "clothing-type",
-        component: ClothingTypeList
+        component: ClothingTypeList,
+        canActivate: [ isAdminGuard ]
       },
       {
         path: "clothing-model",
-        component: ClothingModelList
+        component: ClothingModelList,
+        canActivate: [ isAdminGuard ]
       },
       {
         path: "fabric",
-        component: FabricList
+        component: FabricList,
+        canActivate: [ isAdminGuard ]
       },
       {
         path: "product",
-        component: ProductList
+        component: ProductList,
+        canActivate: [ isAdminGuard ]
       },
       {
         path: "order",
