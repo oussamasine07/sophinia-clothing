@@ -2,10 +2,13 @@ package com.sophinia.backend.controller;
 
 import com.sophinia.backend.dto.request.EmployeeUpdateValidationDTO;
 import com.sophinia.backend.dto.request.EmployeeValidationDTO;
+import com.sophinia.backend.dto.request.UpdateEmployeeProfileValidationDTO;
 import com.sophinia.backend.model.Employee;
 import com.sophinia.backend.service.EmployeeService;
+import io.swagger.v3.oas.annotations.headers.Header;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,9 +51,13 @@ public class EmployeeController {
         return null;
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @PutMapping("/update-profile")
-    public ResponseEntity<Employee> updateProfile () {
-        return null;
+    public ResponseEntity<Employee> updateProfile (
+            @RequestBody UpdateEmployeeProfileValidationDTO updateEmployeeProfileValidationDTO,
+            @RequestHeader("Authorization") String token
+    ) {
+        return employeeService.updateEmployeeProfile(updateEmployeeProfileValidationDTO, token);
     }
 
 }
