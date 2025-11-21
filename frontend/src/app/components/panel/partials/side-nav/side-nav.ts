@@ -34,7 +34,6 @@ export class SideNav implements OnInit {
 
   ngOnInit () {
     this.links = sidebarLinks[this.role]
-    console.log( this.links )
   }
 
   @Input() isOpen = false;          // from layout

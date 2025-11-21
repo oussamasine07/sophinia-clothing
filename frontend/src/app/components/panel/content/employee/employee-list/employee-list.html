@@ -1,0 +1,81 @@
+<!-- keep this part as it is-->
+<div class="flex flex-row flex-wrap items-center justify-between my-4">
+  <h2 class="text-lg sm:text-xl font-semibold flex-shrink-0">Employees</h2>
+  <button
+
+    class="bg-blue-100 text-blue-600 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-blue-200 text-sm sm:text-base mt-2 sm:mt-0 flex-shrink-0"
+  >
+    New Epmployee
+  </button>
+</div>
+
+<!-- Table section -->
+<div class="overflow-x-auto w-full rounded-lg border border-gray-200">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+    <tr>
+      <th class="px-3 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">ID</th>
+      <th class="px-3 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+      <th class="px-3 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+      <th class="px-3 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Email</th>
+      <th class="px-3 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+      <th class="px-3 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Address</th>
+      <th class="px-3 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">CNSS</th>
+      <th class="px-3 py-2 text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+    </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+    <tr *ngFor="let e of employees" class="hover:bg-gray-50 transition-colors">
+      <td class="px-3 py-2 text-sm text-gray-700">{{ e.id }}</td>
+      <td class="px-3 py-2 text-sm text-gray-700">{{ e.firstName }}</td>
+      <td class="px-3 py-2 text-sm text-gray-700">{{ e.lastName }}</td>
+      <td class="px-3 py-2 text-sm text-gray-700">{{ e.email }}</td>
+      <td class="px-3 py-2 text-sm text-gray-700">{{ e.phone }}</td>
+      <td class="px-3 py-2 text-sm text-gray-700">
+        <div>{{ e.address }}</div>
+        <div>{{ e.city }}</div>
+        <div>{{ e.postalCode }}</div>
+      </td>
+      <td class="px-3 py-2 text-sm text-gray-700">{{ e.cnssCode }}</td>
+      <td class="px-3 py-2 text-center flex justify-center gap-1 sm:gap-2">
+        <button
+          class="bg-yellow-100 text-yellow-600 p-1.5 sm:p-2 rounded-full hover:bg-yellow-200 text-sm sm:text-base"
+        >
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button
+          class="bg-red-100 text-red-600 p-1.5 sm:p-2 rounded-full hover:bg-red-200 text-sm sm:text-base"
+        >
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<!--<app-design-create-->
+<!--  *ngIf="showCreateModal"-->
+<!--  (close)="closeCreateModal()"-->
+<!--  (emitCreatedDesign)="addNewDesign($event)"-->
+<!--&gt;</app-design-create>-->
+
+<!--<app-design-update-->
+<!--  *ngIf="showUpdateModal"-->
+<!--  (close)="closeUpdateModal()"-->
+<!--  (emitUpdateDesign)="updateDesign($event)"-->
+<!--  [currentDesign]="currentUpdateDesign"-->
+<!--&gt;</app-design-update>-->
+
+<!--<app-popup-->
+<!--  *ngIf="showDeleteModal"-->
+<!--  (cancelDelete)="closeDeleteModal()"-->
+<!--  (confiremDelete)="deleteModal($event)"-->
+<!--  [current]="currentUpdateDesign"-->
+<!--  [deleteType]="currentDeleteType"-->
+<!--&gt;</app-popup>-->
+
+
+
