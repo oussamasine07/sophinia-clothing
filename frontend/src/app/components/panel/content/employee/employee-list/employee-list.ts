@@ -1,17 +1,15 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {EmployeeInterface} from '../../../../../models/interfaces/employee-interface';
 import {EmployeeService} from '../../../../../core/services/employee/employee-service';
-import {DesignCreate} from '../../design/design-create/design-create';
-import {DesignUpdate} from '../../design/design-update/design-update';
 import {NgForOf, NgIf} from '@angular/common';
-import {Popup} from '../../../partials/popup/popup';
+import {EmployeeCreate} from '../employee-create/employee-create';
 
 @Component({
   selector: 'app-employee-list',
   imports: [
     NgForOf,
     NgIf,
-    Popup
+    EmployeeCreate
   ],
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.scss'
@@ -33,5 +31,44 @@ export class EmployeeList implements OnInit {
     })
   }
 
+  showCreateModel = false;
+  openCreateModel () {
+    this.showCreateModel = true;
+  }
+  closeCreateModel () {
+    this.showCreateModel = false;
+  }
+
+  addEmployee (e: EmployeeInterface) {
+    this.employees.push(e)
+  }
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

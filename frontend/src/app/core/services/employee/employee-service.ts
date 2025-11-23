@@ -1,7 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError, Observable, throwError} from 'rxjs';
 import {EmployeeInterface} from '../../../models/interfaces/employee-interface';
+import {employeeFormtype} from '../../../models/types/employeeFormType';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +16,28 @@ export class EmployeeService {
     return this.httpClient.get<EmployeeInterface[]>(this.url)
   }
 
+  createEmployee (body: employeeFormtype): Observable<EmployeeInterface> {
+    return this.httpClient.post<EmployeeInterface>(this.url, body).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err)
+      })
+    )
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
