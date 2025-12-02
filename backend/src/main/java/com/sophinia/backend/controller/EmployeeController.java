@@ -48,7 +48,7 @@ public class EmployeeController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete (@PathVariable Long id) {
-        return null;
+        return employeeService.deleteEmployee( id );
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")

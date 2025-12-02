@@ -24,6 +24,10 @@ export class EmployeeService {
     )
   }
 
+  deleteEmployee (id: number) {
+    return this.httpClient.delete(`${this.url}/${id}`);
+  }
+
 }
 
 

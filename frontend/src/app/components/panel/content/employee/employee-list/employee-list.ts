@@ -1,15 +1,17 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, input, OnInit} from '@angular/core';
 import {EmployeeInterface} from '../../../../../models/interfaces/employee-interface';
 import {EmployeeService} from '../../../../../core/services/employee/employee-service';
 import {NgForOf, NgIf} from '@angular/common';
 import {EmployeeCreate} from '../employee-create/employee-create';
+import {Popup} from '../../../partials/popup/popup';
 
 @Component({
   selector: 'app-employee-list',
   imports: [
     NgForOf,
     NgIf,
-    EmployeeCreate
+    EmployeeCreate,
+    Popup
   ],
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.scss'
@@ -42,6 +44,27 @@ export class EmployeeList implements OnInit {
   addEmployee (e: EmployeeInterface) {
     this.employees.push(e)
   }
+
+  @Input() currentDeleteType: string = "";
+  @Input() currentEmployee: EmployeeInterface | null = null;
+  showDeleteModal: boolean = false;
+  openPopupModal (e: EmployeeInterface) {
+    this.showDeleteModal = true;
+    this.currentEmployee = e;
+    this.currentDeleteType = "employee"
+  }
+
+  closeDeleteModal () {
+    this.showDeleteModal = false;
+    this.currentEmployee = null;
+    this.currentDeleteType = "";
+  }
+
+  deleteModal (e: EmployeeInterface) {
+    this.employees = this.employees.filter(employee => employee.id != e.id);
+    this.closeDeleteModal()
+  }
+
 
 
 

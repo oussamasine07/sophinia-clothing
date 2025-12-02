@@ -13,7 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeService {
@@ -102,6 +104,22 @@ public class EmployeeService {
         Employee savedEmployee = employeeRepository.save( employee );
 
         return new ResponseEntity<>(savedEmployee, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Map<String, Object>> deleteEmployee (
+            Long id
+    ) {
+        Employee employee = employeeRepository.findById( id )
+                .orElseThrow(() -> new NotFoundException("unfound employee"));
+
+        employeeRepository.deleteById( id );
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", employee.getFullName() + " " + employee.getLastName() + " has been Deleted");
+        response.put("id", employee.getId());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
