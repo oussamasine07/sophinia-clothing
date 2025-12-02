@@ -40,6 +40,11 @@ export const sidebarLinks = {
       link: '/app/order',
       icon: 'fas fa-receipt mr-4'
     },
+    {
+      item: 'Employees',
+      link: '/app/employee',
+      icon: 'fa-solid fa-building-user mr-4'
+    }
   ],
   employee: [
     {

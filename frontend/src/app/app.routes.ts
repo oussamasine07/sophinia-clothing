@@ -14,6 +14,7 @@ import {OrderDetails} from './components/panel/content/order-details/order-detai
 import {Login} from './components/client/pages/login/login';
 import {isAuthenticatedGuard} from './core/guards/is-authenticated-guard';
 import {isAdminGuard} from './core/guards/is-admin-guard';
+import {EmployeeList} from './components/panel/content/employee/employee-list/employee-list';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,11 @@ export const routes: Routes = [
       {
         path: "order/order-details/:id",
         component: OrderDetails
+      },
+      {
+        path: "employee",
+        component: EmployeeList,
+        canActivate: [ isAdminGuard ]
       }
     ]
   },

@@ -1,0 +1,181 @@
+
+<!-- Backdrop -->
+<div class="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center z-50">
+  <!-- Modal Card -->
+  <div
+    class="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-xl transform transition-all duration-300 ease-out"
+    [ngClass]="{
+      'opacity-100 translate-y-0': animate,
+      'opacity-0 -translate-y-5': !animate
+    }"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold text-gray-800">Add Employee</h2>
+
+      <button (click)="onCloseClick()" class="text-gray-500 hover:text-red-500 text-lg">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Modal Content (Form or Inputs) -->
+    <form #createEmployeeForm (ngSubmit)="onCreateDesignSubmit(createEmployeeForm)">
+
+      <!-- First + Last Name in One Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- First name -->
+        <div class="col-span-1 mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">First name</label>
+          <input
+            type="text"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            [ngClass]="{
+          'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['firstName'],
+          'border-gray-300 focus:ring-indigo-400': !fieldErrors['firstName']
+        }"
+            placeholder="Employee's first name"
+            [(ngModel)]="employeeForm.firstName"
+            name="firstName"
+          />
+          <p *ngIf="fieldErrors['firstName']" class="mt-1 text-sm text-red-500">
+            {{ fieldErrors['firstName'] }}
+          </p>
+        </div>
+
+        <!-- Last name -->
+        <div class="col-span-1 mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Last name</label>
+          <input
+            type="text"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            [ngClass]="{
+          'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['lastName'],
+          'border-gray-300 focus:ring-indigo-400': !fieldErrors['lastName']
+        }"
+            placeholder="Employee's last name"
+            [(ngModel)]="employeeForm.lastName"
+            name="lastName"
+          />
+          <p *ngIf="fieldErrors['lastName']" class="mt-1 text-sm text-red-500">
+            {{ fieldErrors['lastName'] }}
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Email -->
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <div class="col-span-1 mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input
+            type="text"
+            class="w-full border rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2"
+            [ngClass]="{
+          'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['email'],
+          'border-gray-300 focus:ring-indigo-400': !fieldErrors['email']
+        }"
+            placeholder="Employee's email"
+            [(ngModel)]="employeeForm.email"
+            name="email"
+          />
+          <p *ngIf="fieldErrors['email']" class="mt-1 text-sm text-red-500">
+            {{ fieldErrors['email'] }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <div class="col-span-1 mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+
+          <div class="relative">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
+              class="w-full border rounded-lg px-3 py-2 pr-32 text-gray-700 focus:outline-none focus:ring-2"
+              [ngClass]="{
+          'border-red-500 placeholder-red-300 focus:ring-red-400': fieldErrors['password'],
+          'border-gray-300 focus:ring-indigo-400': !fieldErrors['password']
+        }"
+              placeholder="Employee's password"
+              [(ngModel)]="employeeForm.password"
+              name="password"
+            />
+
+            <!-- Show/Hide Password Button -->
+            <button
+
+              (click)="onTogglePassword()"
+              type="button"
+              class="absolute right-21 top-1/2 -translate-y-1/2 px-2 py-1 text-gray-600 hover:text-gray-800"
+            >
+              <i class="{{ !showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}}"></i>
+            </button>
+
+            <!-- Generate Password Button -->
+            <button
+              type="button"
+              class="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 text-sm rounded bg-indigo-500 hover:bg-indigo-600 text-white"
+              (click)="onGeneratePasswordClick()"
+            >
+              Generate
+            </button>
+          </div>
+
+          <p *ngIf="fieldErrors['password']" class="mt-1 text-sm text-red-500">
+            {{ fieldErrors['password'] }}
+          </p>
+        </div>
+      </div>
+
+
+
+      <!-- Submit and Cancel -->
+      <div class="flex justify-end space-x-2 mt-4">
+        <button type="button"
+                class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-700">Cancel</button>
+        <button type="submit"
+                class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
